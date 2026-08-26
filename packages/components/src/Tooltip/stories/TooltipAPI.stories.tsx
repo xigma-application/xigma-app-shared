@@ -48,7 +48,7 @@ const tableBodyData: Array<TTableBody> = [
   },
 ];
 
-const title = 'Tooltip/Tooltip API';
+const title = 'UI/Tooltip/Tooltip API';
 
 export default {
   component: Tooltip,

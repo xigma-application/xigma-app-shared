@@ -39,7 +39,7 @@ const tableBodyData: Array<TTableBody> = [
   },
 ];
 
-const title = 'Icon/Icon API';
+const title = 'UI/Icon/Icon API';
 
 export default {
   component: Icon,

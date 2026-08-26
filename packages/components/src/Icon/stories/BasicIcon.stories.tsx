@@ -38,7 +38,7 @@ const blockCodeData: TStoryBlockCode = {
   ],
 };
 
-const title = 'Icon/Basic Icon';
+const title = 'UI/Icon/Basic Icon';
 
 export default {
   component: Icon,

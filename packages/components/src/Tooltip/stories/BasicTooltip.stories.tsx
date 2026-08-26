@@ -46,7 +46,7 @@ const blockCodeData: TStoryBlockCode = {
   })),
 };
 
-const title = 'Tooltip/Basic Tooltip';
+const title = 'UI/Tooltip/Basic Tooltip';
 
 export default {
   component: Tooltip,
