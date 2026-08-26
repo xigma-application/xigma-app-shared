@@ -1,0 +1,8 @@
+@use '@xigma/scss/mixins/svg-color';
+
+.Icon {
+  display: inline-block;
+  flex-shrink: 0;
+
+  @include svg-color.svg-color;
+}

@@ -1,75 +1,103 @@
 ---
 name: xigma-icons
-description: How SVG icons work in xigma-app today (the vite-plugin-svgr pipeline, the data-svg-property recoloring mechanism, and the Icon component) — kept here as reference for when the Icon component and icon set get ported into @xigma/components. Load before porting shared/UI/Icon, or when deciding how @xigma/components should ship icons.
+description: How SVG icons work in @xigma/components — the data-svg-property recoloring mechanism, the Icon component, and the two parallel SVG→React pipelines (vite-plugin-svgr for Storybook, a matching esbuild plugin for the tsup package build). Load before adding an icon, touching packages/components/src/Icon, packages/assets/svg, or packages/components/tsup.config.ts's svgr plugin.
 ---
 
-# xigma Icons (reference — not yet ported into this repo)
+# xigma-app-shared Icons
 
-Kept from `xigma-app`'s `xigma-icons` as reference. `Icon` and the `assets/svg` icon set have not
-been moved into `@xigma/components` yet — this doc describes how they currently work in `xigma-app`
-so a future port can decide what changes.
+Ported from `xigma-app`'s `Icon` + `assets/svg` (106 icons). Unlike most things in this repo,
+this one required solving a real build problem: `xigma-app` only needs `vite-plugin-svgr` because
+it only ever builds with Vite, but `@xigma/components` is built once with `tsup`/esbuild and
+consumed by apps that may use any bundler — so the SVG→React transform has to happen **inside this
+repo's own build**, not be left for the consumer to configure.
 
-**Open problem for the port**: `xigma-app`'s pipeline is `vite-plugin-svgr` (Vite-specific,
-transforms `.svg?react` imports into React components at build time). `@xigma/components` is built
-once with `tsup` and consumed by apps that may not use Vite. Before porting `Icon`, decide whether
-the 84 SVGs get pre-compiled to React components at `@xigma/components` build time (tsup can do
-this with a loader) instead of relying on each consuming app having `vite-plugin-svgr` configured —
-don't just copy the `?react` import convention as-is without checking it survives the tsup build.
+## The `data-svg-property` mechanism (unchanged from xigma-app)
 
-## The `data-svg-property` mechanism (the whole point, and this part **does** port as-is)
-
-Icon source files mark the elements that should be recolorable with `data-svg-property="fill"` or
-`="stroke"`, instead of a hardcoded color:
+Icon source files (`packages/assets/svg/*.svg`) mark recolorable elements with
+`data-svg-property="fill"` or `="stroke"` instead of a hardcoded color:
 
 ```svg
 <path d="..." data-svg-property="fill" fill="white"/>
 ```
 
-`fill="white"` is just a placeholder so the raw SVG still looks right if opened directly — it gets
-overridden at runtime. `Icon.module.scss` targets that attribute:
+`fill="white"` is just a placeholder so the raw SVG still looks right opened directly — it's
+overridden at runtime. `Icon/icon.scss` targets that attribute via `@xigma/scss/mixins/svg-color`
+(ported, unmodified — see [[xigma-theming]]):
 
 ```scss
-:global([data-svg-property='fill']) { fill: currentColor; }
-:global([data-svg-property='stroke']) { stroke: currentColor; }
+@use '@xigma/scss/mixins/svg-color';
+
+.Icon {
+  @include svg-color.svg-color;
+}
 ```
 
-A CSS attribute-selector rule beats an element's own `fill="..."` presentation attribute in the
-cascade, so one SVG asset can be recolored per-instance via `currentColor` — no per-icon variants,
-no JS prop-drilling into internal `<path>` elements. This mixin already lives in
-`@xigma/scss/mixins/svg-color` (ported), so the port doesn't need to redo it — just consume it.
+## `packages/assets/svg/` — the raw SVGs (`@xigma/assets`)
 
-## `xigma-app`'s current pipeline: `vite-plugin-svgr`
+106 files, copied verbatim from `xigma-app/src/assets/svg/`, kept in their own package (not nested
+under `components`) so other packages/apps could reference the raw assets directly if needed.
+`@xigma/assets/package.json`'s `exports` map (`"./svg/*": "./svg/*"`) is what lets both pipelines
+below resolve `@xigma/assets/svg/<name>.svg` through normal Node/bundler package resolution.
 
-```ts
-svgr({ svgrOptions: { titleProp: true, ref: true } })
-```
+## `packages/components/src/Icon/svg.ts` — the `Icons` barrel
 
-SVGO is off by default in this plugin, so `data-svg-property` and other custom attributes survive
-untouched. Import syntax uses the `?react` suffix:
+Same shape as `xigma-app`'s `assets/svg.ts`, one `import X from '@xigma/assets/svg/name.svg?react'`
++ barrel-object entry per icon, PascalCase names. This is a real, committed source file — **not**
+generated at build/install time (an earlier attempt at codegen here was reverted; the barrel is
+maintained the same way `xigma-app` maintains its own, by hand/sed, and lives in git like any other
+source file). Adding an icon means adding both the raw `.svg` in `@xigma/assets/svg/` and the
+import + barrel entry here.
 
-```ts
-import Logo from './svg/logo.svg?react';
-```
+## Two pipelines, kept in sync on purpose
 
-## `assets/svg.ts` — the `Icons` barrel
+`import X from '.../name.svg?react'` needs a loader that turns the SVG into a React component.
+Two different tools do this job in two different contexts, and **both must be kept aligned** (same
+svgr options — `ref: true`, `titleProp: false`, `svgo: false` — same result) or Storybook and the
+published package will visually diverge:
 
-One `import X from './svg/name.svg?react'` + barrel-object entry per icon, PascalCase names
-(`Logo`, `Close`, `ChevronDown`, ...). All 84 are imported eagerly in `xigma-app` today.
+- **Storybook (Vite)**: `.storybook/main.ts`'s `viteFinal` adds `vite-plugin-svgr` — same plugin
+  `xigma-app` itself uses.
+- **The `@xigma/components` package build (tsup/esbuild)**: esbuild has no svgr loader, so
+  `packages/components/tsup.config.ts` defines a small custom esbuild plugin (`svgrPlugin`) that
+  does the equivalent transform at build time using `@svgr/core` directly — `onResolve` hands the
+  `?react`-suffixed specifier to esbuild's own resolver (`build.resolve`, so bare package
+  specifiers like `@xigma/assets/svg/x.svg` still go through node_modules/`exports` resolution
+  correctly — a plain `path.resolve` here was tried and is wrong, it only handles relative paths),
+  then `onLoad` reads the real `.svg` file and runs it through `@svgr/core` in memory. Nothing is
+  written to disk — the transform happens per-build, same as Vite's.
 
-## `shared/UI/Icon/Icon.tsx` (current `xigma-app` shape)
+If `titleProp`/`ref`/`svgo` options ever need to change, change them in **both** places
+(`.storybook/main.ts`'s `svgr(...)` call and `tsup.config.ts`'s `transform(...)` call).
+
+## No CSS Modules here — a second divergence from `xigma-app`, handled the same way twice
+
+`@xigma/scss`'s `svg-color`/`disabled` mixins emit `:global(...)` for CSS-Modules consumers
+(`xigma-app`, x-design). Neither of this repo's own two build pipelines (tsup, Storybook) runs CSS
+Modules — see [[xigma-component-structure]] for why `Icon/icon.scss` is a plain `.scss` file, not
+`.module.scss`. `:global(...)` left untouched would ship as literal (invalid, ignored) CSS in both
+pipelines, so each one strips it after compiling, without touching the shared mixin (which stays
+correct for its primary CSS-Modules consumers):
+
+- tsup: `stripCssModulesGlobal` regex on the compiled CSS string, in `tsup.config.ts`'s `sassPlugin`.
+- Storybook: a one-rule PostCSS plugin (`stripCssModulesGlobal`) wired into `viteFinal`'s
+  `css.postcss.plugins`, in `.storybook/main.ts`.
+
+## `Icon.tsx`
 
 ```tsx
-<Icon name="Logo" color="blue1" size={32} />
+<Icon name="Check" color="blue1" size={16} />
 ```
 
-- `name: keyof typeof Icons` — type-checked against the barrel, typos are compile errors.
-- `color?: keyof typeof colors` (default `'neutral1'`) — one of [[xigma-theming]]'s tokens, applied
-  by setting `style={{ color: colors[color] }}` on the root `<svg>` so `currentColor` picks it up.
-  `colors` (`constant/colors.ts`) isn't ported into this repo yet either — see [[xigma-theming]].
+- `name: keyof typeof Icons` — type-checked against the barrel; the published package's bundled
+  `.d.ts` preserves this as a real 106-member literal union (verified after the port — not widened
+  to `string`), so a typo in `name` is still a compile error for consumers.
+- `color?: keyof typeof colors` (default `'neutral1'`) — `colors` now lives in
+  `packages/components/src/colors.ts` (ported from `xigma-app`'s `constant/colors.ts`; nothing
+  else needed it yet, so it wasn't split into its own package — revisit if that changes) and is
+  re-exported from `@xigma/components`'s root `index.ts`.
 
-## Porting checklist (not done yet)
+## Adding a new icon
 
-1. Decide the SVG→component pipeline for a tsup-built package (see "Open problem" above).
-2. Bring the 84 SVG files + `assets/svg.ts` barrel over, or reference them from wherever they end up.
-3. Port `Icon.tsx` + `Icon.module.scss`, per [[xigma-component-structure]].
-4. Port (or decide the shared home for) `constant/colors.ts`, per [[xigma-theming]].
+1. Export the SVG with `data-svg-property="fill"`/`"stroke"` on the elements that should recolor.
+2. Drop it in `packages/assets/svg/`.
+3. Add the import + barrel entry to `packages/components/src/Icon/svg.ts`, alphabetically, PascalCase.

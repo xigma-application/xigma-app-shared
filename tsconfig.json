@@ -1,7 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "storybook-blocks": ["./.storybook/blocks"]
+    }
   },
-  "include": [".storybook/**/*"]
+  "include": [".storybook/**/*", "packages/*/src/**/*.stories.tsx"]
 }
