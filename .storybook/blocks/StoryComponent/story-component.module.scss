@@ -1,0 +1,145 @@
+.StoryComponent {
+  font-family:
+    PlusJakartaSans-Bold,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  margin: 0 auto;
+  padding: 64px 20px;
+  width: 100%;
+
+  &--max-width {
+    max-width: 1200px;
+  }
+
+  &__title {
+    color: #eaeef3;
+    font-size: 30px;
+    margin: 40px 0 10px;
+
+    [data-theme='light'] & {
+      color: #1e2839;
+    }
+  }
+
+  &__description {
+    color: #aab4be;
+    font-family:
+      'IBM Plex Sans',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol';
+    font-size: 16px;
+
+    & > a {
+      color: #66b2ff;
+      font-size: 13px;
+      text-decoration: underline #3399ff66;
+    }
+
+    & > code {
+      background-color: #66b2ff26;
+      border-radius: 5px;
+      color: #ffffff;
+      font-family: Consolas, Menlo, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 0 5px;
+    }
+
+    [data-theme='light'] & {
+      color: #4b4b4d;
+
+      & > code {
+        color: #1a2027;
+      }
+    }
+  }
+
+  &__content {
+    border: 1px solid;
+    border-color: #ffffff1f;
+    border-radius: 10px;
+    column-gap: 25px;
+    justify-content: center;
+    padding: 24px;
+
+    [data-theme='light'] & {
+      border-color: #0000001f;
+    }
+
+    &--flex {
+      display: flex;
+    }
+
+    &--grid {
+      display: grid;
+    }
+
+    &--top {
+      align-items: flex-start;
+    }
+
+    &--center {
+      align-items: center;
+    }
+
+    &--bottom {
+      align-items: flex-end;
+    }
+
+    &--column {
+      grid-auto-flow: column;
+    }
+
+    &--row {
+      grid-auto-flow: row;
+      row-gap: 15px;
+    }
+
+    &--max-two-columns {
+      grid-template-columns: repeat(2, auto);
+      row-gap: 15px;
+    }
+
+    &--max-three-columns {
+      grid-template-columns: repeat(3, auto);
+      row-gap: 15px;
+    }
+
+    &--max-four-columns {
+      grid-template-columns: repeat(4, auto);
+      row-gap: 15px;
+    }
+
+    &--max-five-columns {
+      grid-template-columns: repeat(5, auto);
+      row-gap: 15px;
+    }
+
+    &--max-six-columns {
+      grid-template-columns: repeat(6, auto);
+      row-gap: 15px;
+    }
+
+    &--max-eight-columns {
+      grid-template-columns: repeat(8, auto);
+      row-gap: 15px;
+    }
+  }
+}

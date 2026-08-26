@@ -1,0 +1,16 @@
+export const CONTENT_MODIFICATORS: Record<string, string> = {
+  block: 'StoryComponent__content--block',
+  bottom: 'StoryComponent__content--bottom',
+  center: 'StoryComponent__content--center',
+  column: 'StoryComponent__content--column',
+  flex: 'StoryComponent__content--flex',
+  grid: 'StoryComponent__content--grid',
+  maxEightColumns: 'StoryComponent__content--max-eight-columns',
+  maxFiveColumns: 'StoryComponent__content--max-five-columns',
+  maxFourColumns: 'StoryComponent__content--max-four-columns',
+  maxSixColumns: 'StoryComponent__content--max-six-columns',
+  maxThreeColumns: 'StoryComponent__content--max-three-columns',
+  maxTwoColumns: 'StoryComponent__content--max-two-columns',
+  row: 'StoryComponent__content--row',
+  top: 'StoryComponent__content--top',
+};

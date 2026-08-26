@@ -1,0 +1,104 @@
+.StoryPropsTable {
+  font-family:
+    'IBM Plex Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+
+  &__title {
+    color: #eaeef3;
+    font-size: 30px;
+    margin: 40px 0 10px;
+
+    [data-theme='light'] & {
+      color: #1e2839;
+    }
+  }
+
+  &__table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  &__row-header {
+    border-bottom: 1px solid;
+    border-bottom-color: #ffffff1f;
+    color: #ffffff;
+    font-size: 16px;
+
+    [data-theme='light'] & {
+      border-bottom-color: #0000001f;
+      color: #000000;
+    }
+
+    & > th {
+      padding: 20px;
+      text-align: left;
+    }
+  }
+
+  &__row-body {
+    border-bottom: 1px solid;
+    border-bottom-color: #ffffff1f;
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.5;
+
+    & code {
+      background-color: #66b2ff26;
+      border-radius: 5px;
+      color: #ffffff;
+      font-family: Consolas, Menlo, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 0 5px;
+    }
+
+    [data-theme='light'] & {
+      border-bottom-color: #0000001f;
+      color: #4b4b4d;
+
+      & code {
+        color: #1a2027;
+      }
+    }
+
+    & > td {
+      padding: 20px;
+      text-align: left;
+    }
+  }
+
+  &__column {
+    &-name {
+      font-family: Consolas, Menlo, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      -webkit-font-smoothing: subpixel-antialiased;
+    }
+
+    &-type {
+      color: #a6e22e;
+      font-family: Consolas, Menlo, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
+      [data-theme='light'] & {
+        color: #932981;
+      }
+    }
+
+    &-default-value {
+      font-family: Consolas, Menlo, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
+
+    &-description {
+      font-size: 14px;
+      max-width: 150px;
+    }
+  }
+}

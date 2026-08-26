@@ -29,7 +29,49 @@ npm run build      # buduje wszystkie pakiety (workspaces --if-present)
 - Nowy komponent React: `packages/components/src/<Nazwa>/`, wyeksportowany w
   `packages/components/src/index.ts`.
 - Nowy util: `packages/utils/src/`, wyeksportowany w `packages/utils/src/index.ts`.
-- Nowy mixin/zmienna SCSS: `packages/scss/src/_mixins.scss` / `_variables.scss`.
+- Nowy mixin/token SCSS: `packages/scss/src/mixins/` / `_variables.scss` / `_theme.scss`,
+  dorzucony do `packages/scss/src/index.scss` i do `exports` w `packages/scss/package.json`.
+
+## Storybook
+
+Dokumentacja/podgląd komponentów z `@xigma/components` — Vite + Storybook 10
+(`@storybook/react-vite`). Story'ki i sam design system **nie są kopiowane z x-design** —
+tylko tooling (config, przełącznik light/dark, globalny SCSS) jest stąd zaadaptowany.
+
+```bash
+npm run storybook          # dev server, http://localhost:6006
+npm run build-storybook    # statyczny build do storybook-static/
+```
+
+- `.storybook/main.ts` — skanuje `packages/*/src/**/*.stories.@(ts|tsx)` i `*.mdx`.
+- `.storybook/preview.tsx` — ładuje `.storybook/styles/index.scss` (tokeny + motyw z
+  `@xigma/scss`) i przełącznik light/dark przez `@storybook/addon-themes`
+  (`withThemeByDataAttribute`, ustawia `data-theme` na `<html>` — dokładnie ten atrybut, na
+  którym opiera się `@xigma/scss/theme`), zamiast starszego mechanizmu z manager-addonem
+  z x-design.
+- Nowy komponent dostaje story'ka w swoim folderze (`packages/components/src/<Nazwa>/<Nazwa>.stories.tsx`).
+
+### `.storybook/blocks` — kit do pisania dokumentacji w MDX
+
+Przeniesiony z x-design (`src/stories/components/*`) zestaw komponentów do budowania bogatych
+stron dokumentacji (`.mdx`), nie sam design system:
+
+- `StoryApi` — cała strona dokumentacji jednego komponentu (tytuł, opis, live-demo, blok kodu,
+  tabela propsów).
+- `StoryComponent` — sekcja z tytułem/opisem/live-demo + opcjonalnym blokiem kodu.
+- `StoryPropsTable` — tabela propsów.
+- `StoryBlockCode` — pseudo-podświetlany blok kodu (importy/zmienne/przykłady JSX).
+- `StoryBlockWarning` — dymek ostrzeżenia w treści dokumentacji.
+
+Zaadaptowane względem x-design: brak zależności od `useTheme`/`constant/colors` (tło body
+ustawione czystym CSS w `.storybook/styles/index.scss` na `var(--color-neutral-4)`, reaguje na
+`[data-theme]` automatycznie) i brak `lodash` (zastąpione lokalnymi jednolinijkowymi utilami).
+Pominięty `Configure.mdx` — to generyczna strona powitalna Storybooka ze stockowymi obrazkami,
+niespecyficzna dla x-design.
+
+```tsx
+import { StoryApi, StoryBlockWarning } from '../../../.storybook/blocks';
+```
 
 ## Użycie w apce-konsumencie
 
@@ -68,15 +110,17 @@ npm run build      # buduje wszystkie pakiety (workspaces --if-present)
 ### Import w kodzie apki
 
 ```tsx
-import { Button } from "@xigma/components";
-import { chunk } from "@xigma/utils";
+import { SomeComponent } from "@xigma/components";
+import { someUtil } from "@xigma/utils";
 ```
 
 ```scss
-@use "@xigma/scss/mixins" as *;
+@use "@xigma/scss/theme";
+@use "@xigma/scss/mixins/svg-color";
 
 .card {
-  @include flex-center;
+  color: var(--color-neutral-1);
+  @include svg-color.svg-color(var(--color-blue-1));
 }
 ```
 

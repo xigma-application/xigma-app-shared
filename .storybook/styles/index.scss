@@ -1,0 +1,12 @@
+@use '@xigma/scss/variables';
+@use '@xigma/scss/theme';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  // color-scheme is already set on :root by @xigma/scss/theme and inherits down
+  background-color: var(--color-neutral-4);
+}

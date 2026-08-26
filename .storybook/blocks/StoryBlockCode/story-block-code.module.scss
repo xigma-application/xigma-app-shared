@@ -1,0 +1,84 @@
+.StoryBlockCode {
+  background-color: #444444;
+  border: 1px solid;
+  border-radius: 10px;
+  color: #ffffff1f;
+  margin-top: 50px;
+  padding: 16px;
+
+  [data-theme='light'] & {
+    color: #0000001f;
+  }
+
+  &__imports {
+    color: #eaeef3;
+    font-size: 13px;
+    margin: 0;
+  }
+
+  &__import {
+    color: #999999;
+
+    &-as,
+    &-from,
+    &-semicolon {
+      color: #999999;
+    }
+
+    &-path {
+      color: #a6e22e;
+    }
+  }
+
+  &__separator {
+    margin: 25px 0;
+  }
+
+  &__components {
+    color: #eaeef3;
+    font-size: 13px;
+  }
+
+  &__component-name {
+    color: #1ea6fb;
+  }
+
+  &__children {
+    margin-left: 10px;
+  }
+
+  &__attribute {
+    color: #eaeef3;
+
+    &--name {
+      color: #999999;
+    }
+
+    &--value {
+      color: #a6e22e;
+    }
+  }
+
+  &__variables {
+    font-size: 12px;
+    margin-bottom: 5px;
+
+    &--equal {
+      color: #a9b7c6;
+      margin: 0 2.5px;
+    }
+
+    &--name {
+      color: #9876aa;
+      margin-left: 2.5px;
+    }
+
+    &--type {
+      color: #cc7832;
+    }
+
+    &--value {
+      color: #a9b7c6;
+    }
+  }
+}

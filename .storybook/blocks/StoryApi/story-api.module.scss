@@ -1,0 +1,62 @@
+.StoryApi {
+  font-family:
+    PlusJakartaSans-Bold,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 64px 20px;
+  width: 100%;
+
+  &__title {
+    color: #eaeef3;
+    font-size: 40px;
+    margin: 40px 0 10px;
+
+    [data-theme='light'] & {
+      color: #1e2839;
+    }
+  }
+
+  &__description {
+    color: #aab4be;
+    font-family:
+      'IBM Plex Sans',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol';
+    font-size: 20px;
+    font-weight: 400;
+
+    [data-theme='light'] & {
+      color: #4b4b4d;
+    }
+  }
+
+  &__story-component {
+    padding: 0;
+
+    & .StoryComponent__title {
+      margin-bottom: -20px;
+    }
+
+    &__story-block-code {
+      margin-top: 15px;
+    }
+  }
+}
