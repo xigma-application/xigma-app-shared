@@ -1,4 +1,4 @@
-import { CSSProperties, FC, SVGProps, useMemo } from "react";
+import { CSSProperties, Ref, SVGProps, forwardRef, useMemo } from "react";
 
 // components
 import { Icons } from "./constants";
@@ -15,24 +15,23 @@ export type TIconProps = Omit<SVGProps<SVGSVGElement>, "color"> & {
   size?: number;
 };
 
-export const Icon: FC<TIconProps> = ({
-  color = "neutral1",
-  name,
-  size = 16,
-  style,
-  ...restProps
-}) => {
-  const SVG = useMemo(() => Icons[name], [name]);
+export const Icon = forwardRef<SVGSVGElement, TIconProps>(
+  ({ color = "neutral1", name, size = 16, style, ...restProps }, ref: Ref<SVGSVGElement>) => {
+    const SVG = useMemo(() => Icons[name], [name]);
 
-  return (
-    <SVG
-      className="Icon"
-      height={size}
-      style={{ color: colors[color], ...style } as CSSProperties}
-      width={size}
-      {...restProps}
-    />
-  );
-};
+    return (
+      <SVG
+        className="Icon"
+        height={size}
+        ref={ref}
+        style={{ color: colors[color], ...style } as CSSProperties}
+        width={size}
+        {...restProps}
+      />
+    );
+  },
+);
+
+Icon.displayName = "Icon";
 
 export default Icon;

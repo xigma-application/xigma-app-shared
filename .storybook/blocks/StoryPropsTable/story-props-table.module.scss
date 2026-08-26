@@ -1,6 +1,6 @@
 .StoryPropsTable {
   font-family:
-    'IBM Plex Sans',
+    'Inter',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
@@ -15,6 +15,7 @@
   &__title {
     color: #eaeef3;
     font-size: 30px;
+    font-weight: 600;
     margin: 40px 0 10px;
 
     [data-theme='light'] & {

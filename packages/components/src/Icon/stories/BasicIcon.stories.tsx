@@ -3,11 +3,12 @@ import type { Meta, StoryFn } from '@storybook/react-vite';
 // components
 import Icon, { TIconProps } from '../Icon';
 import { Icons } from '../constants';
+import { Tooltip } from '../../Tooltip/Tooltip';
 
 // types
 import { ContentGridFlow, StoryComponent, TStoryBlockCode } from 'storybook-blocks';
 
-const description = ['Use Icon to render one of the icons from the shared icon set.'];
+const description = ['Use Icon to render one of the icons from the shared icon set. Hover an icon to see its name.'];
 
 const icons = Object.keys(Icons);
 
@@ -52,7 +53,9 @@ const Template: StoryFn<typeof Icon> = ({ ...args }) => (
     title="Icon"
   >
     {icons.map((iconName) => (
-      <Icon {...args} name={iconName as TIconProps['name']} key={iconName} />
+      <Tooltip content={iconName} key={iconName}>
+        <Icon {...args} name={iconName as TIconProps['name']} />
+      </Tooltip>
     ))}
   </StoryComponent>
 );

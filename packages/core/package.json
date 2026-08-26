@@ -1,5 +1,5 @@
 {
-  "name": "@xigma/components",
+  "name": "@xigma/core",
   "version": "0.0.0",
   "private": false,
   "type": "module",
@@ -11,8 +11,7 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./index.css": "./dist/index.css"
+    }
   },
   "files": ["dist"],
   "scripts": {

@@ -2,6 +2,8 @@ import type { Preview } from '@storybook/react-vite';
 
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 
+import { TooltipProvider } from '../packages/core/src/TooltipProvider/TooltipProvider';
+
 import './styles/index.scss';
 
 const preview: Preview = {
@@ -14,6 +16,11 @@ const preview: Preview = {
     },
   },
   decorators: [
+    (Story) => (
+      <TooltipProvider>
+        <Story />
+      </TooltipProvider>
+    ),
     withThemeByDataAttribute({
       themes: {
         dark: 'dark',

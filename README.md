@@ -9,9 +9,11 @@ i kopiuje go do własnego `node_modules/@xigma/*`.
 ```
 packages/
   components/   @xigma/components — komponenty React (TSX, budowane przez tsup do JS + .d.ts + .css)
+  core/         @xigma/core       — providery współdzielone między komponentami (np. TooltipProvider)
   utils/        @xigma/utils      — funkcje pomocnicze JS/TS (budowane przez tsup)
   scss/         @xigma/scss       — zmienne i mixiny SCSS (bez builda, surowe pliki .scss)
-  assets/       @xigma/assets     — surowe assety (na razie: 106 ikon SVG z xigma-app, bez builda)
+  assets/       @xigma/assets     — pusta na razie, zarezerwowana pod przyszłe wspólne assety
+                                     (ikony SVG dla Icon mieszkają w packages/components/src/Icon/svg/)
 scripts/
   xigma-pull.js          skrypt do skopiowania do repo apki-konsumenta
   xigma.json.example     przykładowa konfiguracja dla apki-konsumenta
@@ -32,9 +34,14 @@ npm run build      # buduje wszystkie pakiety (workspaces --if-present)
 - Nowy util: `packages/utils/src/`, wyeksportowany w `packages/utils/src/index.ts`.
 - Nowy mixin/token SCSS: `packages/scss/src/mixins/` / `_variables.scss` / `_theme.scss`,
   dorzucony do `packages/scss/src/index.scss` i do `exports` w `packages/scss/package.json`.
-- Nowa ikona: wrzuć `.svg` do `packages/assets/svg/` (z atrybutem `data-svg-property="fill"`/`"stroke"`
-  na przekolorowywanych elementach — patrz `xigma-icons`), dodaj import + wpis do `Icons` w
-  `packages/components/src/Icon/svg.ts` (ten sam wzorzec co `assets/svg.ts` w xigma-app).
+- Nowa ikona: wrzuć `.svg` do `packages/components/src/Icon/svg/` (z atrybutem
+  `data-svg-property="fill"`/`"stroke"` na przekolorowywanych elementach — patrz `xigma-icons`),
+  dodaj import + wpis do `Icons` w `packages/components/src/Icon/constants.ts` (ten sam wzorzec co
+  `assets/svg.ts` w xigma-app).
+- Nowy provider współdzielony między komponentami (np. coś jak `TooltipProvider`):
+  `packages/core/src/<Nazwa>Provider/`, wyeksportowany w `packages/core/src/index.ts`. Konsument
+  sam owija nim swoje drzewo — nic w `@xigma/components` nie robi tego automatycznie (Storybook
+  robi to w `.storybook/preview.tsx` tylko na potrzeby podglądu w tym repo).
 
 ### `@xigma/components`: SCSS i SVG bez CSS Modules ani Vite
 
@@ -107,7 +114,7 @@ import { StoryApi, StoryBlockWarning } from '../../../.storybook/blocks';
    {
      "repo": "git@github.com:xigma/xigma-app-shared.git",
      "branch": "main",
-     "packages": ["components", "utils", "scss", "assets"]
+     "packages": ["components", "core", "utils", "scss", "assets"]
    }
    ```
 
@@ -135,12 +142,17 @@ import { StoryApi, StoryBlockWarning } from '../../../.storybook/blocks';
 ### Import w kodzie apki
 
 ```tsx
-import { Icon } from "@xigma/components";
+import { Icon, Tooltip } from "@xigma/components";
 import "@xigma/components/index.css"; // raz, gdziekolwiek apka ładuje swój globalny CSS
+import { TooltipProvider } from "@xigma/core"; // raz, blisko korzenia apki — Tooltip go wymaga
 
 import { someUtil } from "@xigma/utils";
 
-<Icon name="Check" color="blue1" size={16} />
+<TooltipProvider>
+  <Tooltip content="Check">
+    <Icon name="Check" color="blue1" size={16} />
+  </Tooltip>
+</TooltipProvider>
 ```
 
 ```scss
