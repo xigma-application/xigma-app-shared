@@ -1,0 +1,16 @@
+{
+  "name": "@xigma/scss",
+  "version": "0.0.0",
+  "private": false,
+  "files": ["src"],
+  "exports": {
+    "./index": "./src/index.scss",
+    "./index.scss": "./src/index.scss",
+    "./variables": "./src/_variables.scss",
+    "./theme": "./src/_theme.scss",
+    "./mixins/svg-color": "./src/mixins/_svg-color.scss",
+    "./mixins/disabled": "./src/mixins/_disabled.scss",
+    "./mixins/elevation": "./src/mixins/_elevation.scss",
+    "./mixins/animations": "./src/mixins/animations/index.scss"
+  }
+}
