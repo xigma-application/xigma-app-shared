@@ -1,8 +1,14 @@
-# xigma-app-shared
+<div align="center">
+  <img src="packages/assets/xigma-logo.svg" width="320" height="114" alt="Xigma logo" />
 
-Współdzielony frontend dla aplikacji Xigma rozbitych na subdomeny. Zamiast publikować paczki
-na jakikolwiek rejestr npm, każda apka-konsument ściąga najnowszy `main` tego repo skryptem
-i kopiuje go do własnego `node_modules/@xigma/*`.
+  <h1>Xigma / Shared</h1>
+
+  <p><strong>Współdzielony frontend dla aplikacji Xigma rozbitych na subdomeny.</strong><br />
+  Zamiast publikować paczki na jakikolwiek rejestr npm, każda apka-konsument ściąga najnowszy
+  <code>main</code> tego repo skryptem i kopiuje go do własnego <code>node_modules/@xigma/*</code>.</p>
+</div>
+
+---
 
 ## Struktura
 
@@ -12,8 +18,8 @@ packages/
   core/         @xigma/core       — providery współdzielone między komponentami (np. TooltipProvider)
   utils/        @xigma/utils      — funkcje pomocnicze JS/TS (budowane przez tsup)
   scss/         @xigma/scss       — zmienne i mixiny SCSS (bez builda, surowe pliki .scss)
-  assets/       @xigma/assets     — pusta na razie, zarezerwowana pod przyszłe wspólne assety
-                                     (ikony SVG dla Icon mieszkają w packages/components/src/Icon/svg/)
+  assets/       @xigma/assets     — wspólne assety (na razie tylko xigma-logo.svg); ikony SVG dla
+                                     Icon mieszkają w packages/components/src/Icon/svg/
 scripts/
   xigma-pull.js          skrypt do skopiowania do repo apki-konsumenta
   xigma.json.example     przykładowa konfiguracja dla apki-konsumenta
