@@ -32,11 +32,15 @@ const sassPlugin: Plugin = {
   },
 };
 
+// Matches bare `import X from '.../foo.svg'` (no `?react` query) and turns it into a React
+// component. The suffix is omitted on purpose: `declare module '*.svg'` (src/global.d.ts) then
+// lets the editor path-complete the svg/ folder. .storybook/main.ts's svgr({ include: '**/*.svg' })
+// is the Storybook-side equivalent — keep the two aligned.
 const svgrPlugin: Plugin = {
   name: "svgr",
   setup(build) {
-    build.onResolve({ filter: /\.svg\?react$/ }, async (args) => {
-      const resolved = await build.resolve(args.path.replace(/\?react$/, ""), {
+    build.onResolve({ filter: /\.svg$/ }, async (args) => {
+      const resolved = await build.resolve(args.path, {
         resolveDir: args.resolveDir,
         kind: args.kind,
       });
@@ -78,6 +82,6 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom"],
+  external: ["react", "react-dom", "@radix-ui/react-tooltip"],
   esbuildPlugins: [sassPlugin, svgrPlugin],
 });

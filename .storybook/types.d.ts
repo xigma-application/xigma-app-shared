@@ -5,7 +5,7 @@ declare module '*.module.scss' {
   export default classes;
 }
 
-declare module '*.svg?react' {
+declare module '*.svg' {
   import type { FC, SVGProps } from 'react';
 
   const Component: FC<SVGProps<SVGSVGElement>>;
