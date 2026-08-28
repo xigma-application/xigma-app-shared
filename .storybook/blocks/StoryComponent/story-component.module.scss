@@ -1,4 +1,10 @@
 .StoryComponent {
+  // self-contained background: on a Canvas page this only ever sits on the matching body
+  // background (.storybook/styles/index.scss), but the autodocs Docs page embeds this same block
+  // inside its own white article container — without an explicit background here, the title/
+  // description text (var(--color-neutral-1), white in dark mode) renders unreadably on that white
+  // page instead of the dark canvas it was designed against
+  background-color: var(--color-neutral-4);
   font-family:
     'Inter',
     -apple-system,

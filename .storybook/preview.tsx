@@ -7,6 +7,10 @@ import { TooltipProvider } from '../packages/core/src/TooltipProvider/TooltipPro
 import './styles/index.scss';
 
 const preview: Preview = {
+  // every component's Basic*.stories.tsx gets an auto-generated Docs page (props table pulled
+  // from react-docgen-typescript + the JSDoc on each TXxxProps field) — replaces the hand-written
+  // *API.stories.tsx files from Roadmap 1.0.0 Etap 7
+  tags: ['autodocs'],
   parameters: {
     a11y: {
       // turns an axe-core violation into a hard fail once stories run as tests (Roadmap 1.0.0

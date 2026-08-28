@@ -254,12 +254,59 @@ skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--cove
 
 ## Etap 7 — autodocs zamiast ręcznych tabel API
 
-- [ ] `tags: ['autodocs']` (globalnie w `preview.tsx` albo per-komponent)
-- [ ] JSDoc na `TIconProps` / `TTooltipProps` / `TScrubbableInputProps` — źródło opisów propsów
-- [ ] props-table w Docs generowana z typów TS (react-docgen), nie z ręcznego `tableBodyData`
-- [ ] `*API.stories.tsx` z ręcznym `tableBodyData` → skasowane lub zredukowane do narracji;
-      `.storybook/blocks/StoryApi` zostaje do bogatych, pisanych ręcznie stron MDX
-- [ ] sprawdzić że react-docgen ogarnia `forwardRef` (Icon) i `satisfies`/union-typy
+- [x] `tags: ['autodocs']` globalnie w `preview.tsx` — każdy `Basic*.stories.tsx` dostaje własną
+      stronę Docs w sidebarze (potwierdzone w `index.json`: wpis `docs` obok `story`)
+- [x] JSDoc na `TIconProps`/`TTooltipProps`/`TScrubbableInputProps` (per pole) + JSDoc nad samym
+      komponentem (opis, źródło dla nagłówka strony Docs) — przeniesione 1:1 z opisów, które
+      wcześniej siedziały w ręcznym `tableBodyData` w `*API.stories.tsx`
+- [x] props-table w Docs generowana z typów TS, nie z ręcznego `tableBodyData` — przełączone na
+      `typescript.reactDocgen: 'react-docgen-typescript'` w `main.ts` (domyślny `'react-docgen'`
+      jest babel/AST-based, nie resolvuje realnych typów TS)
+- [x] `*API.stories.tsx` (Icon/Tooltip/ScrubbableInput) **skasowane** — `.storybook/blocks/StoryApi`
+      zostaje nietknięty, do bogatych, pisanych ręcznie stron MDX w przyszłości
+- [x] react-docgen-typescript **ogarnia forwardRef i union-typy bezbłędnie** — zweryfikowane
+      bezpośrednio przez `curl` transformowanego modułu z dev-servera i inspekcję wstrzykniętego
+      `Component.__docgenInfo`: `Icon`'s `color`/`name` (oba `keyof typeof X`) wyszły jako pełne,
+      wyliczone unie literali (wszystkie 8 tokenów kolorów, wszystkie ~120 nazw ikon), `forwardRef`
+      poprawnie dał `displayName: "Icon"`, defaulty (`neutral1`, `16`, `false`, `top`, `center`...)
+      wyciągnięte automatycznie z destrukturyzowanych parametrów — bez potrzeby ręcznego dopisywania
+
+### Po drodze: `reactDocgen` w złym miejscu configu, potem zła aktywna paczka tsconfig
+
+Dwa osobne błędy po kolei, oba złapane przez realną weryfikację (nie samo "buduje się"):
+
+1. `reactDocgen` wstawiony pod `framework.options` — kompiluje się w JS, ale `tsc` na
+   `.storybook/main.ts` wywala `TS2353` (`FrameworkOptions` go nie zna). Poprawne miejsce to
+   osobne pole najwyższego poziomu `typescript.reactDocgen` w `StorybookConfig`.
+2. Po przeniesieniu tsc było czyste, ale docgen po cichu **nic nie generował** —
+   `@joshwooding/vite-plugin-react-docgen-typescript` szuka najbliższego `tsconfig.json` od
+   configu Vite (czyli roota repo), a `/tsconfig.json`'s `include` obejmuje tylko
+   `.storybook/**/*` i `*.stories.tsx`, nie zwykłe pliki komponentów — log: `"Skipping docgen for
+   Icon.tsx because it is not included in the active TypeScript project."` Fix:
+   `typescript.reactDocgenTypescriptOptions.tsconfigPath` wskazany jawnie na
+   `packages/components/tsconfig.json`, które faktycznie `include`'uje `src`.
+
+Obu tych rzeczy `build-storybook` (statyczny build) w ogóle nie sygnalizuje — trzeba było
+faktycznie odpalić dev-server i sprawdzić wstrzyknięty `__docgenInfo`, żeby to złapać.
+
+### Po drodze: `*API.stories.tsx` skasowane, przywrócone przez pomyłkę, skasowane ponownie
+
+Skasowanie tych plików (ten sam commit co token elevation — współdzielony working directory z
+inną sesją) wyglądało jak przypadkowy side-effect niezwiązanego commita, więc ktoś je przywrócił
+(`beafbdc`, "accidentally deleted"). To nie był przypadek — świadoma część tego etapu, tylko źle
+się rozniosła przez wspólny index między sesjami. Skasowane ponownie, tym razem z jasnym
+uzasadnieniem w commicie: autodocs (`tags: ['autodocs']` + `react-docgen-typescript`) generuje
+dokładnie tę samą tabelę propsów automatycznie, więc trzymanie obu to czysta duplikacja.
+
+### Po drodze: `StoryComponent` nieczytelny na stronie Docs w dark mode
+
+Tło pod `title`/`description` (`var(--color-neutral-1)`, biały w dark mode) pochodziło wyłącznie z
+`body`'s `background-color` w `.storybook/styles/index.scss` — działa w widoku Canvas (pełny
+iframe preview), ale autodocs osadza ten sam `StoryComponent` w domyślnym, białym kontenerze
+strony Docs, który tego tła nie dziedziczy. Efekt: biały tekst na białym tle, praktycznie
+niewidoczny (złapane na screenshocie usera, nie przez mnie). Fix: `background-color:
+var(--color-neutral-4)` bezpośrednio na `.StoryComponent` — samowystarczalne niezależnie od tego,
+gdzie się renderuje.
 
 ## Etap 8 — toolbar-addony i viewport
 

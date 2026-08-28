@@ -31,6 +31,19 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+  typescript: {
+    // 'react-docgen' (the default) is babel/AST-based and doesn't resolve real TS types —
+    // 'react-docgen-typescript' runs the actual TS compiler, needed for autodocs' props table to
+    // get forwardRef (Icon), Omit<>, and union-typed props right instead of falling back to
+    // 'unknown'/blank descriptions
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      // without this the plugin resolves the *root* tsconfig.json, whose `include` only covers
+      // .storybook/**/*.stories.tsx — not the component source files themselves — and silently
+      // skips docgen for every one of them ("not included in the active TypeScript project")
+      tsconfigPath: path.resolve(__dirname, "../packages/components/tsconfig.json"),
+    },
+  },
   viteFinal: async (config) =>
     mergeConfig(config, {
       plugins: [
