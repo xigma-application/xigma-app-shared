@@ -31,10 +31,28 @@ wstępnym autodocs (Etap 7).
 
 ## Etap 2 — Actions: podgląd callbacków
 
-- [ ] `fn()` z `storybook/test` na `onChange` / `onMouseDown` / `onMouseUp` (ScrubbableInput)
-- [ ] domyślne spy-e w `preview.tsx` (`argTypesRegex: '^on[A-Z].*'`) — każdy `on*` prop logowany
+- [x] `fn()` z `storybook/test` na `onChange` / `onMouseDown` / `onMouseUp` (ScrubbableInput)
+- [x] domyślne spy-e w `preview.tsx` (`argTypesRegex: '^on[A-Z].*'`) — każdy `on*` prop logowany
       w panelu Actions bez ręcznego wpinania w każdej story
-- [ ] weryfikacja: drag po `ScrubbableInput` sypie serią `onChange(value)` w panelu
+- [ ] weryfikacja: drag po `ScrubbableInput` sypie serią `onChange(value)` w panelu — po drodze
+      złapany i naprawiony blokujący bug (patrz niżej, `.storybook/main.ts`); wizualne
+      potwierdzenie samego panelu Actions nadal do zrobienia ręcznie (`npm run storybook` →
+      `UI/ScrubbableInput/Basic ScrubbableInput` → zakładka Actions), rozszerzenie do Chrome nie
+      było podłączone w tej sesji
+
+### Po drodze: `.storybook/main.ts` renderował każdą ikonę jako crash
+
+`svgr({ include: "**/*.svg", ... })` w `.storybook/main.ts` nadpisywał domyślny `include` pluginu
+(`**/*.svg?react`) golim `**/*.svg` — ten glob nie obejmuje query string, więc nigdy nie łapał
+`?react`-owanych importów z `Icon/constants.ts`. Efekt: svgr nigdy się nie odpalał, Vite traktował
+import jak zwykły asset i zwracał `data:image/svg+xml,...` zamiast komponentu React — pierwszy
+render dowolnej ikony w prawdziwym Storybooku (nie w statycznym `build-storybook`, który tego nie
+łapie) kończył się `Failed to execute 'createElement'...`. Wygląda na to, że nikt wcześniej nie
+odpalił `npm run storybook` i nie wszedł na stronę z ikoną. Naprawione — `include` usunięty,
+zweryfikowane bezpośrednio przez dev-server (`curl` transformowanego modułu `.svg?react` pokazuje
+teraz prawdziwy komponent `forwardRef`, nie URL).
+
+- [x] `.storybook/main.ts`: usunięty błędny `include: "**/*.svg"` z konfiguracji `svgr`
 
 ## Etap 3 — `@storybook/addon-a11y`
 

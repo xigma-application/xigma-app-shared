@@ -29,8 +29,13 @@ const config: StorybookConfig = {
   viteFinal: async (config) =>
     mergeConfig(config, {
       plugins: [
+        // no `include` override: vite-plugin-svgr's default (`**/*.svg?react`) is what every
+        // icon import in Icon/constants.ts actually uses. Overriding it to a bare `**/*.svg`
+        // glob stops matching the `?react`-suffixed ids entirely (the glob doesn't span the
+        // query string), so svgr's `load` hook never fires and Vite's built-in asset plugin
+        // resolves the import to a data: URL string instead of a React component — Icon then
+        // tries `createElement(dataUrl, ...)` and crashes at runtime the moment it renders.
         svgr({
-          include: "**/*.svg",
           svgrOptions: { ref: true, titleProp: false },
         }),
       ],

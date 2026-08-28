@@ -8,6 +8,9 @@ import './styles/index.scss';
 
 const preview: Preview = {
   parameters: {
+    // logs any arg named onXxx to the Actions panel, even when it isn't explicitly wired with
+    // `fn()` from `storybook/test` — a safety net for components that gain callback props later
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,

@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import { fn } from 'storybook/test';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 // components
@@ -84,6 +85,8 @@ const meta = {
     max: { control: 'number' },
     min: { control: 'number' },
     onChange: { table: { disable: true } },
+    onMouseDown: { table: { disable: true } },
+    onMouseUp: { table: { disable: true } },
     value: { control: 'number' },
   },
   args: {
@@ -91,7 +94,9 @@ const meta = {
     loop: false,
     max: 100,
     min: 0,
-    onChange: (): void => {},
+    onChange: fn(),
+    onMouseDown: fn(),
+    onMouseUp: fn(),
     value: 25,
   },
   component: ScrubbableInput,
