@@ -3,6 +3,9 @@
   --spacer-2: 8px;
   --radius-medium: 5px;
   --radius-large: 13px;
+  --elevation-100-canvas:
+    0px 0px 0.5px rgb(0, 0, 0, 50%), 0px 1px 3px rgb(0, 0, 0, 40%), inset 0px 0.5px 0px rgb(255, 255, 255, 10%),
+    inset 0px 0px 0.5px rgb(255, 255, 255, 30%);
   --elevation-200-canvas:
     0 3px 8px rgb(0, 0, 0, 35%), 0 1px 3px rgb(0, 0, 0, 50%), inset 0 0.5px 0 rgb(255, 255, 255, 8%),
     inset 0 0 0.5px rgb(255, 255, 255, 30%);
