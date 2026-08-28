@@ -308,22 +308,67 @@ niewidoczny (złapane na screenshocie usera, nie przez mnie). Fix: `background-c
 var(--color-neutral-4)` bezpośrednio na `.StoryComponent` — samowystarczalne niezależnie od tego,
 gdzie się renderuje.
 
-## Etap 8 — toolbar-addony i viewport
+## Etap 8 — toolbar-addony i viewport — **zero zmian w kodzie, tylko weryfikacja**
 
-- [ ] `viewport` — wspólne breakpointy (spięte z `@xigma/scss`), globalny toolbar
-- [ ] `measure` / `outline` — w SB10 w corze, wystarczy nie wyłączać; ewentualnie skrót w docs
-- [ ] `backgrounds` — zdecydować czy potrzebne obok `addon-themes` (motyw już ustawia tło body)
+Sprawdzone realnie na działającym dev-serverze (nie z dokumentacji): wylistowane `title`/
+`aria-label` **całego** paska narzędzi nad canvasem. Wynik — wszystkie trzy są już tam, wbudowane
+w core Storybooka 10, bez żadnej mojej konfiguracji:
 
-## Etap 9 — wizualna regresja (później)
+```
+Grid visibility · Measure tool · Outline tool · Preview background · Theme · Viewport size · Vision filter
+```
 
-Do decyzji, zależnie od tego czy wchodzimy w zewnętrzny serwis:
+- [x] `viewport` — **jest**, domyślne presety Storybooka (mobile/tablet). `@xigma/scss` **nie ma
+      w ogóle** tokenów breakpointów (sprawdzone: `_variables.scss` ma tylko spacery/radiusy/cienie,
+      `xigma-app`'s `.scss` nigdzie nie definiuje globalnych breakpointów — to desktopowe,
+      niereponsywne narzędzie typu Figma) — nie ma więc z czym "spinać" custom presetów. Wymyślanie
+      fikcyjnych wartości byłoby gorsze niż zostawienie domyślnych z Storybooka
+- [x] `measure` / `outline` — **są**, nic ich nie wyłącza (`.storybook/main.ts`'s `addons` nigdy
+      ich nie dotykał — to nie osobne paczki do zainstalowania w SB10, tylko core)
+- [x] `backgrounds` (jako "Preview background") — **jest** wbudowany, też core. Zdecydowane: nic
+      dodatkowo nie trzeba — motyw (`addon-themes`) już steruje tłem `body` przez `data-theme`,
+      "Preview background" zostaje jako dodatkowy, niezależny przełącznik na wypadek potrzeby
+      sprawdzenia komponentu na innym tle niż token motywu — nie koliduje, nie trzeba wyłączać
+      ani dostrajać
 
-- **Chromatic** — `build-storybook` + publish w CI, review snapshotów na PR, obsługuje warianty
-  motywu z `addon-themes`. SaaS.
-- **`@storybook/test-runner` + `jest-image-snapshot`** — snapshoty trzymane w repo, zero
-  zewnętrznej zależności, ale ręczna obsługa różnic między maszynami/CI.
+## Etap 9 — wizualna regresja — **próbowane, zablokowane technicznie na obu ścieżkach**
 
-Powiązane z sekcją "Deploy — nierozwiązane" w README (gdzie i jak hostować statyczny Storybook).
+Decyzja usera: lokalna ścieżka bez zewnętrznego serwisu (**nie** Chromatic — to wymaga założenia
+konta, czego nie mogę zrobić sam; rozwiązałoby przy okazji i to, i sekcję "Deploy" w README, ale
+zostaje do rozważenia osobno, później, jeśli ktoś faktycznie założy konto).
+
+- [ ] **`jest-image-snapshot` bezpośrednio w `@storybook/addon-vitest`'s browser-mode (Etap 4)**
+      — **niemożliwe architektonicznie**, nie tylko trudne. Zweryfikowane empirycznie: kod testu w
+      browser-mode Vitest leci w prawdziwej karcie przeglądarki (RPC do Node, nie sam Node), a
+      `jest-image-snapshot` wewnątrz używa Node-owych `fs`/`pngjs`/`pixelmatch` bezpośrednio. Próba
+      importu w tym kontekście: `TypeError: util.inherits is not a function` (moduły
+      zewnętrylizowane przez Vite dla przeglądarki). To dokładnie ten sam powód, dla którego
+      Vitest 4 dodał natywny `toMatchScreenshot()` z prawdziwym mostkiem RPC — czego nasz Vitest
+      3.2.7 jeszcze nie ma.
+- [ ] **`@storybook/test-runner` + `jest-image-snapshot`** — zainstalowane, skonfigurowane
+      (`postVisit` hook, `.storybook/test-runner.js`), odpalone naprawdę przez `npm run
+      storybook` + `test-storybook -u` — **realny, nieobejściowy konflikt wersji**: Storybook
+      10.5.10's `importModule` (wewnętrzny loader configu) bezwarunkowo woła Node'owy
+      `module.register()` przy KAŻDYM ładowaniu pliku configu (`.storybook/test-runner.*`,
+      niezależnie czy to `.ts` czy zwykły `.js`) — a to leci wewnątrz workera Jesta (`test-runner`
+      jest Jest-owy), gdzie Jest **explicite odmawia** rejestrowania loader hooków:
+      `"module.register() is not supported in Jest: the hooks would attach to the module loader
+      running Jest itself"`. Sprawdzone: przepisanie configu z `.ts` na czysty `.js` nic nie
+      zmienia (rejestracja hooka jest bezwarunkowa w `importModule`, nie zależy od formatu pliku).
+      To wygląda na niezałataną jeszcze niezgodność `@storybook/test-runner@0.24.4` ↔
+      `storybook@10.5.10` (peer deps formalnie na to pozwalają, `^10.5.0-0`, ale runtime się wywala)
+- `jest-image-snapshot`/`@storybook/test-runner`/`concurrently` **odinstalowane** z powrotem —
+  zero działającej infrastruktury nie zostaje w repo na pamiątkę
+
+**Realne opcje na przyszłość**, żadna nie zrobiona teraz:
+1. Poczekać na fix/nowszą wersję `@storybook/test-runner` kompatybilną z `storybook@10.5.x` i
+   spróbować ponownie dokładnie tej samej konfiguracji
+2. Upgrade `@storybook/addon-vitest`/`vitest`/`@vitest/browser` do wersji z natywnym
+   `toMatchScreenshot()` (Vitest 4+) — realna zmiana fundamentu Etapów 4/5, nie mały krok
+3. Chromatic, jeśli ktoś założy konto — rozwiązuje przy okazji i to, i "Deploy" z README
+
+Powiązane z sekcją "Deploy — nierozwiązane" w README (gdzie i jak hostować statyczny Storybook) —
+nadal otwarte, niezależnie od powyższego.
 
 ---
 
