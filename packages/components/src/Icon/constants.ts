@@ -26,6 +26,7 @@ import ChevronLeft from "./svg/chevron-left.svg?react";
 import ChevronRight from "./svg/chevron-right.svg?react";
 import ChevronUp from "./svg/chevron-up.svg?react";
 import Close from "./svg/close.svg?react";
+import CollapsePanel from "./svg/collapse-panel.svg?react";
 import Columns from "./svg/columns.svg?react";
 import CommentTool from "./svg/comment-tool.svg?react";
 import Component from "./svg/component.svg?react";
@@ -84,7 +85,6 @@ import PaddingR from "./svg/padding-r.svg?react";
 import PaddingT from "./svg/padding-t.svg?react";
 import PaddingTB from "./svg/padding-tb.svg?react";
 import PaintTool from "./svg/paint-tool.svg?react";
-import PanelLeft from "./svg/panel-left.svg?react";
 import PenTool from "./svg/pen-tool.svg?react";
 import PencilTool from "./svg/pencil-tool.svg?react";
 import Percentage from "./svg/percentage.svg?react";
@@ -142,6 +142,7 @@ export const Icons = {
   ChevronRight,
   ChevronUp,
   Close,
+  CollapsePanel,
   Columns,
   CommentTool,
   Component,
@@ -200,7 +201,6 @@ export const Icons = {
   PaddingT,
   PaddingTB,
   PaintTool,
-  PanelLeft,
   PenTool,
   PencilTool,
   Percentage,
