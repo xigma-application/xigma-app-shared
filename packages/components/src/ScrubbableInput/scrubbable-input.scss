@@ -1,0 +1,17 @@
+.ScrubbableInput {
+  align-items: center;
+  cursor: ew-resize !important;
+  display: flex;
+  user-select: none;
+
+  &--disabled {
+    pointer-events: none;
+  }
+
+  &__handle {
+    pointer-events: none;
+    position: fixed;
+    transform: translate(-50%, -7px);
+    z-index: 999;
+  }
+}

@@ -36,6 +36,7 @@ import DropEmpty from "./svg/drop-empty.svg?react";
 import DropFilled from "./svg/drop-filled.svg?react";
 import EllipseTool from "./svg/ellipse-tool.svg?react";
 import EraseTool from "./svg/erase-tool.svg?react";
+import EWResize from "./svg/ew-resize.svg?react";
 import EyesClosed from "./svg/eyes-closed.svg?react";
 import EyesDropper from "./svg/eyes-dropper.svg?react";
 import EyesOpened from "./svg/eyes-opened.svg?react";
@@ -151,6 +152,7 @@ export const Icons = {
   DropFilled,
   EllipseTool,
   EraseTool,
+  EWResize,
   EyesClosed,
   EyesDropper,
   EyesOpened,
