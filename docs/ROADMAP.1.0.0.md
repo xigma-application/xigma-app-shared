@@ -138,8 +138,12 @@ kontrast i realnie warto to poprawić (Etap 8/9 albo osobne zadanie); to tylko o
 bramki, świadomie i jawnie, zamiast cichego ukrycia.
 
 - [x] `test`/`test:stories` przechodzą w pełni zielono (16 plików, 38 testów) po tym wyłączeniu
-- [ ] **do zrobienia osobno**: podbić kontrast palety w `StoryBlockCode`'s SCSS do 4.5:1 i zdjąć
-      powyższy `context.exclude`
+- [x] **zrobione**: podbita paleta w `StoryBlockCode`'s SCSS do ≥4.5:1 (liczone skryptem WCAG
+      relative-luminance na tle `#444444`, minimalna zmiana lightness w HSL zachowująca odcień —
+      `#999999→#b1b1b1`, `#1ea6fb→#50bafc`, `#9876aa→#bfaaca`, `#cc7832→#dea677`; `#a6e22e`,
+      `#a9b7c6`, `#eaeef3` już spełniały próg, nietknięte), `a11y.context.exclude` w `preview.tsx`
+      zdjęty. Zweryfikowane: pełny `vitest run --coverage` zielony (16/39/100%) **bez** wyłączenia
+      — realna naprawa, nie tylko zdjęty workaround
 
 ### Po drodze: `resolveSnapshotPath` przestał działać pod `test.projects`
 
@@ -177,9 +181,21 @@ skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--cove
       wzorem `hooks/test/`/`utils/test/` z [[xigma-test-conventions]]) — story same zostają krótkie,
       `play: playX` to jedna linijka; pliki `stories/test/**` wyłączone z progu coverage 100% (jak
       `*.spec.*`), bo to kod testowy, nie produkcyjny
-- [ ] docelowo część asercji z `*.spec.tsx` przenosi się tutaj (bliżej realnego renderu) — **nie
-      zrobione**, zostawione jako miały być: `*.spec.tsx` unit-testy nietknięte, `play()` je
-      uzupełnia (kontrast/CSS, realny Portal, realny drag w przeglądarce), nie duplikuje
+- [x] część asercji z `*.spec.tsx` przeniesiona do `play()` — tam gdzie to była realna
+      duplikacja (nie wszędzie: Icon zostawiony bez zmian, `play()` tam sprawdza tylko rzeczy,
+      których jsdom fizycznie nie potrafi — `currentcolor`/motyw — więc nic nie dublował):
+      - `Tooltip.spec.tsx`: usunięty test "no content → sam trigger" — `stories/test/
+        BasicTooltip.interactions.ts`'s `playNoContent` dowodzi tego samego mocniej (`data-state`
+        nigdy nie trafia na trigger, nie tylko "coś się wyrenderowało"), i ten sam story i tak
+        renderuje się w projekcie `storybook` w ramach tego samego `vitest run --coverage`, więc
+        pokrycie gałęzi `if (!content)` w `Tooltip.tsx` nie ucierpiało (potwierdzone: nadal 100%)
+      - `ScrubbableInput.spec.tsx`: test dragu przycięty do samego progowania przez
+        `onChange`/`onMouseDown`/`onMouseUp` (mock-call assercje — to jsdom robi tak samo dobrze
+        jak przeglądarka). Widoczność handle'a i aktualizacja wyświetlanej wartości zostały tylko w
+        `playBasicScrubbableInput` (realny render/portal); `playStates`' pokrycie zawijania na
+        granicy i tak nigdy nie miało odpowiednika w jsdom, więc to czysty przyrost, nie migracja
+      - zweryfikowane: `vitest run --coverage` 16 plików / 38 testów (było 39, -1 za usunięty
+        duplikat) / 100%, wielokrotnie z rzędu na czysto
 
 ### Po drodze: dwa realne problemy złapane i naprawione
 

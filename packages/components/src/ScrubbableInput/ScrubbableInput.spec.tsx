@@ -34,7 +34,13 @@ describe('ScrubbableInput', () => {
     expect(getRoot().className).toContain('ScrubbableInput--disabled');
   });
 
-  it('should scrub the value on horizontal drag and surface the drag handle', () => {
+  // the drag handle's visibility and the value-on-screen updating are asserted in a real browser
+  // instead, closer to the actual render: stories/test/BasicScrubbableInput.interactions.ts's
+  // playBasicScrubbableInput already covers that (and playStates covers the loop-wrap branch this
+  // file never tested at all). What's left here — and what a real render can't show any better
+  // than jsdom can — is that the drag actually threads through to the onChange/onMouseDown/
+  // onMouseUp props with the right values.
+  it('should thread the clamped value and the mouse events through onChange/onMouseDown/onMouseUp', () => {
     // mock
     const onChange = vi.fn();
     const onMouseDown = vi.fn();
@@ -51,7 +57,6 @@ describe('ScrubbableInput', () => {
 
     // result
     expect(onMouseDown).toHaveBeenCalledTimes(1);
-    expect(document.querySelector('.ScrubbableInput__handle')).toBeInTheDocument();
 
     // action
     act(() => {
@@ -60,14 +65,12 @@ describe('ScrubbableInput', () => {
 
     // result: slow speed by default — 25 + 20 * 0.5
     expect(onChange).toHaveBeenCalledWith(35);
-    expect(screen.getByText('Value: 35')).toBeInTheDocument();
 
     // action
     fireEvent.mouseUp(root);
 
     // result
     expect(onMouseUp).toHaveBeenCalledTimes(1);
-    expect(document.querySelector('.ScrubbableInput__handle')).not.toBeInTheDocument();
   });
 
   it('should fall back to no-op handlers when onMouseDown and onMouseUp are omitted', () => {

@@ -17,12 +17,12 @@
   }
 
   &__import {
-    color: #999999;
+    color: #b1b1b1;
 
     &-as,
     &-from,
     &-semicolon {
-      color: #999999;
+      color: #b1b1b1;
     }
 
     &-path {
@@ -40,7 +40,7 @@
   }
 
   &__component-name {
-    color: #1ea6fb;
+    color: #50bafc;
   }
 
   &__children {
@@ -51,7 +51,7 @@
     color: #eaeef3;
 
     &--name {
-      color: #999999;
+      color: #b1b1b1;
     }
 
     &--value {
@@ -69,12 +69,12 @@
     }
 
     &--name {
-      color: #9876aa;
+      color: #bfaaca;
       margin-left: 2.5px;
     }
 
     &--type {
-      color: #cc7832;
+      color: #dea677;
     }
 
     &--value {
