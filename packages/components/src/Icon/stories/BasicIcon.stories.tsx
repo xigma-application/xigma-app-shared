@@ -61,7 +61,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BasicIcon: Story = {
-  render: (args) => <Icon {...args} />,
+  render: (args) => (
+    <StoryComponent blocksCodeData={[]} description={description} title="Icon">
+      <Icon {...args} />
+    </StoryComponent>
+  ),
 };
 
 export const AllIcons: Story = {

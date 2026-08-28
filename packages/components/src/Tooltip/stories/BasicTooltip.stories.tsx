@@ -79,9 +79,9 @@ type Story = StoryObj<typeof meta>;
 
 export const BasicTooltip: Story = {
   render: (args) => (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: 48 }}>
+    <StoryComponent blocksCodeData={[]} description={description} title="Basic Tooltip">
       <Tooltip {...args} />
-    </div>
+    </StoryComponent>
   ),
 };
 

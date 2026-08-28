@@ -108,7 +108,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BasicScrubbableInput: Story = {
-  render: (args) => <ControlledScrubbableInput {...args} />,
+  render: (args) => (
+    <StoryComponent blocksCodeData={[]} description={description} title="Basic ScrubbableInput">
+      <ControlledScrubbableInput {...args} />
+    </StoryComponent>
+  ),
 };
 
 export const States: Story = {
