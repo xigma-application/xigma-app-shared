@@ -80,15 +80,80 @@ Największy element. Każda story staje się testem uruchamianym przez Vitest w 
 przeglądarce (browser mode), a `play()` (Etap 5) leci jako interakcja z krokami widocznymi w UI
 Storybooka i w raporcie Vitesta.
 
-- [ ] `npx storybook add @storybook/addon-vitest` (dociąga `@vitest/browser` + `playwright`)
-- [ ] `npx playwright install chromium` — lokalnie i w CI
-- [ ] `.storybook/vitest.setup.ts` (generowany) — `setProjectAnnotations` z `preview.tsx`
-- [ ] `vitest.config.ts` → `test.projects: [ <obecny node/jsdom>, <storybook / browser> ]`
-      zamiast pojedynczej konfiguracji
-- [ ] progi coverage: zdecydować czy 100% liczone łącznie, czy per-projekt (unit-testy trzymają
-      100% na logice, storybook-projekt raczej bez twardego progu)
-- [ ] `test` / `test:coverage` w `package.json` uruchamiają oba projekty; osobny `test:stories`
-      na sam projekt storybookowy
+- [x] `npx storybook add @storybook/addon-vitest` — CLI-owy interaktywny wizard nie łyka
+      pipowanego stdin (raw-mode prompt), więc `addons`/`package.json` dociągnięte przez niego,
+      resztę (`vitest.config.ts`, skrypty) dopisana ręcznie wg oficjalnego szablonu
+      (`vitest.config.3.2.template` w paczce addona — dopasowany do naszej wersji Vitest 3.2)
+- [x] `npx playwright install chromium` — binarka już była w cache'u z innego narzędzia na tej
+      maszynie, potwierdzone realnym `chromium.launch()`; do zrobienia w CI przy pierwszym secie
+- [x] ~~`.storybook/vitest.setup.ts` (generowany) — `setProjectAnnotations` z `preview.tsx`~~ —
+      nieaktualne w obecnej wersji addona: `storybookTest({ configDir })` sam ładuje cały
+      `.storybook/main.ts`+`preview.tsx` do projektu testowego, żaden osobny plik setup nie jest
+      generowany ani potrzebny
+- [x] `vitest.config.ts` → `test.projects: [ 'unit' (jsdom, nasze `.spec.*`), 'storybook'
+      (chromium przez `storybookTest`, każda story = test) ]`, `coverage` zostaje wspólny na
+      poziomie roota
+- [x] progi coverage: **liczone łącznie** — oba projekty renderują ten sam kod komponentów, więc
+      dodatkowe pokrycie z browser-mode tylko pomaga dobić do 100%, nie ma powodu rozdzielać; próg
+      100% nadal trzyma na `npm run test:coverage` z obu projektów naraz
+- [x] `test` / `test:coverage` uruchamiają oba projekty (bez zmian w komendzie — `projects` jest
+      częścią samego configu); doszedł `test:stories` (`vitest run --project=storybook`) na sam
+      projekt storybookowy
+
+### ⚠️ Pułapka: `test:stories -- --coverage` straszy fałszywym czerwonym raportem
+
+`test:stories` uruchamia **tylko** projekt `storybook` — story'ki na razie tylko renderują
+komponenty statycznie (żadnego dragu/interakcji, to dopiero `play()` w Etapie 5), więc np.
+`ScrubbableInput/utils` wychodzi na ~7% (logika przeliczania wartości nigdy nie jest wywołana bez
+symulacji ruchu myszką). Coverage w Vitest 3.2 z `projects` jest **jeden, na roocie**, wspólny dla
+całego procesu — nie da się go sensownie ograniczyć per-projekt, więc odpalenie
+`npm run test:stories -- --coverage` (albo `vitest run --project=storybook --coverage`) zawsze
+pokaże ten sam, mylący, częściowy wynik i failnie progi 100%. **To nie jest regresja** — prawdziwa
+bramka to `npm run test:coverage` (bez `--project`, oba projekty naraz), zweryfikowana 8+ razy z
+rzędu na czysto jako 100%. `test:stories` służy tylko do szybkiej iteracji nad samymi story'kami
+(np. przy pracy nad Etapem 5/6/7) — bez `--coverage`.
+
+### Po drodze: prawdziwe naruszenie kontrastu w `.storybook/blocks/StoryBlockCode`
+
+Realny render w Chromium (nie jsdom) złapał to, czego axe w jsdom nie mógł: paleta
+syntax-highlightingu w `StoryBlockCode` (`#999999`/`#cc7832`/`#9876aa`/`#1ea6fb` na tle `#444444`)
+nie spełnia progu 4.5:1 — realne naruszenie `color-contrast`, na każdej story z blokiem kodu (czyli
+praktycznie każdej galerii i stronie `*API`). To dokładnie ten typ trafienia, którego Etap 3 nie
+mógł jeszcze złapać.
+
+Element `@xigma/components` (Icon/Tooltip/ScrubbableInput) same w sobie — **zero** naruszeń w tym
+przebiegu; wszystkie 6 błędów wskazywały wyłącznie na `StoryBlockCode`.
+
+Żeby nie blokować całej bramki a11y tym jednym, znanym, nieaktualizowanym-jeszcze elementem
+dokumentacji (nigdy nie trafia do paczki `@xigma/components`), dodałem globalny
+`a11y.context.exclude: ['[class*="StoryBlockCode"]']` w `preview.tsx` z komentarzem
+odsyłającym tutaj. **To nie jest naprawa** — paleta kolorów w `StoryBlockCode` nadal ma zbyt niski
+kontrast i realnie warto to poprawić (Etap 8/9 albo osobne zadanie); to tylko odblokowuje resztę
+bramki, świadomie i jawnie, zamiast cichego ukrycia.
+
+- [x] `test`/`test:stories` przechodzą w pełni zielono (16 plików, 38 testów) po tym wyłączeniu
+- [ ] **do zrobienia osobno**: podbić kontrast palety w `StoryBlockCode`'s SCSS do 4.5:1 i zdjąć
+      powyższy `context.exclude`
+
+### Po drodze: `resolveSnapshotPath` przestał działać pod `test.projects`
+
+Po przejściu na `projects`, `resolveSnapshotPath` zdefiniowany wewnątrz `unit`-owego projektu
+(tak jak reszta jego configu) był po cichu ignorowany — Vitest pisał nowy snapshot pod domyślną
+ścieżką (`Icon/__snapshots__/Icon.spec.tsx.snap`), zamiast trafić w już zacommitowany
+`Icon/snapshots/Icon.spec.tsx.snap`, mimo identycznej treści. Fix: `resolveSnapshotPath` (razem z
+`coverage`) musi siedzieć na **roocie** `test`, nie wewnątrz projektu — wtedy `extends: true`
+poprawnie go przekazuje do obu projektów. Gdyby to się kiedyś powtórzyło z inną opcją: podejrzewaj
+najpierw root vs. per-project umiejscowienie, nie sam mechanizm resolvera.
+
+### Po drodze: `Vite unexpectedly reloaded a test` realnie łapane przez użytkownika
+
+Wcześniej odnotowane jako "nie udało się odtworzyć" — user złapał to na żywo:
+`react/jsx-dev-runtime` odkrywany dopiero w trakcie importu pierwszej story w przeglądarce wymuszał
+przeładowanie optymalizatora zależności Vite w połowie przebiegu, ucinając każdą story, która
+akurat była w trakcie importu (`Vitest failed to find the current suite`). Fix: `optimizeDeps.include:
+['react/jsx-dev-runtime', 'react-dom/client']` w projekcie `storybook` w `vitest.config.ts`, żeby
+Vite dobundlował to z góry zamiast w locie. Zweryfikowane 8/8 czystych przebiegów ze świeżo
+skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--coverage`).
 
 ## Etap 5 — `play()` interaction-testy
 
