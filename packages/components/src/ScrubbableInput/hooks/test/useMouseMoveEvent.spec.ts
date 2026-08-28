@@ -1,9 +1,17 @@
-import { fireEvent, renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 
 // hooks
 import { useMouseMoveEvent } from '../useMouseMoveEvent';
 
 const position = { x: 0, y: 0 };
+
+// jsdom's MouseEvent constructor ignores movementX, so pin it onto the instance afterwards
+const mouseMoveEvent = (movementX: number, shiftKey = false): MouseEvent => {
+  const event = new MouseEvent('mousemove', { bubbles: true, shiftKey });
+  Object.defineProperty(event, 'movementX', { value: movementX });
+
+  return event;
+};
 
 describe('useMouseMoveEvent', () => {
   beforeAll(() => {
@@ -20,7 +28,7 @@ describe('useMouseMoveEvent', () => {
     renderHook(() => useMouseMoveEvent(100, 0, false, position, onChange, vi.fn(), 10));
 
     // action
-    fireEvent.mouseMove(window, { movementX: 10, shiftKey: false });
+    window.dispatchEvent(mouseMoveEvent(10));
 
     // result
     expect(onChange).toHaveBeenCalledWith(15);
@@ -34,7 +42,7 @@ describe('useMouseMoveEvent', () => {
     renderHook(() => useMouseMoveEvent(100, 0, false, position, onChange, vi.fn(), 10));
 
     // action
-    fireEvent.mouseMove(window, { movementX: 10, shiftKey: true });
+    window.dispatchEvent(mouseMoveEvent(10, true));
 
     // result
     expect(onChange).toHaveBeenCalledWith(30);
@@ -48,23 +56,35 @@ describe('useMouseMoveEvent', () => {
     renderHook(() => useMouseMoveEvent(100, 0, false, position, onChange, vi.fn(), 100));
 
     // action
-    fireEvent.mouseMove(window, { movementX: 50, shiftKey: false });
+    window.dispatchEvent(mouseMoveEvent(50));
 
     // result
     expect(onChange).toHaveBeenCalledWith(100);
   });
 
+  it('should keep the value untouched when it does not move and looping is off', () => {
+    // mock
+    const onChange = vi.fn();
+
+    // before
+    renderHook(() => useMouseMoveEvent(100, 0, false, position, onChange, vi.fn(), 50));
+
+    // action
+    window.dispatchEvent(mouseMoveEvent(0));
+
+    // result
+    expect(onChange).toHaveBeenCalledWith(50);
+  });
+
   it('should wrap around to the opposite bound when loop is enabled', () => {
     // mock
     const onChange = vi.fn();
-    const event = new MouseEvent('mousemove', { bubbles: true });
-    Object.defineProperty(event, 'movementX', { value: 50 });
 
     // before
     renderHook(() => useMouseMoveEvent(100, 0, true, position, onChange, vi.fn(), 100));
 
     // action
-    window.dispatchEvent(event);
+    window.dispatchEvent(mouseMoveEvent(50));
 
     // result
     expect(onChange).toHaveBeenCalledWith(0);
@@ -78,7 +98,7 @@ describe('useMouseMoveEvent', () => {
     renderHook(() => useMouseMoveEvent(100, 0, false, null, onChange, vi.fn(), 10));
 
     // action
-    fireEvent.mouseMove(window, { movementX: 10, shiftKey: false });
+    window.dispatchEvent(mouseMoveEvent(10));
 
     // result
     expect(onChange).not.toHaveBeenCalled();

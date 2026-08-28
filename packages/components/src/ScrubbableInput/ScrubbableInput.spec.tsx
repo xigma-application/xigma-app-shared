@@ -1,9 +1,17 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
 // components
 import ScrubbableInput from './ScrubbableInput';
 
 const getRoot = (): HTMLElement => screen.getByText('child').parentElement as HTMLElement;
+
+// jsdom's MouseEvent constructor ignores movementX, so pin it onto the instance afterwards
+const mouseMoveEvent = (movementX: number): MouseEvent => {
+  const event = new MouseEvent('mousemove', { bubbles: true });
+  Object.defineProperty(event, 'movementX', { value: movementX });
+
+  return event;
+};
 
 describe('ScrubbableInput', () => {
   it('should render its children', () => {
@@ -51,7 +59,9 @@ describe('ScrubbableInput', () => {
     expect(document.querySelector('svg')).toBeInTheDocument();
 
     // action
-    fireEvent.mouseMove(window, { movementX: 20, shiftKey: false });
+    act(() => {
+      window.dispatchEvent(mouseMoveEvent(20));
+    });
 
     // result
     expect(onChange).toHaveBeenCalledWith(20);
@@ -61,6 +71,22 @@ describe('ScrubbableInput', () => {
 
     // result
     expect(onMouseUp).toHaveBeenCalledTimes(1);
+    expect(document.querySelector('svg')).not.toBeInTheDocument();
+  });
+
+  it('should fall back to no-op handlers when onMouseDown and onMouseUp are omitted', () => {
+    // before
+    render(
+      <ScrubbableInput max={100} min={0} onChange={vi.fn()} value={0}>
+        <span>child</span>
+      </ScrubbableInput>,
+    );
+
+    // action
+    fireEvent.mouseDown(getRoot(), { clientX: 0, clientY: 0 });
+    fireEvent.mouseUp(getRoot());
+
+    // result
     expect(document.querySelector('svg')).not.toBeInTheDocument();
   });
 });
