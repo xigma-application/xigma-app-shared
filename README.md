@@ -111,6 +111,23 @@ niespecyficzna dla x-design.
 import { StoryApi, StoryBlockWarning } from '../../../.storybook/blocks';
 ```
 
+### AI / MCP — `@storybook/addon-mcp`
+
+Wystawia serwer MCP (`http://localhost:6006/mcp`, gdy leci `npm run storybook`) z kontekstem tego
+design systemu dla agentów AI — inwentarz komponentów, propsy z `react-docgen-typescript`,
+story'ki, docs, wyniki testów z realnej przeglądarki (`@storybook/addon-vitest`). Zamiast zgadywać
+UI od zera, agent (Claude, Copilot, Cursor, ...) odpytuje serwer i składa interfejs z tego, co już
+istnieje w `@xigma/components`.
+
+Wymaga uruchomionego dev-servera. Podłączenie generyczne (dowolny klient MCP):
+
+```bash
+npx mcp-add --type http --url "http://localhost:6006/mcp" --scope project
+```
+
+Dla Claude Code — [dodanie zdalnego serwera HTTP](https://code.claude.com/docs/en/mcp#option-1-add-a-remote-http-server)
+wg jego własnej dokumentacji.
+
 ## Użycie w apce-konsumencie
 
 1. Skopiuj `scripts/xigma-pull.js` do repo apki (np. do `scripts/`).
