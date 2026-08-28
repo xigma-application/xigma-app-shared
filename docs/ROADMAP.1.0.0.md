@@ -19,13 +19,15 @@ Storybook nie zna propsów, więc panel Controls jest pusty. Przejście na obiek
 (`export const Basic: Story = { args: { ... } }`) odblokowuje Controls i jest warunkiem
 wstępnym autodocs (Etap 7).
 
-- [ ] `BasicIcon`, `BasicTooltip`, `BasicScrubbableInput` → CSF3 z `args`
-- [ ] `argTypes` z `control` / `options` (select dla `name`/`color`/`side`/`align`, `range` dla
-      `size`, `boolean` dla `disabled`/`loop`), `table.category` do grupowania
-- [ ] siatki "wszystkie warianty naraz" (obecne demo przez `StoryComponent`) zostają jako
-      osobne story bez controls (`parameters.controls.disable`)
-- [ ] `ScrubbableInput` jest kontrolowany — potrzebny mały decorator/render trzymający `useState`
-      i spinający `value` ↔ `onChange`, żeby Controls dla `value` działały sensownie
+- [x] `BasicIcon`, `BasicTooltip`, `BasicScrubbableInput` → CSF3 z `args`
+- [x] `argTypes` z `control` / `options` (select dla `name`/`color`/`side`/`align`, `range` dla
+      `size`, `boolean` dla `disabled`/`loop`) — bez `table.category`, za mało propsów per
+      komponent żeby grupowanie miało sens
+- [x] siatki "wszystkie warianty naraz" (obecne demo przez `StoryComponent`) zostają jako
+      osobne story bez controls (`AllIcons`, `AllPlacements`, `States` —
+      `parameters.controls.disable`)
+- [x] `ScrubbableInput` jest kontrolowany — `ControlledScrubbableInput` w story trzyma `useState`
+      i spina `value` ↔ `onChange`, Controls dla `value`/`min`/`max`/`loop`/`disabled` działają
 
 ## Etap 2 — Actions: podgląd callbacków
 

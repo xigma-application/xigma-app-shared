@@ -1,16 +1,19 @@
-import type { Meta, StoryFn } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 // components
 import Icon, { TIconProps } from '../Icon';
 import { Icons } from '../constants';
 import { Tooltip } from '../../Tooltip/Tooltip';
 
+// others
+import { colors } from '../../colors';
+
 // types
 import { ContentGridFlow, StoryComponent, TStoryBlockCode } from 'storybook-blocks';
 
 const description = ['Use Icon to render one of the icons from the shared icon set. Hover an icon to see its name.'];
 
-const icons = Object.keys(Icons);
+const icons = Object.keys(Icons) as Array<TIconProps['name']>;
 
 const blockCodeData: TStoryBlockCode = {
   imports: [
@@ -38,26 +41,45 @@ const blockCodeData: TStoryBlockCode = {
   ],
 };
 
-const title = 'UI/Icon/Basic Icon';
-
-export default {
+const meta = {
+  argTypes: {
+    color: { control: 'select', options: Object.keys(colors) },
+    name: { control: 'select', options: icons },
+    size: { control: { max: 64, min: 8, step: 2, type: 'range' } },
+  },
+  args: {
+    color: 'neutral1',
+    name: 'Check',
+    size: 16,
+  },
   component: Icon,
-  title,
+  title: 'UI/Icon/Basic Icon',
 } satisfies Meta<typeof Icon>;
 
-const Template: StoryFn<typeof Icon> = ({ ...args }) => (
-  <StoryComponent
-    blocksCodeData={[blockCodeData]}
-    contentGridFlow={ContentGridFlow.maxEightColumns}
-    description={description}
-    title="Icon"
-  >
-    {icons.map((iconName) => (
-      <Tooltip content={iconName} key={iconName}>
-        <Icon {...args} name={iconName as TIconProps['name']} />
-      </Tooltip>
-    ))}
-  </StoryComponent>
-);
+export default meta;
 
-export const BasicIcon = Template;
+type Story = StoryObj<typeof meta>;
+
+export const BasicIcon: Story = {
+  render: (args) => <Icon {...args} />,
+};
+
+export const AllIcons: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render: (args) => (
+    <StoryComponent
+      blocksCodeData={[blockCodeData]}
+      contentGridFlow={ContentGridFlow.maxEightColumns}
+      description={description}
+      title="Icon"
+    >
+      {icons.map((iconName) => (
+        <Tooltip content={iconName} key={iconName}>
+          <Icon {...args} name={iconName} />
+        </Tooltip>
+      ))}
+    </StoryComponent>
+  ),
+};

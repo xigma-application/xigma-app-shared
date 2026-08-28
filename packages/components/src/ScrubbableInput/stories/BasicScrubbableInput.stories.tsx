@@ -1,8 +1,8 @@
-import { FC, useState } from 'react';
-import type { Meta, StoryFn } from '@storybook/react-vite';
+import { FC, useEffect, useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 // components
-import ScrubbableInput from '../ScrubbableInput';
+import ScrubbableInput, { TScrubbableInputProps } from '../ScrubbableInput';
 
 // types
 import { ContentGridFlow, StoryComponent, TStoryBlockCode } from 'storybook-blocks';
@@ -13,31 +13,46 @@ const description = [
   <code>loop</code> to wrap around once a bound is reached.`,
 ];
 
-type TFieldProps = {
+const fieldStyle = {
+  border: '1px solid var(--color-neutral-3)',
+  borderRadius: 5,
+  color: 'var(--color-neutral-1)',
+  fontSize: 12,
+  padding: '10px 16px',
+};
+
+// ScrubbableInput is fully controlled — this keeps Storybook's `value` control as the initial
+// value while letting drags update the live value shown in the field.
+const ControlledScrubbableInput: FC<TScrubbableInputProps> = ({ onChange, value: initialValue, ...props }) => {
+  const [value, setValue] = useState(initialValue);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
+  const handleChange = (nextValue: number): void => {
+    setValue(nextValue);
+    onChange(nextValue);
+  };
+
+  return (
+    <ScrubbableInput {...props} onChange={handleChange} value={value}>
+      <span style={fieldStyle}>Value: {value}</span>
+    </ScrubbableInput>
+  );
+};
+
+type TField = {
   disabled?: boolean;
   label: string;
   loop?: boolean;
 };
 
-const Field: FC<TFieldProps> = ({ disabled = false, label, loop = false }) => {
-  const [value, setValue] = useState(25);
-
-  return (
-    <ScrubbableInput disabled={disabled} loop={loop} max={100} min={0} onChange={setValue} value={value}>
-      <span
-        style={{
-          border: '1px solid var(--color-neutral-3)',
-          borderRadius: 5,
-          color: 'var(--color-neutral-1)',
-          fontSize: 12,
-          padding: '10px 16px',
-        }}
-      >
-        {label}: {value}
-      </span>
-    </ScrubbableInput>
-  );
-};
+const fields: Array<TField> = [
+  { label: 'Default' },
+  { label: 'Looping', loop: true },
+  { disabled: true, label: 'Disabled' },
+];
 
 const blockCodeData: TStoryBlockCode = {
   componentName: 'ScrubbableInput',
@@ -61,24 +76,50 @@ const blockCodeData: TStoryBlockCode = {
   variables: [{ name: '[value, setValue]', type: 'const', value: 'useState(25)' }],
 };
 
-const title = 'UI/ScrubbableInput/Basic ScrubbableInput';
-
-export default {
+const meta = {
+  argTypes: {
+    children: { table: { disable: true } },
+    disabled: { control: 'boolean' },
+    loop: { control: 'boolean' },
+    max: { control: 'number' },
+    min: { control: 'number' },
+    onChange: { table: { disable: true } },
+    value: { control: 'number' },
+  },
+  args: {
+    disabled: false,
+    loop: false,
+    max: 100,
+    min: 0,
+    onChange: (): void => {},
+    value: 25,
+  },
   component: ScrubbableInput,
-  title,
+  title: 'UI/ScrubbableInput/Basic ScrubbableInput',
 } satisfies Meta<typeof ScrubbableInput>;
 
-const Template: StoryFn<typeof ScrubbableInput> = () => (
-  <StoryComponent
-    blocksCodeData={[blockCodeData]}
-    contentGridFlow={ContentGridFlow.column}
-    description={description}
-    title="Basic ScrubbableInput"
-  >
-    <Field label="Default" />
-    <Field label="Looping" loop />
-    <Field disabled label="Disabled" />
-  </StoryComponent>
-);
+export default meta;
 
-export const BasicScrubbableInput = Template;
+type Story = StoryObj<typeof meta>;
+
+export const BasicScrubbableInput: Story = {
+  render: (args) => <ControlledScrubbableInput {...args} />,
+};
+
+export const States: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render: (args) => (
+    <StoryComponent
+      blocksCodeData={[blockCodeData]}
+      contentGridFlow={ContentGridFlow.column}
+      description={description}
+      title="Basic ScrubbableInput"
+    >
+      {fields.map(({ disabled, label, loop }) => (
+        <ControlledScrubbableInput {...args} disabled={disabled} key={label} loop={loop} />
+      ))}
+    </StoryComponent>
+  ),
+};

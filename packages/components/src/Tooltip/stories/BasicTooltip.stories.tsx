@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 // components
 import Tooltip from '../Tooltip';
@@ -29,6 +29,14 @@ const placements: Array<TPlacement> = [
   { align: 'end', label: 'LEFT-END', side: 'left' },
 ];
 
+const triggerStyle = {
+  border: '1px solid var(--color-neutral-3)',
+  borderRadius: 5,
+  color: 'var(--color-neutral-1)',
+  fontSize: 12,
+  padding: '10px 16px',
+};
+
 const blockCodeData: TStoryBlockCode = {
   componentName: 'Tooltip',
   imports: [
@@ -46,36 +54,53 @@ const blockCodeData: TStoryBlockCode = {
   })),
 };
 
-const title = 'UI/Tooltip/Basic Tooltip';
-
-export default {
+const meta = {
+  argTypes: {
+    align: { control: 'inline-radio', options: ['start', 'center', 'end'] },
+    children: { table: { disable: true } },
+    content: { control: 'text' },
+    side: { control: 'inline-radio', options: ['top', 'right', 'bottom', 'left'] },
+    sideOffset: { control: { max: 32, min: 0, step: 1, type: 'range' } },
+  },
+  args: {
+    align: 'center',
+    children: <div style={triggerStyle}>Trigger</div>,
+    content: 'Tooltip',
+    side: 'top',
+    sideOffset: 8,
+  },
   component: Tooltip,
-  title,
+  title: 'UI/Tooltip/Basic Tooltip',
 } satisfies Meta<typeof Tooltip>;
 
-const Template: StoryFn<typeof Tooltip> = ({ ...args }) => (
-  <StoryComponent
-    blocksCodeData={[blockCodeData]}
-    contentGridFlow={ContentGridFlow.maxFourColumns}
-    description={description}
-    title="Basic Tooltip"
-  >
-    {placements.map(({ align, label, side }) => (
-      <Tooltip {...args} align={align} content="Tooltip" key={label} side={side}>
-        <div
-          style={{
-            border: '1px solid var(--color-neutral-3)',
-            borderRadius: 5,
-            color: 'var(--color-neutral-1)',
-            fontSize: 12,
-            padding: '10px 16px',
-          }}
-        >
-          {label}
-        </div>
-      </Tooltip>
-    ))}
-  </StoryComponent>
-);
+export default meta;
 
-export const BasicTooltip = Template;
+type Story = StoryObj<typeof meta>;
+
+export const BasicTooltip: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', justifyContent: 'center', padding: 48 }}>
+      <Tooltip {...args} />
+    </div>
+  ),
+};
+
+export const AllPlacements: Story = {
+  parameters: {
+    controls: { disable: true },
+  },
+  render: (args) => (
+    <StoryComponent
+      blocksCodeData={[blockCodeData]}
+      contentGridFlow={ContentGridFlow.maxFourColumns}
+      description={description}
+      title="Basic Tooltip"
+    >
+      {placements.map(({ align, label, side }) => (
+        <Tooltip {...args} align={align} content="Tooltip" key={label} side={side}>
+          <div style={triggerStyle}>{label}</div>
+        </Tooltip>
+      ))}
+    </StoryComponent>
+  ),
+};
