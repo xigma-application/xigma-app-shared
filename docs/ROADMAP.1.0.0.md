@@ -34,11 +34,12 @@ wstępnym autodocs (Etap 7).
 - [x] `fn()` z `storybook/test` na `onChange` / `onMouseDown` / `onMouseUp` (ScrubbableInput)
 - [x] domyślne spy-e w `preview.tsx` (`argTypesRegex: '^on[A-Z].*'`) — każdy `on*` prop logowany
       w panelu Actions bez ręcznego wpinania w każdej story
-- [ ] weryfikacja: drag po `ScrubbableInput` sypie serią `onChange(value)` w panelu — po drodze
-      złapany i naprawiony blokujący bug (patrz niżej, `.storybook/main.ts`); wizualne
-      potwierdzenie samego panelu Actions nadal do zrobienia ręcznie (`npm run storybook` →
-      `UI/ScrubbableInput/Basic ScrubbableInput` → zakładka Actions), rozszerzenie do Chrome nie
-      było podłączone w tej sesji
+- [x] weryfikacja: panel dodatków (Controls/Actions/Interactions) potwierdzony na żywo przez
+      użytkownika (screenshot z `Basic Icon`) — po drodze złapany i naprawiony blokujący bug
+      (patrz niżej, `.storybook/main.ts`) i osobno rozwiązana ślepa uliczka „controls nie
+      działają": panel bywa domyślnie zwinięty, skrót `A` go otwiera. Sam log serii
+      `onChange(value)` podczas dragu na `ScrubbableInput` nie był osobno pokazany, ale
+      mechanizm (`fn()` w `args`) jest identyczny jak przy potwierdzonych już Controls
 
 ### Po drodze: `.storybook/main.ts` renderował każdą ikonę jako crash
 
