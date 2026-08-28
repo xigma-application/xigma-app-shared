@@ -42,6 +42,13 @@ export default defineConfig({
             svgrOptions: { ref: true, titleProp: false },
           }),
         ],
+        // specs use composeStories() to render actual .stories.tsx modules (Roadmap 1.0.0 Etap
+        // 6), which import the same 'storybook-blocks' alias .storybook/main.ts defines
+        resolve: {
+          alias: {
+            'storybook-blocks': path.resolve(dirname, '.storybook/blocks'),
+          },
+        },
         test: {
           environment: 'jsdom',
           exclude: ['**/node_modules/**', '**/dist/**'],

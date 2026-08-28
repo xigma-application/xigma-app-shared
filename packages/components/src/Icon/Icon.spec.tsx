@@ -1,8 +1,12 @@
 import { createRef } from 'react';
+import { composeStories } from '@storybook/react-vite';
 import { render } from '@testing-library/react';
 
 // components
 import Icon from './Icon';
+import * as stories from './stories/BasicIcon.stories';
+
+const { BasicIcon } = composeStories(stories);
 
 describe('Icon snapshots', () => {
   it('should render the named icon', () => {
@@ -17,7 +21,7 @@ describe('Icon snapshots', () => {
 describe('Icon behaviors', () => {
   it('should default the size to 16 and the color to the neutral-1 token', () => {
     // before
-    const { container } = render(<Icon name="Plus" />);
+    const { container } = render(<BasicIcon />);
 
     // find
     const svg = container.querySelector('svg') as SVGSVGElement;
@@ -31,7 +35,7 @@ describe('Icon behaviors', () => {
 
   it('should apply the requested color token, size and merged inline style', () => {
     // before
-    const { container } = render(<Icon color="blue1" name="Plus" size={24} style={{ opacity: 0.5 }} />);
+    const { container } = render(<BasicIcon color="blue1" size={24} style={{ opacity: 0.5 }} />);
 
     // find
     const svg = container.querySelector('svg') as SVGSVGElement;

@@ -201,11 +201,40 @@ skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--cove
 
 ## Etap 6 — `composeStories` w unit-testach
 
-- [ ] `Icon.spec.tsx` / `Tooltip.spec.tsx` / `ScrubbableInput.spec.tsx` renderują złożone story
-      (`composeStories` z `@storybook/react-vite`) zamiast budować drzewo JSX od zera
-- [ ] wspólny setup (TooltipProvider, motyw, mocki z `.storybook/preview`) przez
-      `setProjectAnnotations` w `test/setup.ts` — jedno źródło prawdy z podglądem
-- [ ] usunąć zduplikowany scaffolding z testów, zostawić same asercje
+- [x] `setProjectAnnotations(preview)` w `test/setup.ts` — jedno źródło prawdy: każdy `composeStories`
+      w unit-testach dostaje te same dekoratory co prawdziwy Storybook (`TooltipProvider`, motyw)
+- [x] `unit`-owy projekt w `vitest.config.ts` dostał alias `storybook-blocks` (potrzebny, bo specy
+      teraz importują realne `*.stories.tsx`, które go używają) — ten sam wzorzec co przy debugowaniu
+      w Etapach 2/3
+- [x] `Tooltip.spec.tsx` — pełne przejście na `composeStories(BasicTooltip, NoContent)`: zniknął
+      ręczny `<TooltipPrimitive.Provider delayDuration={0}>` wrapper, bo dekorator z preview robi to
+      samo. Świadomie **nie** przyspieszałem `delayDuration` z powrotem — realny `TooltipProvider`
+      (1s domyślny delay) teraz też przechodzi przez unit-test, tylko że `fireEvent.focus` (w
+      odróżnieniu od hover) w Radiksie i tak otwiera natychmiast, więc czasu nie przybyło
+- [x] `Icon.spec.tsx` — **częściowe** przejście: `composeStories(BasicIcon)` tylko dla testów
+      default/override propsów (gdzie realnie usuwał duplikację); snapshot i ref-forwarding
+      zostały na gołym `<Icon>` świadomie, nie z lenistwa — zobacz niżej
+- [x] `ScrubbableInput.spec.tsx` — **częściowe**: `composeStories(BasicScrubbableInput)` dla
+      render/disabled/drag; test "no-op handlers gdy pominięte" zostaje na gołym `<ScrubbableInput>`
+      świadomie — zobacz niżej
+- [x] usunięty zduplikowany scaffolding tam, gdzie faktycznie był duplikacją, nie wszędzie na siłę
+
+### Dlaczego nie 100% composeStories wszędzie
+
+`composeStories` nie nadaje się do każdego testu — dwa realne ograniczenia, nie lenistwo:
+
+1. **Snapshot Icon.spec.tsx** — `BasicIcon`'s story renderuje przez `<StoryComponent>` (tytuł,
+   opis, wrapper `<section>`) — to chrome dokumentacji Storybooka, nie część `Icon`. Zesnapshotowanie
+   przez to sprzęgłoby test jednostkowy Icon z treścią opisu w story'ce (zmiana copy w opisie
+   złamałaby snapshot Icon, mimo że Icon się nie zmienił) — zostało na gołym `<Icon name="Plus" />`,
+   dokładnie to i tylko to, co snapshot ma sprawdzać.
+2. **`ScrubbableInput`'s "no-op handlers" test** — `meta.args` w story ZAWSZE dostarcza
+   `onMouseDown`/`onMouseUp` (jako `fn()`, na potrzeby panelu Actions z Etapu 2) —
+   `composeStories`' nadpisywanie propsów nie potrafi **usunąć** domyślnego argu, więc nie da się
+   przez nią przetestować faktycznie pominiętego propa (ścieżki domyślnej `noop` w
+   `ScrubbableInput.tsx`). Zostało na gołym `<ScrubbableInput>` bez tych propsów w ogóle.
+   Podobnie ref-forwarding w Icon — `composeStories`' komponent nie gwarantuje przekazania `ref`
+   dalej, to mechanizm Reacta na poziomie samego `Icon`, nie coś do przetestowania przez story.
 
 ## Etap 7 — autodocs zamiast ręcznych tabel API
 

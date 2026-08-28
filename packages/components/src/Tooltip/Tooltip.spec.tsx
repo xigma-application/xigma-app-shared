@@ -1,52 +1,40 @@
-import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { composeStories } from '@storybook/react-vite';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 // components
-import Tooltip from './Tooltip';
+import * as stories from './stories/BasicTooltip.stories';
 
-const renderTooltip = (content?: string): ReturnType<typeof render> =>
-  render(
-    <TooltipPrimitive.Provider delayDuration={0}>
-      <Tooltip content={content}>
-        <button type="button">trigger</button>
-      </Tooltip>
-    </TooltipPrimitive.Provider>,
-  );
+const { BasicTooltip, NoContent } = composeStories(stories);
 
 describe('Tooltip behaviors', () => {
   it('should render the trigger untouched when there is no content', () => {
     // before
-    renderTooltip();
+    render(<NoContent />);
 
     // result
-    expect(screen.getByRole('button', { name: 'trigger' })).toBeInTheDocument();
+    expect(screen.getByText('Trigger')).toBeInTheDocument();
   });
 
   it('should reveal the content once the trigger is focused', async () => {
     // before
-    renderTooltip('hint');
+    render(<BasicTooltip />);
 
     // action
-    fireEvent.focus(screen.getByRole('button', { name: 'trigger' }));
+    fireEvent.focus(screen.getByText('Trigger'));
 
-    // result
-    expect(await screen.findAllByText('hint')).not.toHaveLength(0);
+    // result: TooltipProvider's default 1s enter delay (via setProjectAnnotations, same as
+    // Storybook's own preview) means this needs real time to pass
+    expect(await screen.findAllByText('Tooltip', {}, { timeout: 2000 })).not.toHaveLength(0);
   });
 
   it('should honour custom align, side and sideOffset props', async () => {
     // before
-    render(
-      <TooltipPrimitive.Provider delayDuration={0}>
-        <Tooltip align="start" content="hint" side="bottom" sideOffset={4}>
-          <button type="button">trigger</button>
-        </Tooltip>
-      </TooltipPrimitive.Provider>,
-    );
+    render(<BasicTooltip align="start" content="hint" side="bottom" sideOffset={4} />);
 
     // action
-    fireEvent.focus(screen.getByRole('button', { name: 'trigger' }));
+    fireEvent.focus(screen.getByText('Trigger'));
 
     // result
-    expect(await screen.findAllByText('hint')).not.toHaveLength(0);
+    expect(await screen.findAllByText('hint', {}, { timeout: 2000 })).not.toHaveLength(0);
   });
 });

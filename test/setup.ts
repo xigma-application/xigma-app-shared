@@ -1,4 +1,12 @@
 import '@testing-library/jest-dom/vitest';
+import { setProjectAnnotations } from '@storybook/react';
+
+import preview from '../.storybook/preview';
+
+// applies the same decorators Storybook itself uses (TooltipProvider, theme) to any story
+// rendered through composeStories in a unit spec — one source of truth with the real preview,
+// instead of specs re-wrapping providers by hand
+setProjectAnnotations(preview);
 
 // jsdom doesn't implement matchMedia
 Object.defineProperty(window, 'matchMedia', {
