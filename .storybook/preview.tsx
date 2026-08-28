@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/react-vite';
 
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 
+import { ReactiveDocsContainer } from './ReactiveDocsContainer';
 import { TooltipProvider } from '../packages/core/src/TooltipProvider/TooltipProvider';
 
 import './styles/index.scss';
@@ -17,6 +18,9 @@ const preview: Preview = {
       // Etap 4, addon-vitest) — in the interactive Accessibility panel it just controls styling
       test: 'error',
     },
+    // addon-docs' own chrome otherwise stays permanently light — ReactiveDocsContainer follows
+    // the data-theme toggle below instead
+    docs: { container: ReactiveDocsContainer },
     // logs any arg named onXxx to the Actions panel, even when it isn't explicitly wired with
     // `fn()` from `storybook/test` — a safety net for components that gain callback props later
     actions: { argTypesRegex: '^on[A-Z].*' },
