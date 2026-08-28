@@ -7,6 +7,7 @@ import { Tooltip } from '../../Tooltip/Tooltip';
 
 // others
 import { colors } from '../../colors';
+import { playBasicIcon } from './test/BasicIcon.interactions';
 
 // types
 import { ContentGridFlow, StoryComponent, TStoryBlockCode } from 'storybook-blocks';
@@ -61,6 +62,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BasicIcon: Story = {
+  play: playBasicIcon,
   render: (args) => (
     <StoryComponent blocksCodeData={[]} description={description} title="Icon">
       <Icon {...args} />

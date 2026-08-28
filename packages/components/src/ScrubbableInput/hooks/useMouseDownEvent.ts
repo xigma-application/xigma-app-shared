@@ -15,7 +15,9 @@ export const useMouseDownEvent = (
     onMouseDown();
 
     if (inputRef.current) {
-      inputRef.current.requestPointerLock();
+      // rejects (e.g. when the browser refuses lock outside a top-level document) without ever
+      // stopping the drag itself — the lock is a nice-to-have, not a requirement
+      inputRef.current.requestPointerLock().catch(() => {});
     }
   };
 

@@ -9,7 +9,7 @@ describe('useMouseDownEvent', () => {
     // mock
     const setMousePosition = vi.fn();
     const onMouseDown = vi.fn();
-    const requestPointerLock = vi.fn();
+    const requestPointerLock = vi.fn().mockResolvedValue(undefined);
     const inputRef = { current: { requestPointerLock } } as unknown as RefObject<HTMLDivElement>;
 
     // before

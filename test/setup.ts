@@ -40,9 +40,10 @@ Object.defineProperty(HTMLElement.prototype, 'setPointerCapture', {
   writable: true,
 });
 
-// jsdom doesn't implement the pointer lock API (used by ScrubbableInput's drag gesture)
+// jsdom doesn't implement the pointer lock API (used by ScrubbableInput's drag gesture) — the
+// real DOM method returns a Promise<void>, so the mock does too
 Object.defineProperty(HTMLElement.prototype, 'requestPointerLock', {
-  value: (): void => {},
+  value: (): Promise<void> => Promise.resolve(),
   writable: true,
 });
 

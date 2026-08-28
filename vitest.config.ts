@@ -16,6 +16,7 @@ export default defineConfig({
       exclude: [
         '**/*.spec.{ts,tsx}',
         '**/*.stories.tsx',
+        '**/stories/test/**',
         '**/index.ts',
         '**/types.ts',
         '**/constants.ts',

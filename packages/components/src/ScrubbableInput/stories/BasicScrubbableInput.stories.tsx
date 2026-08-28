@@ -5,6 +5,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 // components
 import ScrubbableInput, { TScrubbableInputProps } from '../ScrubbableInput';
 
+// others
+import { playBasicScrubbableInput, playStates } from './test/BasicScrubbableInput.interactions';
+
 // types
 import { ContentGridFlow, StoryComponent, TStoryBlockCode } from 'storybook-blocks';
 
@@ -108,6 +111,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BasicScrubbableInput: Story = {
+  play: playBasicScrubbableInput,
   render: (args) => (
     <StoryComponent blocksCodeData={[]} description={description} title="Basic ScrubbableInput">
       <ControlledScrubbableInput {...args} />
@@ -119,6 +123,7 @@ export const States: Story = {
   parameters: {
     controls: { disable: true },
   },
+  play: playStates,
   render: (args) => (
     <StoryComponent
       blocksCodeData={[blockCodeData]}

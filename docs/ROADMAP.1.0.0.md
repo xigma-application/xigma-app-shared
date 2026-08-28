@@ -100,18 +100,24 @@ Storybooka i w raporcie Vitesta.
       częścią samego configu); doszedł `test:stories` (`vitest run --project=storybook`) na sam
       projekt storybookowy
 
-### ⚠️ Pułapka: `test:stories -- --coverage` straszy fałszywym czerwonym raportem
+### ⚠️ Pułapka: coverage widziane tylko z projektu `storybook` straszy fałszywym czerwonym raportem
 
-`test:stories` uruchamia **tylko** projekt `storybook` — story'ki na razie tylko renderują
-komponenty statycznie (żadnego dragu/interakcji, to dopiero `play()` w Etapie 5), więc np.
-`ScrubbableInput/utils` wychodzi na ~7% (logika przeliczania wartości nigdy nie jest wywołana bez
-symulacji ruchu myszką). Coverage w Vitest 3.2 z `projects` jest **jeden, na roocie**, wspólny dla
-całego procesu — nie da się go sensownie ograniczyć per-projekt, więc odpalenie
-`npm run test:stories -- --coverage` (albo `vitest run --project=storybook --coverage`) zawsze
-pokaże ten sam, mylący, częściowy wynik i failnie progi 100%. **To nie jest regresja** — prawdziwa
-bramka to `npm run test:coverage` (bez `--project`, oba projekty naraz), zweryfikowana 8+ razy z
-rzędu na czysto jako 100%. `test:stories` służy tylko do szybkiej iteracji nad samymi story'kami
-(np. przy pracy nad Etapem 5/6/7) — bez `--coverage`.
+Dotyczy **trzech** równoważnych ścieżek, wszystkich ograniczonych do samego projektu `storybook`:
+`npm run test:stories -- --coverage`, `vitest run --project=storybook --coverage`, i — co mniej
+oczywiste — **widget testowy wbudowany w Storybooka** (`npm run storybook`, ikonka probówki w
+sidebarze). Ten ostatni z definicji strukturalnie nie wie nic o osobnym projekcie `unit` (jsdom) w
+`vitest.config.ts` — zna tylko story'ki, więc nawet po dodaniu `play()` w Etapie 5 nigdy nie
+odpali `utils/test/*.spec.ts` i podobnych dedykowanych jsdom-owych testów. Np. `ScrubbableInput/utils`
+(`getRevertValue`/`handleUpdateMousePosition`) wychodzi tam na ~77-80%, mimo 100% w pełnym przebiegu
+— play() na `ScrubbableInput` dotyka tej logiki tylko częściowo przy okazji dragu, resztę pokrywają
+wyłącznie dedykowane testy jednostkowe, które żyją tylko w projekcie `unit`.
+
+Coverage w Vitest 3.2 z `projects` jest **jeden, na roocie**, wspólny dla całego procesu — nie da
+się go sensownie ograniczyć per-projekt ani sprawić, żeby widget Storybooka "widział" drugi projekt.
+**To nie jest regresja** — prawdziwa bramka to `npm run test:coverage` (bez `--project`, oba
+projekty naraz), zweryfikowana wielokrotnie z rzędu na czysto jako 100%. `test:stories` i widget w
+Storybooku służą tylko do szybkiej iteracji nad samymi story'kami — bez `--coverage`, i bez
+traktowania ich coverage jako miarodajnego.
 
 ### Po drodze: prawdziwe naruszenie kontrastu w `.storybook/blocks/StoryBlockCode`
 
@@ -157,12 +163,41 @@ skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--cove
 
 ## Etap 5 — `play()` interaction-testy
 
-- [ ] `ScrubbableInput` — `play` symuluje gest scrubowania (pointer down → `mousemove` z
-      `movementX` → up), asercje: `onChange` dostało zklampowaną wartość, handle pojawia się i
-      znika, `loop` zawija na granicy
-- [ ] `Tooltip` — focus/hover triggera → treść widoczna; brak `content` → sam trigger
-- [ ] `Icon` — render named icon, `data-svg-property` recoloring pod motywem
-- [ ] docelowo część asercji z `*.spec.tsx` przenosi się tutaj (bliżej realnego renderu)
+- [x] `Icon` — render + `data-svg-property` recoloring pod motywem: real Chromium potwierdza, że
+      `fill: currentcolor` faktycznie resolvuje na obliczony kolor Icon, i że to token motywu, nie
+      sztywna wartość (przełączenie `data-theme` w trakcie testu zmienia wynik)
+- [x] `Tooltip` — hover triggera → treść widoczna (Portal renderuje poza `canvasElement`, więc
+      asercja idzie przez globalny `screen`, nie scoped `canvas`); brak `content` → osobna story
+      `NoContent`, trigger nigdy nie dostaje `data-state` od Radixa (dowód, że wczesny `return
+      children` w `Tooltip.tsx` faktycznie omija Radixa, nie tylko "wygląda tak samo")
+- [x] `ScrubbableInput` — `play` symuluje gest scrubowania (mousedown → `mousemove` z
+      `movementX` → mouseup), asercje: `onChange`/wyświetlana wartość dostają zklampowaną liczbę,
+      handle pojawia się i znika, `loop` zawija na granicy (`States`, pole "Looping")
+- [x] logika testów **w osobnym pliku** obok `*.stories.tsx` (`stories/test/<Nazwa>.interactions.ts`,
+      wzorem `hooks/test/`/`utils/test/` z [[xigma-test-conventions]]) — story same zostają krótkie,
+      `play: playX` to jedna linijka; pliki `stories/test/**` wyłączone z progu coverage 100% (jak
+      `*.spec.*`), bo to kod testowy, nie produkcyjny
+- [ ] docelowo część asercji z `*.spec.tsx` przenosi się tutaj (bliżej realnego renderu) — **nie
+      zrobione**, zostawione jako miały być: `*.spec.tsx` unit-testy nietknięte, `play()` je
+      uzupełnia (kontrast/CSS, realny Portal, realny drag w przeglądarce), nie duplikuje
+
+### Po drodze: dwa realne problemy złapane i naprawione
+
+- **Produkcyjny bug, nie tylko testowy**: `useMouseDownEvent.ts`'s
+  `inputRef.current.requestPointerLock()` rzucał w prawdziwej przeglądarce (addon-vitest/Playwright)
+  `WrongDocumentError` jako nieobsłużony reject Promise — bez tego play() na `ScrubbableInput` nie
+  mógł w ogóle przejść. Naprawione `.catch(() => {})` — pointer lock to "nice to have" przy dragu,
+  jego odmowa (np. w iframe, restrykcyjna przeglądarka) nie powinna nigdy zostawiać nieobsłużonego
+  rejecta u konsumenta paczki. `test/setup.ts`'s jsdom mock zaktualizowany żeby zwracał
+  `Promise.resolve()` (jak prawdziwe DOM API), nie `undefined`.
+- **Wyścig `window.dispatchEvent` vs. React**: surowy `window.dispatchEvent(mousemove)` omija
+  React'a całkowicie, więc nie daje mu sygnału żeby zflushować passive effect
+  (`useMouseMoveEvent`'s nasłuchiwacz, dodawany w `useEffect`) — mousedown mógł jeszcze nie
+  skomitować, kiedy kolejna linia już dispatchowała mousemove w pustkę. Fix: `dragTo` helper w
+  `stories/test/BasicScrubbableInput.interactions.ts` re-dispatchuje wewnątrz `waitFor` zamiast
+  jednego strzału — dispatch przed podłączeniem listenera to no-op, retry łapie ten, który trafia
+  po (patrz [[xigma-test-act-wrapping]] — ten sam problem co `act()`, tylko bez `act()` jako
+  dostępnego narzędzia w play()).
 
 ## Etap 6 — `composeStories` w unit-testach
 

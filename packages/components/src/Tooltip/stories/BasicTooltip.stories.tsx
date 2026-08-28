@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 // components
 import Tooltip from '../Tooltip';
 
+// others
+import { playBasicTooltip, playNoContent } from './test/BasicTooltip.interactions';
+
 // types
 import { ContentGridFlow, StoryComponent, TStoryBlockCode } from 'storybook-blocks';
 
@@ -78,8 +81,24 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const BasicTooltip: Story = {
+  play: playBasicTooltip,
   render: (args) => (
     <StoryComponent blocksCodeData={[]} description={description} title="Basic Tooltip">
+      <Tooltip {...args} />
+    </StoryComponent>
+  ),
+};
+
+export const NoContent: Story = {
+  args: {
+    content: undefined,
+  },
+  parameters: {
+    controls: { disable: true },
+  },
+  play: playNoContent,
+  render: (args) => (
+    <StoryComponent blocksCodeData={[]} title="No content">
       <Tooltip {...args} />
     </StoryComponent>
   ),
