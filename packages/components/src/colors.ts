@@ -1,5 +1,6 @@
 export const colors = {
   blue1: 'var(--color-blue-1)',
+  blue2: 'var(--color-blue-2)',
   neutral1: 'var(--color-neutral-1)',
   neutral2: 'var(--color-neutral-2)',
   neutral3: 'var(--color-neutral-3)',
