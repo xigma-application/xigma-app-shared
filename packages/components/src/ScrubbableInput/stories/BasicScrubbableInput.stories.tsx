@@ -103,6 +103,10 @@ const meta = {
     value: 25,
   },
   component: ScrubbableInput,
+  // 'code-only' badge (storybook-addon-tag-badges) — unlike Icon/Tooltip, this wasn't ported from
+  // an existing x-design/xigma-app component (git history: no "port ... from" commit), it was
+  // built code-first for this repo, so there's no design counterpart yet
+  tags: ['code-only'],
   title: 'UI/ScrubbableInput/Basic ScrubbableInput',
 } satisfies Meta<typeof ScrubbableInput>;
 
