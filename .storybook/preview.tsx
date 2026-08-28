@@ -8,6 +8,11 @@ import './styles/index.scss';
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      // turns an axe-core violation into a hard fail once stories run as tests (Roadmap 1.0.0
+      // Etap 4, addon-vitest) — in the interactive Accessibility panel it just controls styling
+      test: 'error',
+    },
     // logs any arg named onXxx to the Actions panel, even when it isn't explicitly wired with
     // `fn()` from `storybook/test` — a safety net for components that gain callback props later
     actions: { argTypesRegex: '^on[A-Z].*' },

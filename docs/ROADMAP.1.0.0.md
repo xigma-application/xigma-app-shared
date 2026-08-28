@@ -57,13 +57,22 @@ teraz prawdziwy komponent `forwardRef`, nie URL).
 
 ## Etap 3 — `@storybook/addon-a11y`
 
-- [ ] `npx storybook add @storybook/addon-a11y`
-- [ ] zakładka Accessibility (axe-core) per story
-- [ ] `a11y` w `preview.tsx` — globalne reguły, `context`/`element`
-- [ ] `parameters.a11y.test = 'error'` — naruszenia a11y jako twardy fail (spina się z Etapem 4,
-      gdzie story lecą jako testy)
-- [ ] przejrzeć realne trafienia na istniejących komponentach (kontrast tokenów, rola triggera
-      Tooltipa, `EWResize` handle jako czysto dekoracyjny)
+- [x] `npx storybook add @storybook/addon-a11y` — dopisany do `addons` w `.storybook/main.ts`
+      automatycznie przez CLI
+- [x] zakładka Accessibility (axe-core) per story — wbudowana w sam addon, nic dodatkowego do
+      wpięcia
+- [x] `a11y` w `preview.tsx` — na razie tylko `test: 'error'` globalnie (patrz niżej); osobnych
+      `context`/`element`-owych wyjątków per-story nie było potrzeba, zero realnych trafień
+- [x] `parameters.a11y.test = 'error'` — ustawione globalnie w `preview.tsx`; realnie zacznie coś
+      failować dopiero jak story polecą jako testy w Etapie 4, w interaktywnym UI steruje tylko
+      stylem zakładki
+- [x] przejrzeć realne trafienia — axe-core przepuszczony ręcznie (jednorazowy skrypt przez
+      Vitest+RTL, nie zostawiony w repo) po `Basic Icon`/`All Icons`/`Basic Tooltip`/
+      `All Placements`/`Basic ScrubbableInput`/`States` z domyślnymi `args`: **zero naruszeń** na
+      wszystkich sześciu. Jedyny wynik to `incomplete: color-contrast` — axe nie potrafi policzyć
+      kontrastu w jsdom (brak realnego layoutu/CSSOM), więc to nie jest realne trafienie, tylko
+      ograniczenie środowiska; realny check kontrastu wymaga renderu w prawdziwej przeglądarce —
+      Etap 4 (`addon-vitest`, browser mode)
 
 ## Etap 4 — `@storybook/addon-vitest` (story = test)
 
