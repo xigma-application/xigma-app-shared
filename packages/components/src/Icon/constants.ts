@@ -1,3 +1,4 @@
+import Agents from "./svg/agents.svg?react";
 import AlignHorizontalCenter from "./svg/align-horizontal-center.svg?react";
 import AlignHorizontalLeft from "./svg/align-horizontal-left.svg?react";
 import AlignHorizontalRight from "./svg/align-horizontal-right.svg?react";
@@ -7,6 +8,7 @@ import AlignVerticalTop from "./svg/align-vertical-top.svg?react";
 import ArrowTool from "./svg/arrow-tool.svg?react";
 import ArrowUp from "./svg/arrow-up.svg?react";
 import AspectRatio from "./svg/aspect-ratio.svg?react";
+import Assets from "./svg/assets.svg?react";
 import AutoHeight from "./svg/auto-height.svg?react";
 import AutoLayout from "./svg/auto-layout.svg?react";
 import AutoWidth from "./svg/auto-width.svg?react";
@@ -37,6 +39,7 @@ import EraseTool from "./svg/erase-tool.svg?react";
 import EyesClosed from "./svg/eyes-closed.svg?react";
 import EyesDropper from "./svg/eyes-dropper.svg?react";
 import EyesOpened from "./svg/eyes-opened.svg?react";
+import File from "./svg/file.svg?react";
 import FileTool from "./svg/file-tool.svg?react";
 import FitLayout from "./svg/fit-layout.svg?react";
 import FixedHeight from "./svg/fixed-height.svg?react";
@@ -101,12 +104,15 @@ import StepBackwardOutlined from "./svg/step-backward-outlined.svg?react";
 import TextOnPathTool from "./svg/text-on-path-tool.svg?react";
 import TextTool from "./svg/text-tool.svg?react";
 import ToggleRotate from "./svg/toggle-rotate.svg?react";
+import Tools from "./svg/tools.svg?react";
 import VariableWidthTool from "./svg/variable-width-tool.svg?react";
+import Variables from "./svg/variables.svg?react";
 import Variant from "./svg/variant.svg?react";
 import WidthRestricted from "./svg/width-restricted.svg?react";
 import Wrap from "./svg/wrap.svg?react";
 
 export const Icons = {
+  Agents,
   AlignHorizontalCenter,
   AlignHorizontalLeft,
   AlignHorizontalRight,
@@ -116,6 +122,7 @@ export const Icons = {
   ArrowTool,
   ArrowUp,
   AspectRatio,
+  Assets,
   AutoHeight,
   AutoLayout,
   AutoWidth,
@@ -146,6 +153,7 @@ export const Icons = {
   EyesClosed,
   EyesDropper,
   EyesOpened,
+  File,
   FileTool,
   FitLayout,
   FixedHeight,
@@ -210,7 +218,9 @@ export const Icons = {
   TextOnPathTool,
   TextTool,
   ToggleRotate,
+  Tools,
   VariableWidthTool,
+  Variables,
   Variant,
   WidthRestricted,
   Wrap,
