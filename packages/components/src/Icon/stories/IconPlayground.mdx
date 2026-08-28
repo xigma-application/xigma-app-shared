@@ -1,0 +1,22 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import { Playground } from "storybook-addon-code-editor";
+
+import { Icon } from "../Icon";
+
+<Meta title="UI/Icon/Playground" />
+
+# Icon — live playground
+
+Edit the code below and see it re-render instantly. This lives in its own MDX page rather than on
+the `Basic Icon` story itself — `Icon.spec.tsx` reuses that story via `composeStories()`, and
+`storybook-addon-code-editor`'s `makeLiveEditStory()` replaces a story's `render` outright (it
+renders whatever's typed in the editor, not the args passed in), which broke that reuse. A
+standalone `Playground` sidesteps this entirely: it doesn't touch any story object.
+
+<Playground
+  availableImports={{ "@xigma/components": { Icon } }}
+  code={`import { Icon } from '@xigma/components';
+
+export default () => <Icon name="Check" color="neutral1" size={24} />;
+`}
+/>

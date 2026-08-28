@@ -54,6 +54,14 @@ export default defineConfig({
           exclude: ['**/node_modules/**', '**/dist/**'],
           globals: true,
           name: 'unit',
+          server: {
+            // storybook-addon-code-editor@6.2.0 ships dist/*.js with extensionless relative
+            // imports (e.g. `from './createStore'`) — invalid under Node's own ESM resolver, which
+            // is what externalized deps go through by default. Inlining forces Vite to transform
+            // it instead, the same way the real-browser `storybook` project's bundler already does
+            // (that's why only this project hit "Cannot find module .../createStore").
+            deps: { inline: ['storybook-addon-code-editor'] },
+          },
           setupFiles: ['./test/setup.ts'],
         },
       },

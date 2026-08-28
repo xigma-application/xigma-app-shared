@@ -6,8 +6,10 @@ import type { StorybookConfig } from "@storybook/react-vite";
 import type { Plugin as PostcssPlugin } from "postcss";
 import { mergeConfig } from "vite";
 import svgr from "vite-plugin-svgr";
+import { getCodeEditorStaticDirs } from "storybook-addon-code-editor/getStaticDirs";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const stripCssModulesGlobal: PostcssPlugin = {
   postcssPlugin: "strip-css-modules-global",
@@ -21,6 +23,9 @@ const config: StorybookConfig = {
     "../packages/*/src/**/*.mdx",
     "../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
+  // Monaco Editor's own assets (for storybook-addon-code-editor's live playground) — served
+  // statically, not bundled through Vite
+  staticDirs: [...getCodeEditorStaticDirs(__filename)],
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-themes",
@@ -29,6 +34,7 @@ const config: StorybookConfig = {
     "@storybook/addon-mcp",
     "storybook-addon-tag-badges",
     "@chromatic-com/storybook",
+    "storybook-addon-code-editor",
   ],
   framework: {
     name: "@storybook/react-vite",
