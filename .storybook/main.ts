@@ -28,6 +28,7 @@ const config: StorybookConfig = {
     "@storybook/addon-vitest",
     "@storybook/addon-mcp",
     "storybook-addon-tag-badges",
+    "@chromatic-com/storybook",
   ],
   framework: {
     name: "@storybook/react-vite",

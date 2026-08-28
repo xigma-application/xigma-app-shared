@@ -331,11 +331,26 @@ Grid visibility · Measure tool · Outline tool · Preview background · Theme �
       sprawdzenia komponentu na innym tle niż token motywu — nie koliduje, nie trzeba wyłączać
       ani dostrajać
 
-## Etap 9 — wizualna regresja — **próbowane, zablokowane technicznie na obu ścieżkach**
+## Etap 9 — wizualna regresja — **lokalna ścieżka zablokowana technicznie, addon Chromatic zainstalowany (bez konta)**
 
 Decyzja usera: lokalna ścieżka bez zewnętrznego serwisu (**nie** Chromatic — to wymaga założenia
 konta, czego nie mogę zrobić sam; rozwiązałoby przy okazji i to, i sekcję "Deploy" w README, ale
 zostaje do rozważenia osobno, później, jeśli ktoś faktycznie założy konto).
+
+**Doprecyzowanie**: samo *zainstalowanie* `@chromatic-com/storybook` (addon "Visual Tests") **nie**
+wymaga konta — tylko faktyczne *uruchomienie* pierwszego testu wizualnego (panel "Visual Tests" →
+"Enable in Chromatic") go wymaga. Zweryfikowane empirycznie (nie tylko z dokumentacji): addon
+zainstalowany przez `npx storybook add @chromatic-com/storybook`, wpięty w `.storybook/main.ts`,
+`npx storybook build` przechodzi czysto, `npx storybook dev` startuje bez błędu i serwuje
+`sb-addons/chromatic-com-storybook-6/manager-bundle.js` obok pozostałych addonów, cały zestaw
+testów (`npx vitest run`, 13/13 plików, 35/35 testów) dalej zielony. Przy okazji addon sam wykrył
+realny problem: `actions.argTypesRegex` w `preview.tsx` koliduje z jego build'em snapshotowym
+("the build used by the addon for snapshot testing doesn't take the regex into account") — usunięte
+z `preview.tsx`, bezpiecznie, bo wszystkie obecne story i tak jawnie opakowują callbacki w `fn()`.
+
+Więc: addon jest **gotowy i wpięty**, tylko ostatni krok — zalogowanie się do Chromatic i
+"Enable in Chromatic" w panelu — zostaje po stronie usera (tworzenie konta jest poza tym, co mogę
+zrobić sam).
 
 - [ ] **`jest-image-snapshot` bezpośrednio w `@storybook/addon-vitest`'s browser-mode (Etap 4)**
       — **niemożliwe architektonicznie**, nie tylko trudne. Zweryfikowane empirycznie: kod testu w
@@ -365,7 +380,9 @@ zostaje do rozważenia osobno, później, jeśli ktoś faktycznie założy konto
    spróbować ponownie dokładnie tej samej konfiguracji
 2. Upgrade `@storybook/addon-vitest`/`vitest`/`@vitest/browser` do wersji z natywnym
    `toMatchScreenshot()` (Vitest 4+) — realna zmiana fundamentu Etapów 4/5, nie mały krok
-3. Chromatic, jeśli ktoś założy konto — rozwiązuje przy okazji i to, i "Deploy" z README
+3. Chromatic — addon już zainstalowany i wpięty (patrz wyżej); zostaje tylko zalogowanie się na
+   konto i "Enable in Chromatic" w panelu "Visual Tests", co rozwiąże przy okazji i to, i "Deploy"
+   z README
 
 Powiązane z sekcją "Deploy — nierozwiązane" w README (gdzie i jak hostować statyczny Storybook) —
 nadal otwarte, niezależnie od powyższego.
