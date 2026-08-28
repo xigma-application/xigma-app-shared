@@ -1,4 +1,4 @@
-@use 'sass:map';
+@use "sass:map";
 
 $themes: (
   dark: (
@@ -11,6 +11,7 @@ $themes: (
     blue-2: #7cc4f8,
     on-blue-1: #ffffff,
     disabled: #ffffff66,
+    scrollbar: #686868,
   ),
   light: (
     neutral-1: #272727,
@@ -22,6 +23,7 @@ $themes: (
     blue-2: #7cc4f8,
     on-blue-1: #ffffff,
     disabled: #78787866,
+    scrollbar: #c3c3c3,
   ),
 );
 
@@ -43,10 +45,10 @@ $themes: (
   }
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   @include theme-variables(dark);
 }
 
-:root[data-theme='light'] {
+:root[data-theme="light"] {
   @include theme-variables(light);
 }

@@ -1,5 +1,6 @@
 @use '@xigma/scss/variables';
 @use '@xigma/scss/theme';
+@use '@xigma/scss/mixins/scrollbar';
 
 // Inter, copied from xigma-app's src/assets/fonts/inter/source/ — Regular weight only, same
 // source file xigma-app itself ships (see its OFL.txt here for the license).
@@ -14,6 +15,10 @@
 html,
 body {
   height: 100%;
+}
+
+:root {
+  @include scrollbar.scrollbar;
 }
 
 body {

@@ -9,6 +9,7 @@
     "./variables": "./src/_variables.scss",
     "./theme": "./src/_theme.scss",
     "./mixins/svg-color": "./src/mixins/_svg-color.scss",
+    "./mixins/scrollbar": "./src/mixins/_scrollbar.scss",
     "./mixins/disabled": "./src/mixins/_disabled.scss",
     "./mixins/elevation": "./src/mixins/_elevation.scss",
     "./mixins/animations": "./src/mixins/animations/index.scss"

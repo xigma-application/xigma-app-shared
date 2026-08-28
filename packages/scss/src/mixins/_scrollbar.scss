@@ -1,0 +1,24 @@
+@mixin scrollbar($size: 10px) {
+  scrollbar-color: var(--color-scrollbar) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: $size;
+    width: $size;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-clip: content-box;
+    background-color: var(--color-scrollbar);
+    border: 2px solid transparent;
+    border-radius: $size;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
