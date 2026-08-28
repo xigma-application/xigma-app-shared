@@ -98,6 +98,7 @@ import RowGrabber from "./svg/row-grabber.svg?react";
 import Rows from "./svg/rows.svg?react";
 import Sample from "./svg/sample.svg?react";
 import ScaleTool from "./svg/scale-tool.svg?react";
+import Search from "./svg/search.svg?react";
 import SectionTool from "./svg/section-tool.svg?react";
 import ShapeBuilderTool from "./svg/shape-builder-tool.svg?react";
 import SliceTool from "./svg/slice-tool.svg?react";
@@ -214,6 +215,7 @@ export const Icons = {
   Rows,
   Sample,
   ScaleTool,
+  Search,
   SectionTool,
   ShapeBuilderTool,
   SliceTool,
