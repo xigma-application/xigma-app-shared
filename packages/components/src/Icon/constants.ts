@@ -62,6 +62,7 @@ import IndividualInsets from "./svg/individual-insets.svg?react";
 import InputsConnector from "./svg/inputs-connector.svg?react";
 import LassoTool from "./svg/lasso-tool.svg?react";
 import LineTool from "./svg/line-tool.svg?react";
+import Lock from "./svg/lock.svg?react";
 import MarginB from "./svg/margin-b.svg?react";
 import MarginL from "./svg/margin-l.svg?react";
 import MarginLR from "./svg/margin-lr.svg?react";
@@ -108,6 +109,7 @@ import TextOnPathTool from "./svg/text-on-path-tool.svg?react";
 import TextTool from "./svg/text-tool.svg?react";
 import ToggleRotate from "./svg/toggle-rotate.svg?react";
 import Tools from "./svg/tools.svg?react";
+import Unlock from "./svg/unlock.svg?react";
 import VariableWidthTool from "./svg/variable-width-tool.svg?react";
 import Variables from "./svg/variables.svg?react";
 import Variant from "./svg/variant.svg?react";
@@ -179,6 +181,7 @@ export const Icons = {
   InputsConnector,
   LassoTool,
   LineTool,
+  Lock,
   MarginB,
   MarginL,
   MarginLR,
@@ -225,6 +228,7 @@ export const Icons = {
   TextTool,
   ToggleRotate,
   Tools,
+  Unlock,
   VariableWidthTool,
   Variables,
   Variant,
