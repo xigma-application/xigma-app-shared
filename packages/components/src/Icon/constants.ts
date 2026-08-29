@@ -55,6 +55,7 @@ import FlowVertical from "./svg/flow-vertical.svg?react";
 import FrameTool from "./svg/frame-tool.svg?react";
 import GapColumns from "./svg/gap-columns.svg?react";
 import GapRows from "./svg/gap-rows.svg?react";
+import Group from "./svg/group.svg?react";
 import HandTool from "./svg/hand-tool.svg?react";
 import HeightRestricted from "./svg/height-restricted.svg?react";
 import HtmlTag from "./svg/html-tag.svg?react";
@@ -174,6 +175,7 @@ export const Icons = {
   FrameTool,
   GapColumns,
   GapRows,
+  Group,
   HandTool,
   HeightRestricted,
   HtmlTag,
