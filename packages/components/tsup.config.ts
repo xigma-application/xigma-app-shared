@@ -87,6 +87,11 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom", "@radix-ui/react-tooltip"],
+  external: [
+    "react",
+    "react-dom",
+    "@radix-ui/react-tooltip",
+    "@radix-ui/react-dropdown-menu",
+  ],
   esbuildPlugins: [sassPlugin, svgrPlugin],
 });
