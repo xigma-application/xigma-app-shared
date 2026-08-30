@@ -26,6 +26,7 @@ import ChevronLeft from "./svg/chevron-left.svg?react";
 import ChevronRight from "./svg/chevron-right.svg?react";
 import ChevronUp from "./svg/chevron-up.svg?react";
 import Close from "./svg/close.svg?react";
+import CollapseLayers from "./svg/collapse-layers.svg?react";
 import CollapsePanel from "./svg/collapse-panel.svg?react";
 import Columns from "./svg/columns.svg?react";
 import CommentTool from "./svg/comment-tool.svg?react";
@@ -146,6 +147,7 @@ export const Icons = {
   ChevronRight,
   ChevronUp,
   Close,
+  CollapseLayers,
   CollapsePanel,
   Columns,
   CommentTool,
