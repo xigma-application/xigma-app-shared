@@ -1,4 +1,4 @@
-@use '@xigma/scss/mixins/disabled';
+@use "@xigma/scss/mixins/disabled";
 
 .MenuItem {
   align-items: center;
@@ -14,6 +14,7 @@
     background-color: var(--color-blue-1);
   }
 
+  &[data-highlighted] &__label,
   &[data-highlighted] &__shortcut {
     color: var(--color-on-blue-1);
   }
