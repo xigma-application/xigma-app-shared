@@ -1,3 +1,4 @@
+import Actions from "./svg/actions.svg?react";
 import Agents from "./svg/agents.svg?react";
 import AlignHorizontalCenter from "./svg/align-horizontal-center.svg?react";
 import AlignHorizontalLeft from "./svg/align-horizontal-left.svg?react";
@@ -62,6 +63,7 @@ import HeightRestricted from "./svg/height-restricted.svg?react";
 import HtmlTag from "./svg/html-tag.svg?react";
 import IndividualInsets from "./svg/individual-insets.svg?react";
 import InputsConnector from "./svg/inputs-connector.svg?react";
+import Keyboard from "./svg/keyboard.svg?react";
 import LassoTool from "./svg/lasso-tool.svg?react";
 import LeadArrow from "./svg/lead-arrow.svg?react";
 import LineTool from "./svg/line-tool.svg?react";
@@ -101,14 +103,17 @@ import Protractor from "./svg/protractor.svg?react";
 import RectangleTool from "./svg/rectangle-tool.svg?react";
 import RowGrabber from "./svg/row-grabber.svg?react";
 import Rows from "./svg/rows.svg?react";
+import Rule from "./svg/rule.svg?react";
 import Sample from "./svg/sample.svg?react";
 import ScaleTool from "./svg/scale-tool.svg?react";
 import Search from "./svg/search.svg?react";
 import SectionTool from "./svg/section-tool.svg?react";
+import Settings from "./svg/settings.svg?react";
 import ShapeBuilderTool from "./svg/shape-builder-tool.svg?react";
 import SliceTool from "./svg/slice-tool.svg?react";
 import StarTool from "./svg/star-tool.svg?react";
 import StepBackwardOutlined from "./svg/step-backward-outlined.svg?react";
+import Target from "./svg/target.svg?react";
 import TextOnPathTool from "./svg/text-on-path-tool.svg?react";
 import TextTool from "./svg/text-tool.svg?react";
 import ToggleRotate from "./svg/toggle-rotate.svg?react";
@@ -121,6 +126,7 @@ import WidthRestricted from "./svg/width-restricted.svg?react";
 import Wrap from "./svg/wrap.svg?react";
 
 export const Icons = {
+  Actions,
   Agents,
   AlignHorizontalCenter,
   AlignHorizontalLeft,
@@ -185,6 +191,7 @@ export const Icons = {
   HtmlTag,
   IndividualInsets,
   InputsConnector,
+  Keyboard,
   LassoTool,
   LeadArrow,
   LineTool,
@@ -224,14 +231,17 @@ export const Icons = {
   RectangleTool,
   RowGrabber,
   Rows,
+  Rule,
   Sample,
   ScaleTool,
   Search,
   SectionTool,
+  Settings,
   ShapeBuilderTool,
   SliceTool,
   StarTool,
   StepBackwardOutlined,
+  Target,
   TextOnPathTool,
   TextTool,
   ToggleRotate,
