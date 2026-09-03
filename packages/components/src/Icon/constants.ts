@@ -59,6 +59,7 @@ import GapColumns from "./svg/gap-columns.svg?react";
 import GapRows from "./svg/gap-rows.svg?react";
 import Group from "./svg/group.svg?react";
 import HandTool from "./svg/hand-tool.svg?react";
+import Headphones from "./svg/headphones.svg?react";
 import HeightRestricted from "./svg/height-restricted.svg?react";
 import HtmlTag from "./svg/html-tag.svg?react";
 import IndividualInsets from "./svg/individual-insets.svg?react";
@@ -188,6 +189,7 @@ export const Icons = {
   GapRows,
   Group,
   HandTool,
+  Headphones,
   HeightRestricted,
   HtmlTag,
   IndividualInsets,
