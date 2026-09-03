@@ -95,6 +95,7 @@ import PaintTool from "./svg/paint-tool.svg?react";
 import PenTool from "./svg/pen-tool.svg?react";
 import PencilTool from "./svg/pencil-tool.svg?react";
 import Percentage from "./svg/percentage.svg?react";
+import Play from "./svg/play.svg?react";
 import Plus from "./svg/plus.svg?react";
 import PolygonTool from "./svg/polygon-tool.svg?react";
 import PositionSwitcher from "./svg/position-switcher.svg?react";
@@ -223,6 +224,7 @@ export const Icons = {
   PenTool,
   PencilTool,
   Percentage,
+  Play,
   Plus,
   PolygonTool,
   PositionSwitcher,
