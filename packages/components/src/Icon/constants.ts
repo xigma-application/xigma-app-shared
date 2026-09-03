@@ -100,6 +100,7 @@ import Play from "./svg/play.svg?react";
 import Plus from "./svg/plus.svg?react";
 import PolygonTool from "./svg/polygon-tool.svg?react";
 import PositionSwitcher from "./svg/position-switcher.svg?react";
+import PreviewPlay from "./svg/preview-play.svg?react";
 import Properties from "./svg/properties.svg?react";
 import Protractor from "./svg/protractor.svg?react";
 import RectangleTool from "./svg/rectangle-tool.svg?react";
@@ -230,6 +231,7 @@ export const Icons = {
   Plus,
   PolygonTool,
   PositionSwitcher,
+  PreviewPlay,
   Properties,
   Protractor,
   RectangleTool,
