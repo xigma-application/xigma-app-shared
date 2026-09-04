@@ -122,6 +122,7 @@ import TextOnPathTool from "./svg/text-on-path-tool.svg?react";
 import TextTool from "./svg/text-tool.svg?react";
 import ToggleRotate from "./svg/toggle-rotate.svg?react";
 import Tools from "./svg/tools.svg?react";
+import Triangle from "./svg/triangle.svg?react";
 import Unlock from "./svg/unlock.svg?react";
 import VariableWidthTool from "./svg/variable-width-tool.svg?react";
 import Variables from "./svg/variables.svg?react";
@@ -254,6 +255,7 @@ export const Icons = {
   TextTool,
   ToggleRotate,
   Tools,
+  Triangle,
   Unlock,
   VariableWidthTool,
   Variables,
