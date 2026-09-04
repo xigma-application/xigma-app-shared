@@ -75,6 +75,7 @@ import MarginLR from "./svg/margin-lr.svg?react";
 import MarginR from "./svg/margin-r.svg?react";
 import MarginT from "./svg/margin-t.svg?react";
 import MarginTB from "./svg/margin-tb.svg?react";
+import Mask from "./svg/mask.svg?react";
 import MaskGroup from "./svg/mask-group.svg?react";
 import MaxHeight from "./svg/max-height.svg?react";
 import MaxWidth from "./svg/max-width.svg?react";
@@ -206,6 +207,7 @@ export const Icons = {
   MarginR,
   MarginT,
   MarginTB,
+  Mask,
   MaskGroup,
   MaxHeight,
   MaxWidth,
