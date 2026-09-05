@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 
 // hooks
-import { useTheme } from './useTheme';
+import { getInitialTheme, useTheme } from './useTheme';
 
 // others
 import { STORAGE_KEY } from './constants';
@@ -9,6 +9,20 @@ import { STORAGE_KEY } from './constants';
 const stubMatchMedia = (matches: boolean): void => {
   vi.spyOn(window, 'matchMedia').mockReturnValue({ matches } as MediaQueryList);
 };
+
+describe('getInitialTheme behaviors', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('should default to dark when there is no window (server-side rendering)', () => {
+    // mock
+    vi.stubGlobal('window', undefined);
+
+    // result
+    expect(getInitialTheme()).toBe('dark');
+  });
+});
 
 describe('useTheme behaviors', () => {
   afterEach(() => {

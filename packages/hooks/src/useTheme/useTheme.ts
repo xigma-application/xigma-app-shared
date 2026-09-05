@@ -12,7 +12,11 @@ export type TUseTheme = {
   toggleTheme: () => void;
 };
 
-const getInitialTheme = (): Theme => {
+export const getInitialTheme = (): Theme => {
+  if (typeof window === 'undefined') {
+    return 'dark';
+  }
+
   const stored = localStorage.getItem(STORAGE_KEY);
 
   if (stored === 'light' || stored === 'dark' || stored === 'system') {
