@@ -1,0 +1,7 @@
+<svg class="svg" xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12">
+<path fill="white" data-svg-property="fill" fill-opacity="1" fill-rule="evenodd" stroke="none" d="m7 5.293 2.646-2.647.708.708L7.707 6l2.647 2.646-.708.708L7 6.707 4.354 9.354l-.708-.708L6.293 6 3.646 3.354l.708-.708z"></path>
+<path fill="white" data-svg-property="fill" fill-opacity=".8" fill-rule="nonzero" stroke="none" d="M0 0h1v12H0z"></path>
+<path fill="white" data-svg-property="fill" fill-opacity=".8" fill-rule="evenodd" stroke="none" d="M1 0H0v12h1z"></path>
+<path fill="white" data-svg-property="fill" fill-opacity=".8" fill-rule="nonzero" stroke="none" d="M13 0h1v12h-1z"></path>
+<path fill="white" data-svg-property="fill" fill-opacity=".8" fill-rule="evenodd" stroke="none" d="M14 0h-1v12h1z"></path>
+</svg>

@@ -105,6 +105,7 @@ import PreviewPlay from "./svg/preview-play.svg?react";
 import Properties from "./svg/properties.svg?react";
 import Protractor from "./svg/protractor.svg?react";
 import RectangleTool from "./svg/rectangle-tool.svg?react";
+import RemoveFit from "./svg/remove-fit.svg?react";
 import RowGrabber from "./svg/row-grabber.svg?react";
 import Rows from "./svg/rows.svg?react";
 import Rule from "./svg/rule.svg?react";
@@ -238,6 +239,7 @@ export const Icons = {
   Properties,
   Protractor,
   RectangleTool,
+  RemoveFit,
   RowGrabber,
   Rows,
   Rule,
