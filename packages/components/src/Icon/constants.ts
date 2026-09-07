@@ -66,6 +66,10 @@ import IndividualInsets from "./svg/individual-insets.svg?react";
 import InputsConnector from "./svg/inputs-connector.svg?react";
 import Keyboard from "./svg/keyboard.svg?react";
 import LassoTool from "./svg/lasso-tool.svg?react";
+import LayoutGrid from "./svg/layout-grid.svg?react";
+import LayoutHorizontal from "./svg/layout-horizontal.svg?react";
+import LayoutHorizontalWrap from "./svg/layout-horizontal-wrap.svg?react";
+import LayoutVertical from "./svg/layout-vertical.svg?react";
 import LeadArrow from "./svg/lead-arrow.svg?react";
 import LineTool from "./svg/line-tool.svg?react";
 import Lock from "./svg/lock.svg?react";
@@ -200,6 +204,10 @@ export const Icons = {
   InputsConnector,
   Keyboard,
   LassoTool,
+  LayoutGrid,
+  LayoutHorizontal,
+  LayoutHorizontalWrap,
+  LayoutVertical,
   LeadArrow,
   LineTool,
   Lock,
