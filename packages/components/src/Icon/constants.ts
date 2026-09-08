@@ -73,12 +73,6 @@ import LayoutVertical from "./svg/layout-vertical.svg?react";
 import LeadArrow from "./svg/lead-arrow.svg?react";
 import LineTool from "./svg/line-tool.svg?react";
 import Lock from "./svg/lock.svg?react";
-import MarginB from "./svg/margin-b.svg?react";
-import MarginL from "./svg/margin-l.svg?react";
-import MarginLR from "./svg/margin-lr.svg?react";
-import MarginR from "./svg/margin-r.svg?react";
-import MarginT from "./svg/margin-t.svg?react";
-import MarginTB from "./svg/margin-tb.svg?react";
 import Mask from "./svg/mask.svg?react";
 import MaskGroup from "./svg/mask-group.svg?react";
 import MaxHeight from "./svg/max-height.svg?react";
@@ -211,12 +205,6 @@ export const Icons = {
   LeadArrow,
   LineTool,
   Lock,
-  MarginB,
-  MarginL,
-  MarginLR,
-  MarginR,
-  MarginT,
-  MarginTB,
   Mask,
   MaskGroup,
   MaxHeight,
