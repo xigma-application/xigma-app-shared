@@ -1,15 +1,11 @@
 declare module '*.scss';
 
 declare module '*.svg' {
-  import type { FC, SVGProps } from 'react';
-
-  const Component: FC<SVGProps<SVGSVGElement>>;
+  const Component: import('react').FC<import('react').SVGProps<SVGSVGElement>>;
   export default Component;
 }
 
 declare module '*.svg?react' {
-  import type { FC, SVGProps } from 'react';
-
-  const Component: FC<SVGProps<SVGSVGElement>>;
+  const Component: import('react').FC<import('react').SVGProps<SVGSVGElement>>;
   export default Component;
 }
