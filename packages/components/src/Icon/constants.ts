@@ -63,6 +63,7 @@ import Headphones from "./svg/headphones.svg?react";
 import HeightRestricted from "./svg/height-restricted.svg?react";
 import HtmlTag from "./svg/html-tag.svg?react";
 import IndividualInsets from "./svg/individual-insets.svg?react";
+import Info from "./svg/info.svg?react";
 import InputsConnector from "./svg/inputs-connector.svg?react";
 import Keyboard from "./svg/keyboard.svg?react";
 import LassoTool from "./svg/lasso-tool.svg?react";
@@ -195,6 +196,7 @@ export const Icons = {
   HeightRestricted,
   HtmlTag,
   IndividualInsets,
+  Info,
   InputsConnector,
   Keyboard,
   LassoTool,
