@@ -1,5 +1,5 @@
 .Tooltip {
-  background-color: var(--color-neutral-5);
+  background-color: var(--color-surface);
   border-radius: 4px;
   box-shadow: 0 2px 14px rgb(0 0 0 / 20%);
   color: var(--color-neutral-1);
@@ -9,6 +9,6 @@
   white-space: nowrap;
 
   &__arrow {
-    fill: var(--color-neutral-5);
+    fill: var(--color-surface);
   }
 }
