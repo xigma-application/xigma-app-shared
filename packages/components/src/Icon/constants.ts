@@ -45,6 +45,7 @@ import EyesDropper from "./svg/eyes-dropper.svg?react";
 import EyesOpened from "./svg/eyes-opened.svg?react";
 import File from "./svg/file.svg?react";
 import FileTool from "./svg/file-tool.svg?react";
+import FillHorizontal from "./svg/fill-horizontal.svg?react";
 import FitLayout from "./svg/fit-layout.svg?react";
 import FixedHeight from "./svg/fixed-height.svg?react";
 import FixedWidth from "./svg/fixed-width.svg?react";
@@ -180,6 +181,7 @@ export const Icons = {
   EyesOpened,
   File,
   FileTool,
+  FillHorizontal,
   FitLayout,
   FixedHeight,
   FixedWidth,
