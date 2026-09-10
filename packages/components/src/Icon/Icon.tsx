@@ -1,3 +1,4 @@
+import cx from "classnames";
 import { CSSProperties, Ref, SVGProps, forwardRef, useMemo } from "react";
 
 // components
@@ -24,12 +25,12 @@ export type TIconProps = Omit<SVGProps<SVGSVGElement>, "color"> & {
  * color).
  */
 export const Icon = forwardRef<SVGSVGElement, TIconProps>(
-  ({ color = "neutral1", name, size = 16, style, ...restProps }, ref: Ref<SVGSVGElement>) => {
+  ({ className, color = "neutral1", name, size = 16, style, ...restProps }, ref: Ref<SVGSVGElement>) => {
     const SVG = useMemo(() => Icons[name], [name]);
 
     return (
       <SVG
-        className="Icon"
+        className={cx("Icon", className)}
         height={size}
         ref={ref}
         style={{ color: colors[color], ...style } as CSSProperties}
