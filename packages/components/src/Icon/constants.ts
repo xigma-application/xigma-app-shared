@@ -57,6 +57,8 @@ import FlowVertical from "./svg/flow-vertical.svg?react";
 import FrameTool from "./svg/frame-tool.svg?react";
 import GapColumns from "./svg/gap-columns.svg?react";
 import GapRows from "./svg/gap-rows.svg?react";
+import GridColumnSpan from "./svg/grid-column-span.svg?react";
+import GridRowSpan from "./svg/grid-row-span.svg?react";
 import Group from "./svg/group.svg?react";
 import HandTool from "./svg/hand-tool.svg?react";
 import Headphones from "./svg/headphones.svg?react";
@@ -190,6 +192,8 @@ export const Icons = {
   FrameTool,
   GapColumns,
   GapRows,
+  GridColumnSpan,
+  GridRowSpan,
   Group,
   HandTool,
   Headphones,
