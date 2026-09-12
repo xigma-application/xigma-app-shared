@@ -56,6 +56,7 @@ import FlowDefault from "./svg/flow-default.svg?react";
 import FlowGrid from "./svg/flow-grid.svg?react";
 import FlowHorizontal from "./svg/flow-horizontal.svg?react";
 import FlowVertical from "./svg/flow-vertical.svg?react";
+import FollowPath from "./svg/follow-path.svg?react";
 import FrameTool from "./svg/frame-tool.svg?react";
 import GapColumns from "./svg/gap-columns.svg?react";
 import GapRows from "./svg/gap-rows.svg?react";
@@ -193,6 +194,7 @@ export const Icons = {
   FlowGrid,
   FlowHorizontal,
   FlowVertical,
+  FollowPath,
   FrameTool,
   GapColumns,
   GapRows,
