@@ -122,6 +122,7 @@ import ShapeBuilderTool from "./svg/shape-builder-tool.svg?react";
 import SliceTool from "./svg/slice-tool.svg?react";
 import StarTool from "./svg/star-tool.svg?react";
 import StepBackwardOutlined from "./svg/step-backward-outlined.svg?react";
+import SwapHorizontal from "./svg/swap-horizontal.svg?react";
 import Target from "./svg/target.svg?react";
 import TextOnPathTool from "./svg/text-on-path-tool.svg?react";
 import TextTool from "./svg/text-tool.svg?react";
@@ -260,6 +261,7 @@ export const Icons = {
   SliceTool,
   StarTool,
   StepBackwardOutlined,
+  SwapHorizontal,
   Target,
   TextOnPathTool,
   TextTool,
