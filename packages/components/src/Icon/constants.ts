@@ -120,6 +120,7 @@ import SectionTool from "./svg/section-tool.svg?react";
 import Settings from "./svg/settings.svg?react";
 import ShapeBuilderTool from "./svg/shape-builder-tool.svg?react";
 import SliceTool from "./svg/slice-tool.svg?react";
+import Solid from "./svg/solid.svg?react";
 import StarTool from "./svg/star-tool.svg?react";
 import StepBackwardOutlined from "./svg/step-backward-outlined.svg?react";
 import StylesAndVariables from "./svg/styles-and-variables.svg?react";
@@ -260,6 +261,7 @@ export const Icons = {
   Settings,
   ShapeBuilderTool,
   SliceTool,
+  Solid,
   StarTool,
   StepBackwardOutlined,
   StylesAndVariables,
