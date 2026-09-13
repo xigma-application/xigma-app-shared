@@ -1,3 +1,7 @@
+$svg-fixed-properties: (
+  'fill-ramp-400': var(--color-ramp-400),
+);
+
 @mixin svg-color($color: currentcolor, $important: false) {
   $suffix: if(sass($important): ' !important'; else: '');
 
@@ -7,5 +11,11 @@
 
   :global([data-svg-property='stroke']) {
     stroke: #{$color}#{$suffix};
+  }
+
+  @each $property, $value in $svg-fixed-properties {
+    :global([data-svg-property='#{$property}']) {
+      fill: #{$value}#{$suffix};
+    }
   }
 }
