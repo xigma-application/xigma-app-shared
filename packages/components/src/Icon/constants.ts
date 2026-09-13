@@ -60,6 +60,7 @@ import FollowPath from "./svg/follow-path.svg?react";
 import FrameTool from "./svg/frame-tool.svg?react";
 import GapColumns from "./svg/gap-columns.svg?react";
 import GapRows from "./svg/gap-rows.svg?react";
+import Gradient from "./svg/gradient.svg?react";
 import GridColumnSpan from "./svg/grid-column-span.svg?react";
 import GridRowSpan from "./svg/grid-row-span.svg?react";
 import Group from "./svg/group.svg?react";
@@ -201,6 +202,7 @@ export const Icons = {
   FrameTool,
   GapColumns,
   GapRows,
+  Gradient,
   GridColumnSpan,
   GridRowSpan,
   Group,
