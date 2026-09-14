@@ -26,6 +26,7 @@ import ChevronDown from "./svg/chevron-down.svg?react";
 import ChevronLeft from "./svg/chevron-left.svg?react";
 import ChevronRight from "./svg/chevron-right.svg?react";
 import ChevronUp from "./svg/chevron-up.svg?react";
+import CircularPattern from "./svg/circular-pattern.svg?react";
 import Close from "./svg/close.svg?react";
 import CollapseLayers from "./svg/collapse-layers.svg?react";
 import CollapsePanel from "./svg/collapse-panel.svg?react";
@@ -99,6 +100,7 @@ import PaddingR from "./svg/padding-r.svg?react";
 import PaddingT from "./svg/padding-t.svg?react";
 import PaddingTB from "./svg/padding-tb.svg?react";
 import PaintTool from "./svg/paint-tool.svg?react";
+import Pattern from "./svg/pattern.svg?react";
 import PenTool from "./svg/pen-tool.svg?react";
 import PencilTool from "./svg/pencil-tool.svg?react";
 import Percentage from "./svg/percentage.svg?react";
@@ -110,6 +112,7 @@ import PreviewPlay from "./svg/preview-play.svg?react";
 import Properties from "./svg/properties.svg?react";
 import Protractor from "./svg/protractor.svg?react";
 import RectangleTool from "./svg/rectangle-tool.svg?react";
+import RectangularPattern from "./svg/rectangular-pattern.svg?react";
 import RemoveFit from "./svg/remove-fit.svg?react";
 import RowGrabber from "./svg/row-grabber.svg?react";
 import Rows from "./svg/rows.svg?react";
@@ -122,6 +125,7 @@ import Settings from "./svg/settings.svg?react";
 import ShapeBuilderTool from "./svg/shape-builder-tool.svg?react";
 import SliceTool from "./svg/slice-tool.svg?react";
 import Solid from "./svg/solid.svg?react";
+import Source from "./svg/source.svg?react";
 import StarTool from "./svg/star-tool.svg?react";
 import StepBackwardOutlined from "./svg/step-backward-outlined.svg?react";
 import StylesAndVariables from "./svg/styles-and-variables.svg?react";
@@ -168,6 +172,7 @@ export const Icons = {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  CircularPattern,
   Close,
   CollapseLayers,
   CollapsePanel,
@@ -241,6 +246,7 @@ export const Icons = {
   PaddingT,
   PaddingTB,
   PaintTool,
+  Pattern,
   PenTool,
   PencilTool,
   Percentage,
@@ -252,6 +258,7 @@ export const Icons = {
   Properties,
   Protractor,
   RectangleTool,
+  RectangularPattern,
   RemoveFit,
   RowGrabber,
   Rows,
@@ -264,6 +271,7 @@ export const Icons = {
   ShapeBuilderTool,
   SliceTool,
   Solid,
+  Source,
   StarTool,
   StepBackwardOutlined,
   StylesAndVariables,
