@@ -71,6 +71,7 @@ import HandTool from './svg/hand-tool.svg?react';
 import Headphones from './svg/headphones.svg?react';
 import HeightRestricted from './svg/height-restricted.svg?react';
 import HtmlTag from './svg/html-tag.svg?react';
+import Image from './svg/image.svg?react';
 import IndividualInsets from './svg/individual-insets.svg?react';
 import Info from './svg/info.svg?react';
 import InputsConnector from './svg/inputs-connector.svg?react';
@@ -220,6 +221,7 @@ export const Icons = {
   Headphones,
   HeightRestricted,
   HtmlTag,
+  Image,
   IndividualInsets,
   Info,
   InputsConnector,
