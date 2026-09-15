@@ -1,4 +1,8 @@
-<svg width="16" height="16" fill="none" viewBox="0 0 16 16" data-testid="locked-icon" data-fpl-icon-size="16">
-<rect data-svg-property="fill-ramp-400" width="6" height="4" x="5" y="8" fill="#fff6" rx=".25"></rect>
-<path data-svg-property="fill" fill="white" fill-rule="evenodd" d="M10.776 8H5.224l-.025.005A.25.25 0 0 0 5 8.25v3.5c0 .138.112.25.25.25h5.5a.25.25 0 0 0 .25-.25v-3.5a.25.25 0 0 0-.199-.245zM7 7H6V6a2 2 0 1 1 4 0v1zM5 6a3 3 0 0 1 6 0v1.025c.57.116 1 .62 1 1.225v3.5c0 .69-.56 1.25-1.25 1.25h-5.5C4.56 13 4 12.44 4 11.75v-3.5c0-.605.43-1.11 1-1.225z" clip-rule="evenodd"></path>
+<svg width="24" height="24" fill="none" viewBox="0 0 24 24" data-testid="locked-icon"
+    data-fpl-icon-size="24">
+    <rect data-svg-property="fill-ramp-400" width="9" height="6" x="7.5" y="12"
+        fill="#fff6" rx=".375"></rect>
+    <path data-svg-property="fill" fill="white" fill-rule="evenodd"
+        d="M16.164 12H7.836l-.037.008a.375.375 0 0 0-.298.367v5.25c0 .207.168.375.375.375h8.25a.375.375 0 0 0 .375-.375v-5.25a.375.375 0 0 0-.299-.367zM10.5 10.5H9V9a3 3 0 1 1 6 0v1.5zM7.5 9a4.5 4.5 0 0 1 9 0v1.537c.855.174 1.5.93 1.5 1.838v5.25c0 1.035-.84 1.875-1.875 1.875h-8.25C6.84 19.5 6 18.66 6 17.625v-5.25c0-.908.645-1.665 1.5-1.838z"
+        clip-rule="evenodd"></path>
 </svg>
