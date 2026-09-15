@@ -1,8 +1,10 @@
 <svg width="24" height="24" fill="none" viewBox="0 0 24 24" data-testid="locked-icon"
     data-fpl-icon-size="24">
-    <rect data-svg-property="fill-ramp-400" width="9" height="6" x="7.5" y="12"
+    <rect transform="translate(3.6 3.6) scale(0.7)" data-svg-property="fill-ramp-400" width="9"
+        height="6" x="7.5" y="12"
         fill="#fff6" rx=".375"></rect>
     <path data-svg-property="fill" fill="white" fill-rule="evenodd"
+        transform="translate(3.6 3.6) scale(0.7)"
         d="M16.164 12H7.836l-.037.008a.375.375 0 0 0-.298.367v5.25c0 .207.168.375.375.375h8.25a.375.375 0 0 0 .375-.375v-5.25a.375.375 0 0 0-.299-.367zM10.5 10.5H9V9a3 3 0 1 1 6 0v1.5zM7.5 9a4.5 4.5 0 0 1 9 0v1.537c.855.174 1.5.93 1.5 1.838v5.25c0 1.035-.84 1.875-1.875 1.875h-8.25C6.84 19.5 6 18.66 6 17.625v-5.25c0-.908.645-1.665 1.5-1.838z"
         clip-rule="evenodd"></path>
 </svg>

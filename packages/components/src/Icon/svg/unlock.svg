@@ -1,6 +1,7 @@
 <svg width="24" height="24" fill="none" viewBox="0 0 24 24" data-testid="unlocked-icon"
     data-fpl-icon-size="24">
     <path data-svg-property="fill" fill="white" fill-rule="evenodd"
+        transform="translate(3.6 3.6) scale(0.7)"
         d="M7.5 7.5a4.5 4.5 0 0 1 9 0v3.037c.855.174 1.5.93 1.5 1.838v5.25c0 1.035-.84 1.875-1.875 1.875h-8.25C6.84 19.5 6 18.66 6 17.625v-5.25c0-1.035.84-1.875 1.875-1.875H15V7.5a3 3 0 1 0-6 0 .75.75 0 0 1-1.5 0m.375 4.5a.375.375 0 0 0-.375.375v5.25c0 .207.168.375.375.375h8.25a.375.375 0 0 0 .375-.375v-5.25a.375.375 0 0 0-.375-.375z"
         clip-rule="evenodd"></path>
 </svg>
