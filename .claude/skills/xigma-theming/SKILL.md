@@ -20,12 +20,27 @@ A Sass map per theme + a mixin that emits `--color-*` custom properties:
 
 ```scss
 $themes: (
-  dark: (neutral-1: #ffffff, neutral-2: #b3b3b3, neutral-3: #444444, neutral-4: #2c2c2c, neutral-5: #272727, blue-1: #0d99ff),
-  light: (neutral-1: #272727, neutral-2: #6e6e6e, neutral-3: #e6e6e6, neutral-4: #ffffff, neutral-5: #f5f5f5, blue-1: #0d99ff),
+  dark: (
+    neutral-1: #ffffff,
+    neutral-2: #b3b3b3,
+    neutral-3: #444444,
+    neutral-4: #2c2c2c,
+    neutral-5: #272727,
+    blue-1: #0d99ff,
+  ),
+  light: (
+    neutral-1: #272727,
+    neutral-2: #6e6e6e,
+    neutral-3: #e6e6e6,
+    neutral-4: #ffffff,
+    neutral-5: #f5f5f5,
+    blue-1: #0d99ff,
+  ),
 );
 ```
 
 Applied four times, by design:
+
 1. `:root { @include theme-variables(dark); }` — dark is the default.
 2. `@media (prefers-color-scheme: light) { :root { ... } }` — auto light when the OS prefers it and
    no explicit choice has been made.
@@ -47,7 +62,7 @@ export const colors = {
 ```
 
 Each value is the CSS `var()` string, not a resolved hex — so `colors.neutral2` used in an inline
-`style` prop is *exactly* the same token as `var(--color-neutral-2)` in a `.module.scss` file, and
+`style` prop is _exactly_ the same token as `var(--color-neutral-2)` in a `.module.scss` file, and
 both react to theme changes automatically with no re-render needed. Adding a color token means
 touching **both** `_theme.scss` here and each app's `colors.ts` — there is no codegen step.
 

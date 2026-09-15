@@ -40,11 +40,7 @@ export const MenuItem: FC<TMenuItemProps> = ({
   withCheck = true,
 }) => (
   <DropdownMenuPrimitive.Item
-    className={cx(
-      'MenuItem',
-      { 'MenuItem--marginBottom': marginBottom, 'MenuItem--marginTop': marginTop },
-      className,
-    )}
+    className={cx('MenuItem', { 'MenuItem--marginBottom': marginBottom, 'MenuItem--marginTop': marginTop }, className)}
     disabled={disabled}
     onSelect={onClick}
   >

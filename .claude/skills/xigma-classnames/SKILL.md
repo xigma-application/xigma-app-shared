@@ -22,7 +22,7 @@ Prefer:
 ```tsx
 import cx from 'classnames';
 
-<div className={cx(styles.PopoverItem, className)} />
+<div className={cx(styles.PopoverItem, className)} />;
 ```
 
 `classnames` is a project dependency (`package.json`'s `dependencies`, not `devDependencies` —
@@ -43,7 +43,7 @@ export type TPopoverItemProps = {
   // ...
 };
 
-export const PopoverItem: FC<TPopoverItemProps> = ({ className = '', /* ... */ }) => (
+export const PopoverItem: FC<TPopoverItemProps> = ({ className = '' /* ... */ }) => (
   <div className={cx(styles.PopoverItem, className)} /* ... */ />
 );
 ```

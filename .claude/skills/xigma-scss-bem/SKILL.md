@@ -68,6 +68,6 @@ syntax on the JS side is the accepted cost of that, not a problem to work around
 ## Related
 
 [[xigma-component-structure]] — the root class still matches the component name exactly; BEM
-nesting only governs classes *below* that root.
+nesting only governs classes _below_ that root.
 [[xigma-import-order]] / [[xigma-module-structure]] — unrelated axes (import grouping, file
 placement) that apply independently of this rule.

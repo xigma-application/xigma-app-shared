@@ -164,7 +164,12 @@ export const drawScene = (gl: WebGL2RenderingContext, program: WebGLProgram, buf
 };
 
 // utils/startRenderLoop.ts
-export const startRenderLoop = (gl: WebGL2RenderingContext, program: WebGLProgram, buffer: WebGLBuffer, canvas: HTMLCanvasElement): (() => void) => {
+export const startRenderLoop = (
+  gl: WebGL2RenderingContext,
+  program: WebGLProgram,
+  buffer: WebGLBuffer,
+  canvas: HTMLCanvasElement,
+): (() => void) => {
   let frameId: number;
 
   const tick = (): void => {
@@ -205,12 +210,23 @@ just applied to a value that changes over time instead of a static one:
 ```ts
 type TFrameIdRef = { current: number };
 
-const tick = (gl: WebGL2RenderingContext, program: WebGLProgram, buffer: WebGLBuffer, canvas: HTMLCanvasElement, frameIdRef: TFrameIdRef): void => {
+const tick = (
+  gl: WebGL2RenderingContext,
+  program: WebGLProgram,
+  buffer: WebGLBuffer,
+  canvas: HTMLCanvasElement,
+  frameIdRef: TFrameIdRef,
+): void => {
   drawScene(gl, program, buffer, canvas);
   frameIdRef.current = requestAnimationFrame(() => tick(gl, program, buffer, canvas, frameIdRef));
 };
 
-export const startRenderLoop = (gl: WebGL2RenderingContext, program: WebGLProgram, buffer: WebGLBuffer, canvas: HTMLCanvasElement): (() => void) => {
+export const startRenderLoop = (
+  gl: WebGL2RenderingContext,
+  program: WebGLProgram,
+  buffer: WebGLBuffer,
+  canvas: HTMLCanvasElement,
+): (() => void) => {
   const frameIdRef: TFrameIdRef = { current: 0 };
 
   frameIdRef.current = requestAnimationFrame(() => tick(gl, program, buffer, canvas, frameIdRef));
@@ -278,7 +294,7 @@ useEffect(() => {
 }, [activeTool, canvasRef, dispatch, draftRef]);
 ```
 
-`getPointerPosition(canvas, event)` and `toDraftRect(start, current)` themselves *are* pure and
+`getPointerPosition(canvas, event)` and `toDraftRect(start, current)` themselves _are_ pure and
 parameterizable (no hook state at all), so those moved to
 `components/Design/Canvas/hooks/useFrameTool/utils/getPointerPosition.ts` and `.../utils/toDraftRect.ts`
 — see `components/Design/Canvas/hooks/useFrameTool/useFrameTool.ts` for the full split: pure
@@ -286,13 +302,13 @@ helpers in `utils/`, stateful handlers in the hook body, and `useEffect` doing n
 add/remove listeners.
 
 **Refinement — a handler can still move to `utils/` even if it needs `dispatch` or ref-backed
-state, as long as it only needs a *callback*, not the raw ref itself.** The dividing line above
+state, as long as it only needs a _callback_, not the raw ref itself.** The dividing line above
 ("needs a ref → stays in the hook") is about who owns the ref, not who's allowed to trigger it.
 `useSelectionTool.ts`'s `handlePointerDown` grew real "ifologia" (5-way branch: shift+hit,
 hit-in-multi-selection, hit-not-in-selection, gap-inside-group-bounds, empty click) and moved out
 to `utils/handlePointerDown/handlePointerDown.ts`, even though its logic needs both `dispatch` and
 `armDrag` (a closure the hook defines around its own `dragStateRef`). The ref (`dragStateRef`)
-itself never leaves the hook — only the handler that *calls* `armDrag` moved out, taking `dispatch`
+itself never leaves the hook — only the handler that _calls_ `armDrag` moved out, taking `dispatch`
 and `armDrag` as explicit parameters (`handlePointerDown(canvas, event, dispatch, armDrag)`),
 exactly like `canvas`/`event` are already passed explicitly. `armDrag`'s own type
 (`TArmDrag = (armIds: string[], pendingClickAction: TPendingClickAction | null, point: TPoint) =>
@@ -380,8 +396,8 @@ alongside them.
 
 ## Ordered resolver chain for many mutually-exclusive, order-sensitive branches
 
-When one dispatcher must pick exactly one of many (10+) non-trivial branches, and *which one wins
-matters* (a more specific hit-test must be tried before a more general catch-all), don't grow the
+When one dispatcher must pick exactly one of many (10+) non-trivial branches, and _which one wins
+matters_ (a more specific hit-test must be tried before a more general catch-all), don't grow the
 dispatcher into one long `if`/`else if` chain — and it's not a [[xigma-switch-over-if]] case either,
 since there's no single discriminant value to switch on. Instead:
 
@@ -405,7 +421,16 @@ for (const resolve of ARM_RESOLVERS) {
 A resolver itself stays a plain positive guard over its own slice of the context:
 
 ```ts
-export const armHitOnPointerDown = ({ canvas, currentSelection, dispatch, event, hit, point, selectedNodes, selectionRefs }: TArmContext): true | undefined => {
+export const armHitOnPointerDown = ({
+  canvas,
+  currentSelection,
+  dispatch,
+  event,
+  hit,
+  point,
+  selectedNodes,
+  selectionRefs,
+}: TArmContext): true | undefined => {
   if (hit) {
     armHitDrag(canvas, event, dispatch, selectionRefs.dragStateRef, hit, currentSelection, selectedNodes, point);
     return true;
@@ -421,13 +446,18 @@ the catch-all), each living in its own `armResolvers/armXOnPointerDown.ts` file,
 ## Self-guarding fan-out for many independent branches
 
 When branches are independent rather than mutually exclusive — each cares only about its own slice
-of state, and in practice at most one is ever active, but nothing needs to *pick a winner* — don't
+of state, and in practice at most one is ever active, but nothing needs to _pick a winner_ — don't
 route them through a claim/short-circuit chain either. Give each branch its own ref and its own
 named function that positive-guards on that ref, then call every function unconditionally in
 sequence; each no-ops unless its own ref happens to be set:
 
 ```ts
-export const continueEndpointDrag = (canvas: HTMLCanvasElement, event: PointerEvent, dispatch: AppDispatch, endpointDragRef: RefObject<TEndpointDragState | null>): void => {
+export const continueEndpointDrag = (
+  canvas: HTMLCanvasElement,
+  event: PointerEvent,
+  dispatch: AppDispatch,
+  endpointDragRef: RefObject<TEndpointDragState | null>,
+): void => {
   const endpointDragState = endpointDragRef.current;
 
   if (endpointDragState) {
@@ -446,7 +476,7 @@ export const handlePointerMove = (canvas, event, dispatch, canvasRefs, selection
 ```
 
 This is deliberately not [[xigma-switch-over-if]]'s "3+ ifs on the same value" shape — each function
-guards a *different* ref, there's no single discriminant to switch on. It's also deliberately not
+guards a _different_ ref, there's no single discriminant to switch on. It's also deliberately not
 the claim/short-circuit resolver chain above: nothing here needs to pick a winner, since only one
 drag ref is ever armed at a time by the paired `armXOnPointerDown` resolver, so calling all of them
 is cheap and keeps adding a new drag kind a pure addition (one new file + one new call) instead of a
@@ -487,6 +517,6 @@ out of the hook's file into its own `utils/<functionName>.ts`; once a function i
 per the "ifologia" rule above, that skill also covers where the resulting files (and their own
 promoted folder) live.
 
-[[xigma-switch-over-if]] — covers the sibling case where 3+ branches *do* test one shared
+[[xigma-switch-over-if]] — covers the sibling case where 3+ branches _do_ test one shared
 discriminant value; the resolver-chain and self-guarding fan-out patterns above are for when they
 don't.

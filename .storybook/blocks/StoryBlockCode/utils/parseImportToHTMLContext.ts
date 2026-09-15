@@ -12,10 +12,7 @@ const getItemWithHighlightWordAs = (itemsToImports: string, styles: Record<strin
     .map((item) => (item === 'as' ? getHTMLElement(cx(styles['StoryBlockCode__import-as']), 'as') : item))
     .join(' ');
 
-export const parseImportToHTMLContext = (
-  { items: itemsToImports, path }: TImport,
-  styles: Record<string, string>,
-): string =>
+export const parseImportToHTMLContext = ({ items: itemsToImports, path }: TImport, styles: Record<string, string>): string =>
   [
     getHTMLElement(cx(styles['StoryBlockCode__import']), 'import'),
     getHTMLElement(cx(styles['StoryBlockCode__import-items']), getItemWithHighlightWordAs(itemsToImports, styles)),

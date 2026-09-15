@@ -28,11 +28,7 @@ export const StoryApi: FC<TStoryApiProps> = ({ children = null, description = []
 
       {/* DESCRIPTION */}
       {description.map((description, key) => (
-        <p
-          className={cx(styles['StoryApi__description'])}
-          dangerouslySetInnerHTML={{ __html: description }}
-          key={key}
-        />
+        <p className={cx(styles['StoryApi__description'])} dangerouslySetInnerHTML={{ __html: description }} key={key} />
       ))}
 
       {/* COMPONENT */}

@@ -71,7 +71,8 @@ it belongs inside that hook's own folder, promoting the hook from a flat `hooks/
 `hooks/useX/useX.ts` with a sibling `utils/`. Confirmed against x-design's
 `hooks/useResizeHandler/` (`useResizeHandler.tsx` + `utils/handleMouseDown.ts`) and
 `hooks/useKeyboardHandler/` (`useKeyboardHandler.tsx` + `types.ts` + `utils/handleLockBrowserEvents.ts`
-+ `utils/triggerActions.ts`).
+
+- `utils/triggerActions.ts`).
 
 ```
 hooks/
@@ -107,7 +108,7 @@ hooks/
 
 **Naming, corrected by the user:** this folder/orchestrator was originally called `drawFrame`/
 `drawFrame.ts`, and the per-tool draft-preview drawer (below) was `drawDraftFrame.ts`. Both names
-collided the word "frame" across two unrelated meanings: a *render* frame (one tick of the
+collided the word "frame" across two unrelated meanings: a _render_ frame (one tick of the
 `requestAnimationFrame` loop — what the orchestrator actually draws, the whole scene each tick)
 and a Design **Frame** (`NodeType.frame`, what the draft-preview drawer actually draws — the
 in-progress frame node being dragged out with the Frame tool). Renamed so each name means only one
@@ -164,7 +165,7 @@ Rules for this promotion, confirmed by re-running `grep -rl` for every export na
   before deciding it stays local.
 
 **Domain awareness, not reachability, decides feature-local vs. global `utils/<category>/`.** Ask
-whether the function's own parameters/body reference the *feature's* domain vocabulary
+whether the function's own parameters/body reference the _feature's_ domain vocabulary
 (`TSceneNode`, "selection", "draft rect", `store`/selectors) or whether it only ever talks about
 generic primitives (a rect's x/y/width/height, a hex color, a WebGL context) that any canvas-drawing
 feature could reuse — regardless of who happens to import it today. `drawScene.ts` and its direct
@@ -173,7 +174,7 @@ siblings (`drawSceneNodes`, `drawSelectionOutline`, `drawGroupSelectionOutline`,
 branches on `TSceneNode[]`/selection state, i.e. Design-domain concepts. `drawSceneBackground`,
 `drawBackground`, `drawCornerHandles`, `drawRect`, `getRectCorners`, `hexToRgbFloat`, and
 `hexToRgbaFloat` all moved to the **global `src/utils/canvas/`** (one function per file + `test/`,
-folder named for *what it draws on*, not the math-vs-color distinction the folder started as) —
+folder named for _what it draws on_, not the math-vs-color distinction the folder started as) —
 none of them knows what a "node" or "selection" is; they only take a rect/color/gl handle and draw
 or convert it. This first version of this rule tried "does it take a `gl`/`program`/`buffer`
 param" as the dividing line and put `drawBackground`/`drawCornerHandles`/`drawRect` on the
@@ -189,6 +190,7 @@ sign the util (or the value it needs) isn't actually global yet. When `drawBackg
 `TDraftRect` from `components/Design/Canvas/types` and `BACKGROUND_COLOR`/`CORNER_HANDLE_SIZE` etc.
 from `components/Design/Canvas/constants` — that reverse dependency was caught and corrected by the
 user. Fix: relocate the values themselves, not just re-point the import.
+
 - Feature-specific `types.ts` values that generic global code needs move to a new top-level
   `src/types/<name>.ts` (e.g. `types/canvas.ts` got `TDraftRect`/`TPoint`, moved wholesale out of
   `Canvas/types.ts` — that file was deleted once empty, and **every** consumer across the feature
@@ -199,7 +201,7 @@ user. Fix: relocate the values themselves, not just re-point the import.
   global code actually needs move — constants still exclusively used inside the feature
   (`DRAFT_FRAME_STROKE`, `MIN_FRAME_SIZE`, the `ZOOM_*` family, `WEBGL_CONTEXT_ID`, shader sources)
   stay in the feature's own `constants.ts`; check every remaining consumer with `grep -rl
-  <CONST_NAME> src` before moving vs. leaving behind, since moving a still-locally-used constant
+<CONST_NAME> src` before moving vs. leaving behind, since moving a still-locally-used constant
   would just create the reverse problem the other way (feature reaching into `constant/` for
   something that isn't actually shared).
 

@@ -1,17 +1,17 @@
-import type { Preview } from "@storybook/react-vite";
+import type { Preview } from '@storybook/react-vite';
 
-import { withThemeByDataAttribute } from "@storybook/addon-themes";
+import { withThemeByDataAttribute } from '@storybook/addon-themes';
 
-import { ReactiveDocsContainer } from "./ReactiveDocsContainer";
-import { TooltipProvider } from "../packages/core/src/TooltipProvider/TooltipProvider";
+import { ReactiveDocsContainer } from './ReactiveDocsContainer';
+import { TooltipProvider } from '../packages/core/src/TooltipProvider/TooltipProvider';
 
-import "./styles/index.scss";
+import './styles/index.scss';
 
 const preview: Preview = {
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     a11y: {
-      test: "error",
+      test: 'error',
     },
     docs: { container: ReactiveDocsContainer },
     controls: {
@@ -29,11 +29,11 @@ const preview: Preview = {
     ),
     withThemeByDataAttribute({
       themes: {
-        dark: "dark",
-        light: "light",
+        dark: 'dark',
+        light: 'light',
       },
-      defaultTheme: "dark",
-      attributeName: "data-theme",
+      defaultTheme: 'dark',
+      attributeName: 'data-theme',
     }),
   ],
 };

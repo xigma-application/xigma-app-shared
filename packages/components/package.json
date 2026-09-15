@@ -14,7 +14,9 @@
     },
     "./index.css": "./dist/index.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"

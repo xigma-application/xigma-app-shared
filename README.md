@@ -165,22 +165,22 @@ wg jego własnej dokumentacji.
 ### Import w kodzie apki
 
 ```tsx
-import { Icon, Tooltip } from "@xigma/components";
-import "@xigma/components/index.css"; // raz, gdziekolwiek apka ładuje swój globalny CSS
-import { TooltipProvider } from "@xigma/core"; // raz, blisko korzenia apki — Tooltip go wymaga
+import { Icon, Tooltip } from '@xigma/components';
+import '@xigma/components/index.css'; // raz, gdziekolwiek apka ładuje swój globalny CSS
+import { TooltipProvider } from '@xigma/core'; // raz, blisko korzenia apki — Tooltip go wymaga
 
-import { someUtil } from "@xigma/utils";
+import { someUtil } from '@xigma/utils';
 
 <TooltipProvider>
   <Tooltip content="Check">
     <Icon name="Check" color="blue1" size={16} />
   </Tooltip>
-</TooltipProvider>
+</TooltipProvider>;
 ```
 
 ```scss
-@use "@xigma/scss/theme";
-@use "@xigma/scss/mixins/svg-color";
+@use '@xigma/scss/theme';
+@use '@xigma/scss/mixins/svg-color';
 
 .card {
   color: var(--color-neutral-1);

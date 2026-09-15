@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 
 $themes: (
   dark: (
@@ -69,10 +69,10 @@ $themes: (
   }
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   @include theme-variables(dark);
 }
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   @include theme-variables(light);
 }

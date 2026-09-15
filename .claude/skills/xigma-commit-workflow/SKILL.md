@@ -53,7 +53,7 @@ they hand back an edited message), in that same turn:
    rules (name files explicitly, glance at `git status` after a broad add for anything that
    shouldn't be there).
 2. Commit with the approved text verbatim (via heredoc), plus the standard `Co-Authored-By: Claude
-   Sonnet 5 <noreply@anthropic.com>` trailer — don't re-summarize or editorialize on top of what was
+Sonnet 5 <noreply@anthropic.com>` trailer — don't re-summarize or editorialize on top of what was
    approved.
 3. Push right after, without asking again — that confirmation already happened when they approved
    the form. Don't force-push; if a plain push is rejected (e.g. remote moved), stop and ask rather

@@ -52,11 +52,7 @@ type TField = {
   loop?: boolean;
 };
 
-const fields: Array<TField> = [
-  { label: 'Default' },
-  { label: 'Looping', loop: true },
-  { disabled: true, label: 'Disabled' },
-];
+const fields: Array<TField> = [{ label: 'Default' }, { label: 'Looping', loop: true }, { disabled: true, label: 'Disabled' }];
 
 const blockCodeData: TStoryBlockCode = {
   componentName: 'ScrubbableInput',

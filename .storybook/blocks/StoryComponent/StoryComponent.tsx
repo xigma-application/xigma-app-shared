@@ -49,11 +49,7 @@ export const StoryComponent: FC<TStoryComponentProps> = ({
 
     {/* DESCRIPTION */}
     {description.map((description, key) => (
-      <p
-        className={cx(styles['StoryComponent__description'])}
-        dangerouslySetInnerHTML={{ __html: description }}
-        key={key}
-      />
+      <p className={cx(styles['StoryComponent__description'])} dangerouslySetInnerHTML={{ __html: description }} key={key} />
     ))}
 
     {/* COMPONENT SECTION */}
@@ -72,11 +68,7 @@ export const StoryComponent: FC<TStoryComponentProps> = ({
 
     {/* BLOCK CODE */}
     {blocksCodeData.length > 0 && (
-      <StoryBlockCode
-        blocksCodeData={blocksCodeData}
-        className={cx(styles['StoryComponent__story-block-code'])}
-        {...restProps}
-      />
+      <StoryBlockCode blocksCodeData={blocksCodeData} className={cx(styles['StoryComponent__story-block-code'])} {...restProps} />
     )}
   </section>
 );

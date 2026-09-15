@@ -35,9 +35,7 @@ import { FC } from 'react';
 // styles
 import './component-name.scss';
 
-const ComponentName: FC<TComponentNameProps> = (props) => (
-  <div className="ComponentName">...</div>
-);
+const ComponentName: FC<TComponentNameProps> = (props) => <div className="ComponentName">...</div>;
 
 export default ComponentName;
 ```

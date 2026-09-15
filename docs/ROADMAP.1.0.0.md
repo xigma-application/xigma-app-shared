@@ -91,7 +91,7 @@ Storybooka i w raporcie Vitesta.
       `.storybook/main.ts`+`preview.tsx` do projektu testowego, żaden osobny plik setup nie jest
       generowany ani potrzebny
 - [x] `vitest.config.ts` → `test.projects: [ 'unit' (jsdom, nasze `.spec.*`), 'storybook'
-      (chromium przez `storybookTest`, każda story = test) ]`, `coverage` zostaje wspólny na
+  (chromium przez `storybookTest`, każda story = test) ]`, `coverage` zostaje wspólny na
       poziomie roota
 - [x] progi coverage: **liczone łącznie** — oba projekty renderują ten sam kod komponentów, więc
       dodatkowe pokrycie z browser-mode tylko pomaga dobić do 100%, nie ma powodu rozdzielać; próg
@@ -173,7 +173,7 @@ skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--cove
 - [x] `Tooltip` — hover triggera → treść widoczna (Portal renderuje poza `canvasElement`, więc
       asercja idzie przez globalny `screen`, nie scoped `canvas`); brak `content` → osobna story
       `NoContent`, trigger nigdy nie dostaje `data-state` od Radixa (dowód, że wczesny `return
-      children` w `Tooltip.tsx` faktycznie omija Radixa, nie tylko "wygląda tak samo")
+  children` w `Tooltip.tsx` faktycznie omija Radixa, nie tylko "wygląda tak samo")
 - [x] `ScrubbableInput` — `play` symuluje gest scrubowania (mousedown → `mousemove` z
       `movementX` → mouseup), asercje: `onChange`/wyświetlana wartość dostają zklampowaną liczbę,
       handle pojawia się i znika, `loop` zawija na granicy (`States`, pole "Looping")
@@ -183,19 +183,16 @@ skasowanym `node_modules/.vite` (5× sam projekt `storybook`, 3× pełny `--cove
       `*.spec.*`), bo to kod testowy, nie produkcyjny
 - [x] część asercji z `*.spec.tsx` przeniesiona do `play()` — tam gdzie to była realna
       duplikacja (nie wszędzie: Icon zostawiony bez zmian, `play()` tam sprawdza tylko rzeczy,
-      których jsdom fizycznie nie potrafi — `currentcolor`/motyw — więc nic nie dublował):
-      - `Tooltip.spec.tsx`: usunięty test "no content → sam trigger" — `stories/test/
-        BasicTooltip.interactions.ts`'s `playNoContent` dowodzi tego samego mocniej (`data-state`
-        nigdy nie trafia na trigger, nie tylko "coś się wyrenderowało"), i ten sam story i tak
-        renderuje się w projekcie `storybook` w ramach tego samego `vitest run --coverage`, więc
-        pokrycie gałęzi `if (!content)` w `Tooltip.tsx` nie ucierpiało (potwierdzone: nadal 100%)
-      - `ScrubbableInput.spec.tsx`: test dragu przycięty do samego progowania przez
-        `onChange`/`onMouseDown`/`onMouseUp` (mock-call assercje — to jsdom robi tak samo dobrze
-        jak przeglądarka). Widoczność handle'a i aktualizacja wyświetlanej wartości zostały tylko w
-        `playBasicScrubbableInput` (realny render/portal); `playStates`' pokrycie zawijania na
-        granicy i tak nigdy nie miało odpowiednika w jsdom, więc to czysty przyrost, nie migracja
-      - zweryfikowane: `vitest run --coverage` 16 plików / 38 testów (było 39, -1 za usunięty
-        duplikat) / 100%, wielokrotnie z rzędu na czysto
+      których jsdom fizycznie nie potrafi — `currentcolor`/motyw — więc nic nie dublował): - `Tooltip.spec.tsx`: usunięty test "no content → sam trigger" — `stories/test/
+    BasicTooltip.interactions.ts`'s `playNoContent` dowodzi tego samego mocniej (`data-state`
+      nigdy nie trafia na trigger, nie tylko "coś się wyrenderowało"), i ten sam story i tak
+      renderuje się w projekcie `storybook` w ramach tego samego `vitest run --coverage`, więc
+      pokrycie gałęzi `if (!content)` w `Tooltip.tsx` nie ucierpiało (potwierdzone: nadal 100%) - `ScrubbableInput.spec.tsx`: test dragu przycięty do samego progowania przez
+      `onChange`/`onMouseDown`/`onMouseUp` (mock-call assercje — to jsdom robi tak samo dobrze
+      jak przeglądarka). Widoczność handle'a i aktualizacja wyświetlanej wartości zostały tylko w
+      `playBasicScrubbableInput` (realny render/portal); `playStates`' pokrycie zawijania na
+      granicy i tak nigdy nie miało odpowiednika w jsdom, więc to czysty przyrost, nie migracja - zweryfikowane: `vitest run --coverage` 16 plików / 38 testów (było 39, -1 za usunięty
+      duplikat) / 100%, wielokrotnie z rzędu na czysto
 
 ### Po drodze: dwa realne problemy złapane i naprawione
 
@@ -282,7 +279,7 @@ Dwa osobne błędy po kolei, oba złapane przez realną weryfikację (nie samo "
    `@joshwooding/vite-plugin-react-docgen-typescript` szuka najbliższego `tsconfig.json` od
    configu Vite (czyli roota repo), a `/tsconfig.json`'s `include` obejmuje tylko
    `.storybook/**/*` i `*.stories.tsx`, nie zwykłe pliki komponentów — log: `"Skipping docgen for
-   Icon.tsx because it is not included in the active TypeScript project."` Fix:
+Icon.tsx because it is not included in the active TypeScript project."` Fix:
    `typescript.reactDocgenTypescriptOptions.tsconfigPath` wskazany jawnie na
    `packages/components/tsconfig.json`, które faktycznie `include`'uje `src`.
 
@@ -337,8 +334,8 @@ Decyzja usera: lokalna ścieżka bez zewnętrznego serwisu (**nie** Chromatic �
 konta, czego nie mogę zrobić sam; rozwiązałoby przy okazji i to, i sekcję "Deploy" w README, ale
 zostaje do rozważenia osobno, później, jeśli ktoś faktycznie założy konto).
 
-**Doprecyzowanie**: samo *zainstalowanie* `@chromatic-com/storybook` (addon "Visual Tests") **nie**
-wymaga konta — tylko faktyczne *uruchomienie* pierwszego testu wizualnego (panel "Visual Tests" →
+**Doprecyzowanie**: samo _zainstalowanie_ `@chromatic-com/storybook` (addon "Visual Tests") **nie**
+wymaga konta — tylko faktyczne _uruchomienie_ pierwszego testu wizualnego (panel "Visual Tests" →
 "Enable in Chromatic") go wymaga. Zweryfikowane empirycznie (nie tylko z dokumentacji): addon
 zainstalowany przez `npx storybook add @chromatic-com/storybook`, wpięty w `.storybook/main.ts`,
 `npx storybook build` przechodzi czysto, `npx storybook dev` startuje bez błędu i serwuje
@@ -362,13 +359,13 @@ zrobić sam).
       3.2.7 jeszcze nie ma.
 - [ ] **`@storybook/test-runner` + `jest-image-snapshot`** — zainstalowane, skonfigurowane
       (`postVisit` hook, `.storybook/test-runner.js`), odpalone naprawdę przez `npm run
-      storybook` + `test-storybook -u` — **realny, nieobejściowy konflikt wersji**: Storybook
+  storybook` + `test-storybook -u` — **realny, nieobejściowy konflikt wersji**: Storybook
       10.5.10's `importModule` (wewnętrzny loader configu) bezwarunkowo woła Node'owy
       `module.register()` przy KAŻDYM ładowaniu pliku configu (`.storybook/test-runner.*`,
       niezależnie czy to `.ts` czy zwykły `.js`) — a to leci wewnątrz workera Jesta (`test-runner`
       jest Jest-owy), gdzie Jest **explicite odmawia** rejestrowania loader hooków:
       `"module.register() is not supported in Jest: the hooks would attach to the module loader
-      running Jest itself"`. Sprawdzone: przepisanie configu z `.ts` na czysty `.js` nic nie
+  running Jest itself"`. Sprawdzone: przepisanie configu z `.ts` na czysty `.js` nic nie
       zmienia (rejestracja hooka jest bezwarunkowa w `importModule`, nie zależy od formatu pliku).
       To wygląda na niezałataną jeszcze niezgodność `@storybook/test-runner@0.24.4` ↔
       `storybook@10.5.10` (peer deps formalnie na to pozwalają, `^10.5.0-0`, ale runtime się wywala)
@@ -376,6 +373,7 @@ zrobić sam).
   zero działającej infrastruktury nie zostaje w repo na pamiątkę
 
 **Realne opcje na przyszłość**, żadna nie zrobiona teraz:
+
 1. Poczekać na fix/nowszą wersję `@storybook/test-runner` kompatybilną z `storybook@10.5.x` i
    spróbować ponownie dokładnie tej samej konfiguracji
 2. Upgrade `@storybook/addon-vitest`/`vitest`/`@vitest/browser` do wersji z natywnym

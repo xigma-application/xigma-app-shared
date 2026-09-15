@@ -6,7 +6,7 @@ description: JSX event handlers (onClick, onInput, onKeyDown, onBlur, ...) in xi
 # xigma Event Handlers Live in Hooks
 
 A component's own file should stay declarative — JSX plus the hook calls that feed it. Event
-handler *logic* (what happens on input/blur/keydown/...) does not belong in the component body,
+handler _logic_ (what happens on input/blur/keydown/...) does not belong in the component body,
 even when it looks small enough to inline.
 
 ## Rule

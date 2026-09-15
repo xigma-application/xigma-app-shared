@@ -2,7 +2,9 @@
   "name": "@xigma/scss",
   "version": "0.0.0",
   "private": false,
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "exports": {
     "./index": "./src/index.scss",
     "./index.scss": "./src/index.scss",

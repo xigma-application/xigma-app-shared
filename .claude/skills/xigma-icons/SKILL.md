@@ -42,11 +42,12 @@ below resolve `@xigma/assets/svg/<name>.svg` through normal Node/bundler package
 ## `packages/components/src/Icon/svg.ts` — the `Icons` barrel
 
 Same shape as `xigma-app`'s `assets/svg.ts`, one `import X from '@xigma/assets/svg/name.svg?react'`
-+ barrel-object entry per icon, PascalCase names. This is a real, committed source file — **not**
-generated at build/install time (an earlier attempt at codegen here was reverted; the barrel is
-maintained the same way `xigma-app` maintains its own, by hand/sed, and lives in git like any other
-source file). Adding an icon means adding both the raw `.svg` in `@xigma/assets/svg/` and the
-import + barrel entry here.
+
+- barrel-object entry per icon, PascalCase names. This is a real, committed source file — **not**
+  generated at build/install time (an earlier attempt at codegen here was reverted; the barrel is
+  maintained the same way `xigma-app` maintains its own, by hand/sed, and lives in git like any other
+  source file). Adding an icon means adding both the raw `.svg` in `@xigma/assets/svg/` and the
+  import + barrel entry here.
 
 ## Two pipelines, kept in sync on purpose
 

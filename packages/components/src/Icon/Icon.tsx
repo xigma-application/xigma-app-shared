@@ -1,16 +1,16 @@
-import cx from "classnames";
-import { CSSProperties, Ref, SVGProps, forwardRef, useMemo } from "react";
+import cx from 'classnames';
+import { CSSProperties, Ref, SVGProps, forwardRef, useMemo } from 'react';
 
 // components
-import { Icons } from "./constants";
+import { Icons } from './constants';
 
 // others
-import { colors } from "../colors";
+import { colors } from '../colors';
 
 // styles
-import "./icon.scss";
+import './icon.scss';
 
-export type TIconProps = Omit<SVGProps<SVGSVGElement>, "color"> & {
+export type TIconProps = Omit<SVGProps<SVGSVGElement>, 'color'> & {
   /** The icon's color — one of `@xigma/components`'s `colors` theme tokens. */
   color?: keyof typeof colors;
   /** Name of the icon from the shared icon set. */
@@ -25,12 +25,12 @@ export type TIconProps = Omit<SVGProps<SVGSVGElement>, "color"> & {
  * color).
  */
 export const Icon = forwardRef<SVGSVGElement, TIconProps>(
-  ({ className, color = "neutral1", name, size = 16, style, ...restProps }, ref: Ref<SVGSVGElement>) => {
+  ({ className, color = 'neutral1', name, size = 16, style, ...restProps }, ref: Ref<SVGSVGElement>) => {
     const SVG = useMemo(() => Icons[name], [name]);
 
     return (
       <SVG
-        className={cx("Icon", className)}
+        className={cx('Icon', className)}
         height={size}
         ref={ref}
         style={{ color: colors[color], ...style } as CSSProperties}
@@ -41,6 +41,6 @@ export const Icon = forwardRef<SVGSVGElement, TIconProps>(
   },
 );
 
-Icon.displayName = "Icon";
+Icon.displayName = 'Icon';
 
 export default Icon;

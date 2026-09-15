@@ -37,7 +37,7 @@ everything else, including every hook/util/component you touch, is held to the s
 3. Add a test that exercises that specific branch/line — not a padding assertion that happens to
    touch the line incidentally. If the gap is a whole conditional branch (an `if`/default-param
    path that's never taken the other way), the missing test is usually "the input/gesture that
-   takes the *other* path," not a duplicate of an existing test.
+   takes the _other_ path," not a duplicate of an existing test.
 4. Re-run `npm run test:coverage` until clean, then also run `npx tsc -p tsconfig.json --noEmit`
    (catches type errors in `.stories.tsx`, which coverage doesn't touch since they're excluded)
    and, if any Storybook file changed, `npm run build-storybook`.
@@ -49,7 +49,7 @@ formatting step to run after — unlike xigma-app's version of this skill.
 
 `ScrubbableInput.tsx` defines `const noop = (): void => {};` as the default for the optional
 `onMouseDown`/`onMouseUp` props. Every existing test either passed explicit `onMouseDown`/
-`onMouseUp` mocks, or never fired a mouse event at all — so `noop` itself was never *called*,
+`onMouseUp` mocks, or never fired a mouse event at all — so `noop` itself was never _called_,
 and function coverage stayed under 100% despite every other branch of the component being green.
 The fix wasn't new component logic, just a test that exercises the default:
 
@@ -71,7 +71,7 @@ it('should fall back to no-op handlers when onMouseDown and onMouseUp are omitte
 });
 ```
 
-This is a common shape of coverage gap here: a component's *default* prop value (a `noop`, a
+This is a common shape of coverage gap here: a component's _default_ prop value (a `noop`, a
 default numeric constant) reads as "trivially covered" because the line defining it runs on
 import, but the function/branch itself only counts as covered once something actually invokes it
 with no override supplied.

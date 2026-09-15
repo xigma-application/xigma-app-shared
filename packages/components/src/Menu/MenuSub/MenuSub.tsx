@@ -48,11 +48,7 @@ export const MenuSub: FC<TMenuSubProps> = ({
   return (
     <DropdownMenuPrimitive.Sub onOpenChange={onOpenChange} open={open}>
       <DropdownMenuPrimitive.SubTrigger
-        className={cx(
-          'MenuSub',
-          { 'MenuSub--marginBottom': marginBottom, 'MenuSub--marginTop': marginTop },
-          triggerClassName,
-        )}
+        className={cx('MenuSub', { 'MenuSub--marginBottom': marginBottom, 'MenuSub--marginTop': marginTop }, triggerClassName)}
         disabled={disabled}
         onPointerEnter={onPointerEnter}
         onPointerLeave={onPointerLeave}

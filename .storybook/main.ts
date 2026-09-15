@@ -1,52 +1,46 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import type { StorybookConfig } from "@storybook/react-vite";
+import type { StorybookConfig } from '@storybook/react-vite';
 
-import type { Plugin as PostcssPlugin } from "postcss";
-import { mergeConfig } from "vite";
-import svgr from "vite-plugin-svgr";
-import { getCodeEditorStaticDirs } from "storybook-addon-code-editor/getStaticDirs";
+import type { Plugin as PostcssPlugin } from 'postcss';
+import { mergeConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
+import { getCodeEditorStaticDirs } from 'storybook-addon-code-editor/getStaticDirs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const stripCssModulesGlobal: PostcssPlugin = {
-  postcssPlugin: "strip-css-modules-global",
+  postcssPlugin: 'strip-css-modules-global',
   Rule(rule) {
-    rule.selector = rule.selector.replace(/:global\(([^)]+)\)/g, "$1");
+    rule.selector = rule.selector.replace(/:global\(([^)]+)\)/g, '$1');
   },
 };
 
 const config: StorybookConfig = {
-  stories: [
-    "../packages/*/src/**/*.mdx",
-    "../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-  ],
+  stories: ['../packages/*/src/**/*.mdx', '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   // Monaco Editor's own assets (for storybook-addon-code-editor's live playground) — served
   // statically, not bundled through Vite
   staticDirs: [...getCodeEditorStaticDirs(__filename)],
   addons: [
-    "@storybook/addon-docs",
-    "@storybook/addon-themes",
-    "@storybook/addon-a11y",
-    "@storybook/addon-vitest",
-    "@storybook/addon-mcp",
-    "storybook-addon-tag-badges",
-    "@chromatic-com/storybook",
-    "storybook-addon-code-editor",
+    '@storybook/addon-docs',
+    '@storybook/addon-themes',
+    '@storybook/addon-a11y',
+    '@storybook/addon-vitest',
+    '@storybook/addon-mcp',
+    'storybook-addon-tag-badges',
+    '@chromatic-com/storybook',
+    'storybook-addon-code-editor',
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: '@storybook/react-vite',
     options: {},
   },
   typescript: {
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-      tsconfigPath: path.resolve(
-        __dirname,
-        "../packages/components/tsconfig.json",
-      ),
+      tsconfigPath: path.resolve(__dirname, '../packages/components/tsconfig.json'),
     },
   },
   viteFinal: async (config) =>
@@ -58,7 +52,7 @@ const config: StorybookConfig = {
       ],
       resolve: {
         alias: {
-          "storybook-blocks": path.resolve(__dirname, "blocks"),
+          'storybook-blocks': path.resolve(__dirname, 'blocks'),
         },
       },
       css: {
