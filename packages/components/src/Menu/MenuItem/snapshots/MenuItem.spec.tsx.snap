@@ -32,10 +32,10 @@ exports[`MenuItem snapshots > should render a disabled MenuItem 1`] = `
   <svg
     class="Icon"
     fill="none"
-    height="14"
+    height="24"
     style="color: var(--color-neutral-1);"
     viewBox="0 0 16 16"
-    width="14"
+    width="24"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -89,10 +89,10 @@ exports[`MenuItem snapshots > should render a selected MenuItem with an icon and
   <svg
     class="Icon"
     fill="none"
-    height="14"
+    height="24"
     style="color: var(--color-neutral-1);"
     viewBox="0 0 16 16"
-    width="14"
+    width="24"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

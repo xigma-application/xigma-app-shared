@@ -29,7 +29,7 @@ export const MenuItem: FC<TMenuItemProps> = ({
   className = '',
   disabled = false,
   icon,
-  iconSize = 14,
+  iconSize = 24,
   label,
   marginBottom = false,
   marginTop = false,
