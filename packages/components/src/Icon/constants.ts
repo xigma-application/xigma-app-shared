@@ -33,6 +33,7 @@ import ChevronDown from './svg/chevron-down.svg?react';
 import ChevronLeft from './svg/chevron-left.svg?react';
 import ChevronRight from './svg/chevron-right.svg?react';
 import ChevronUp from './svg/chevron-up.svg?react';
+import Circle from './svg/circle.svg?react';
 import CircularPattern from './svg/circular-pattern.svg?react';
 import Close from './svg/close.svg?react';
 import CollapseLayers from './svg/collapse-layers.svg?react';
@@ -42,6 +43,7 @@ import CommentTool from './svg/comment-tool.svg?react';
 import Component from './svg/component.svg?react';
 import Corners from './svg/corners.svg?react';
 import Crop from './svg/crop.svg?react';
+import CustomSize from './svg/custom-size.svg?react';
 import CutTool from './svg/cut-tool.svg?react';
 import Detached from './svg/detached.svg?react';
 import DropEmpty from './svg/drop-empty.svg?react';
@@ -82,6 +84,7 @@ import IndividualInsets from './svg/individual-insets.svg?react';
 import Info from './svg/info.svg?react';
 import InputsConnector from './svg/inputs-connector.svg?react';
 import Keyboard from './svg/keyboard.svg?react';
+import Landscape from './svg/landscape.svg?react';
 import LassoTool from './svg/lasso-tool.svg?react';
 import LayoutGrid from './svg/layout-grid.svg?react';
 import LayoutHorizontal from './svg/layout-horizontal.svg?react';
@@ -117,6 +120,7 @@ import Percentage from './svg/percentage.svg?react';
 import Play from './svg/play.svg?react';
 import Plus from './svg/plus.svg?react';
 import PolygonTool from './svg/polygon-tool.svg?react';
+import Portrait from './svg/portrait.svg?react';
 import PositionSwitcher from './svg/position-switcher.svg?react';
 import PreviewPlay from './svg/preview-play.svg?react';
 import Properties from './svg/properties.svg?react';
@@ -136,6 +140,7 @@ import ShapeBuilderTool from './svg/shape-builder-tool.svg?react';
 import SliceTool from './svg/slice-tool.svg?react';
 import Solid from './svg/solid.svg?react';
 import Source from './svg/source.svg?react';
+import Square from './svg/square.svg?react';
 import StarTool from './svg/star-tool.svg?react';
 import StepBackwardOutlined from './svg/step-backward-outlined.svg?react';
 import StylesAndVariables from './svg/styles-and-variables.svg?react';
@@ -190,6 +195,7 @@ export const Icons = {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  Circle,
   CircularPattern,
   Close,
   CollapseLayers,
@@ -199,6 +205,7 @@ export const Icons = {
   Component,
   Corners,
   Crop,
+  CustomSize,
   CutTool,
   Detached,
   DropEmpty,
@@ -239,6 +246,7 @@ export const Icons = {
   Info,
   InputsConnector,
   Keyboard,
+  Landscape,
   LassoTool,
   LayoutGrid,
   LayoutHorizontal,
@@ -274,6 +282,7 @@ export const Icons = {
   Play,
   Plus,
   PolygonTool,
+  Portrait,
   PositionSwitcher,
   PreviewPlay,
   Properties,
@@ -293,6 +302,7 @@ export const Icons = {
   SliceTool,
   Solid,
   Source,
+  Square,
   StarTool,
   StepBackwardOutlined,
   StylesAndVariables,
