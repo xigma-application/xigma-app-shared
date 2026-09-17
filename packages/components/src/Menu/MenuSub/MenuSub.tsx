@@ -35,7 +35,7 @@ export const MenuSub: FC<TMenuSubProps> = ({
   className = '',
   disabled = false,
   icon,
-  iconSize = 14,
+  iconSize = 24,
   label,
   marginBottom = false,
   marginTop = false,
