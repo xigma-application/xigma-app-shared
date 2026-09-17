@@ -144,6 +144,7 @@ import Unlock from './svg/unlock.svg?react';
 import VariableWidthTool from './svg/variable-width-tool.svg?react';
 import Variables from './svg/variables.svg?react';
 import Variant from './svg/variant.svg?react';
+import Video from './svg/video.svg?react';
 import WidthRestricted from './svg/width-restricted.svg?react';
 import Wrap from './svg/wrap.svg?react';
 
@@ -294,6 +295,7 @@ export const Icons = {
   VariableWidthTool,
   Variables,
   Variant,
+  Video,
   WidthRestricted,
   Wrap,
 };
