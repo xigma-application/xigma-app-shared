@@ -1,5 +1,10 @@
 import Actions from './svg/actions.svg?react';
 import Agents from './svg/agents.svg?react';
+import AiBackgroundRemove from './svg/ai-background-remove.svg?react';
+import AiBoostResolution from './svg/ai-boost-resolution.svg?react';
+import AiEditWithPrompt from './svg/ai-edit-with-prompt.svg?react';
+import AiExpand from './svg/ai-expand.svg?react';
+import AiVectorize from './svg/ai-vectorize.svg?react';
 import AlignHorizontalCenter from './svg/align-horizontal-center.svg?react';
 import AlignHorizontalLeft from './svg/align-horizontal-left.svg?react';
 import AlignHorizontalRight from './svg/align-horizontal-right.svg?react';
@@ -36,6 +41,7 @@ import Columns from './svg/columns.svg?react';
 import CommentTool from './svg/comment-tool.svg?react';
 import Component from './svg/component.svg?react';
 import Corners from './svg/corners.svg?react';
+import Crop from './svg/crop.svg?react';
 import CutTool from './svg/cut-tool.svg?react';
 import Detached from './svg/detached.svg?react';
 import DropEmpty from './svg/drop-empty.svg?react';
@@ -151,6 +157,11 @@ import Wrap from './svg/wrap.svg?react';
 export const Icons = {
   Actions,
   Agents,
+  AiBackgroundRemove,
+  AiBoostResolution,
+  AiEditWithPrompt,
+  AiExpand,
+  AiVectorize,
   AlignHorizontalCenter,
   AlignHorizontalLeft,
   AlignHorizontalRight,
@@ -187,6 +198,7 @@ export const Icons = {
   CommentTool,
   Component,
   Corners,
+  Crop,
   CutTool,
   Detached,
   DropEmpty,
