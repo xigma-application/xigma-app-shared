@@ -106,6 +106,7 @@ import MoreOptions from './svg/more-options.svg?react';
 import MoveHand from './svg/move-hand.svg?react';
 import MoveTool from './svg/move-tool.svg?react';
 import MoveVectorTool from './svg/move-vector-tool.svg?react';
+import NotAllowed from './svg/not-allowed.svg?react';
 import Opacity from './svg/opacity.svg?react';
 import PaddingB from './svg/padding-b.svg?react';
 import PaddingL from './svg/padding-l.svg?react';
@@ -271,6 +272,7 @@ export const Icons = {
   MoveHand,
   MoveTool,
   MoveVectorTool,
+  NotAllowed,
   Opacity,
   PaddingB,
   PaddingL,
