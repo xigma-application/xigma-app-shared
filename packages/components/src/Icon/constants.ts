@@ -136,6 +136,7 @@ import ScaleTool from './svg/scale-tool.svg?react';
 import Search from './svg/search.svg?react';
 import SectionTool from './svg/section-tool.svg?react';
 import Settings from './svg/settings.svg?react';
+import Shaders from './svg/shaders.svg?react';
 import ShapeBuilderTool from './svg/shape-builder-tool.svg?react';
 import SliceTool from './svg/slice-tool.svg?react';
 import Solid from './svg/solid.svg?react';
@@ -298,6 +299,7 @@ export const Icons = {
   Search,
   SectionTool,
   Settings,
+  Shaders,
   ShapeBuilderTool,
   SliceTool,
   Solid,
