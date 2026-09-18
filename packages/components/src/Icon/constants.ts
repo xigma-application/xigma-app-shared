@@ -71,6 +71,7 @@ import FlowHorizontal from './svg/flow-horizontal.svg?react';
 import FlowVertical from './svg/flow-vertical.svg?react';
 import FollowPath from './svg/follow-path.svg?react';
 import FrameTool from './svg/frame-tool.svg?react';
+import Frequency from './svg/frequency.svg?react';
 import GapColumns from './svg/gap-columns.svg?react';
 import GapRows from './svg/gap-rows.svg?react';
 import Gradient from './svg/gradient.svg?react';
@@ -142,11 +143,25 @@ import Settings from './svg/settings.svg?react';
 import Shaders from './svg/shaders.svg?react';
 import ShapeBuilderTool from './svg/shape-builder-tool.svg?react';
 import SliceTool from './svg/slice-tool.svg?react';
+import Smoothen from './svg/smoothen.svg?react';
 import Solid from './svg/solid.svg?react';
 import Source from './svg/source.svg?react';
 import Square from './svg/square.svg?react';
 import StarTool from './svg/star-tool.svg?react';
 import StepBackwardOutlined from './svg/step-backward-outlined.svg?react';
+import Stroke from './svg/stroke.svg?react';
+import StrokeBottom from './svg/stroke-bottom.svg?react';
+import StrokeCapNone from './svg/stroke-cap-none.svg?react';
+import StrokeCapRound from './svg/stroke-cap-round.svg?react';
+import StrokeCapSquare from './svg/stroke-cap-square.svg?react';
+import StrokeDashed from './svg/stroke-dashed.svg?react';
+import StrokeJoinBevel from './svg/stroke-join-bevel.svg?react';
+import StrokeJoinMiter from './svg/stroke-join-miter.svg?react';
+import StrokeJoinRound from './svg/stroke-join-round.svg?react';
+import StrokeLeft from './svg/stroke-left.svg?react';
+import StrokeRight from './svg/stroke-right.svg?react';
+import StrokeSolid from './svg/stroke-solid.svg?react';
+import StrokeTop from './svg/stroke-top.svg?react';
 import StylesAndVariables from './svg/styles-and-variables.svg?react';
 import SwapHorizontal from './svg/swap-horizontal.svg?react';
 import Target from './svg/target.svg?react';
@@ -160,7 +175,9 @@ import VariableWidthTool from './svg/variable-width-tool.svg?react';
 import Variables from './svg/variables.svg?react';
 import Variant from './svg/variant.svg?react';
 import Video from './svg/video.svg?react';
+import Weight from './svg/weight.svg?react';
 import WidthRestricted from './svg/width-restricted.svg?react';
+import Wiggle from './svg/wiggle.svg?react';
 import Wrap from './svg/wrap.svg?react';
 
 export const Icons = {
@@ -237,6 +254,7 @@ export const Icons = {
   FlowVertical,
   FollowPath,
   FrameTool,
+  Frequency,
   GapColumns,
   GapRows,
   Gradient,
@@ -308,11 +326,25 @@ export const Icons = {
   Shaders,
   ShapeBuilderTool,
   SliceTool,
+  Smoothen,
   Solid,
   Source,
   Square,
   StarTool,
   StepBackwardOutlined,
+  Stroke,
+  StrokeBottom,
+  StrokeCapNone,
+  StrokeCapRound,
+  StrokeCapSquare,
+  StrokeDashed,
+  StrokeJoinBevel,
+  StrokeJoinMiter,
+  StrokeJoinRound,
+  StrokeLeft,
+  StrokeRight,
+  StrokeSolid,
+  StrokeTop,
   StylesAndVariables,
   SwapHorizontal,
   Target,
@@ -326,6 +358,8 @@ export const Icons = {
   Variables,
   Variant,
   Video,
+  Weight,
   WidthRestricted,
+  Wiggle,
   Wrap,
 };
