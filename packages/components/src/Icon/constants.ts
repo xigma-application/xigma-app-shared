@@ -41,6 +41,7 @@ import CollapsePanel from './svg/collapse-panel.svg?react';
 import Columns from './svg/columns.svg?react';
 import CommentTool from './svg/comment-tool.svg?react';
 import Component from './svg/component.svg?react';
+import Contrast from './svg/contrast.svg?react';
 import Corners from './svg/corners.svg?react';
 import Crop from './svg/crop.svg?react';
 import CustomSize from './svg/custom-size.svg?react';
@@ -204,6 +205,7 @@ export const Icons = {
   Columns,
   CommentTool,
   Component,
+  Contrast,
   Corners,
   Crop,
   CustomSize,
