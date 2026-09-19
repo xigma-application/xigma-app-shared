@@ -21,6 +21,7 @@ import Assets from './svg/assets.svg?react';
 import AutoHeight from './svg/auto-height.svg?react';
 import AutoLayout from './svg/auto-layout.svg?react';
 import AutoWidth from './svg/auto-width.svg?react';
+import BackgroundBlur from './svg/background-blur.svg?react';
 import BendTool from './svg/bend-tool.svg?react';
 import BorderRadiusB from './svg/border-radius-b.svg?react';
 import BorderRadiusL from './svg/border-radius-l.svg?react';
@@ -51,6 +52,7 @@ import CutTool from './svg/cut-tool.svg?react';
 import Detached from './svg/detached.svg?react';
 import DropEmpty from './svg/drop-empty.svg?react';
 import DropFilled from './svg/drop-filled.svg?react';
+import DropShadow from './svg/drop-shadow.svg?react';
 import EllipseTool from './svg/ellipse-tool.svg?react';
 import EraseTool from './svg/erase-tool.svg?react';
 import EWResize from './svg/ew-resize.svg?react';
@@ -75,6 +77,7 @@ import FrameTool from './svg/frame-tool.svg?react';
 import Frequency from './svg/frequency.svg?react';
 import GapColumns from './svg/gap-columns.svg?react';
 import GapRows from './svg/gap-rows.svg?react';
+import Glass from './svg/glass.svg?react';
 import Gradient from './svg/gradient.svg?react';
 import GridColumnSpan from './svg/grid-column-span.svg?react';
 import GridRowSpan from './svg/grid-row-span.svg?react';
@@ -86,10 +89,12 @@ import HtmlTag from './svg/html-tag.svg?react';
 import Image from './svg/image.svg?react';
 import IndividualInsets from './svg/individual-insets.svg?react';
 import Info from './svg/info.svg?react';
+import InnerShadow from './svg/inner-shadow.svg?react';
 import InputsConnector from './svg/inputs-connector.svg?react';
 import Keyboard from './svg/keyboard.svg?react';
 import Landscape from './svg/landscape.svg?react';
 import LassoTool from './svg/lasso-tool.svg?react';
+import LayerBlur from './svg/layer-blur.svg?react';
 import LayoutGrid from './svg/layout-grid.svg?react';
 import LayoutHorizontal from './svg/layout-horizontal.svg?react';
 import LayoutHorizontalWrap from './svg/layout-horizontal-wrap.svg?react';
@@ -108,6 +113,7 @@ import MoreOptions from './svg/more-options.svg?react';
 import MoveHand from './svg/move-hand.svg?react';
 import MoveTool from './svg/move-tool.svg?react';
 import MoveVectorTool from './svg/move-vector-tool.svg?react';
+import Noise from './svg/noise.svg?react';
 import NotAllowed from './svg/not-allowed.svg?react';
 import Opacity from './svg/opacity.svg?react';
 import PaddingB from './svg/padding-b.svg?react';
@@ -141,6 +147,7 @@ import ScaleTool from './svg/scale-tool.svg?react';
 import Search from './svg/search.svg?react';
 import SectionTool from './svg/section-tool.svg?react';
 import Settings from './svg/settings.svg?react';
+import Shader from './svg/shader.svg?react';
 import Shaders from './svg/shaders.svg?react';
 import ShapeBuilderTool from './svg/shape-builder-tool.svg?react';
 import SizeJitter from './svg/size-jitter.svg?react';
@@ -169,6 +176,7 @@ import SwapHorizontal from './svg/swap-horizontal.svg?react';
 import Target from './svg/target.svg?react';
 import TextOnPathTool from './svg/text-on-path-tool.svg?react';
 import TextTool from './svg/text-tool.svg?react';
+import Texture from './svg/texture.svg?react';
 import ToggleRotate from './svg/toggle-rotate.svg?react';
 import Tools from './svg/tools.svg?react';
 import Triangle from './svg/triangle.svg?react';
@@ -206,6 +214,7 @@ export const Icons = {
   AutoHeight,
   AutoLayout,
   AutoWidth,
+  BackgroundBlur,
   BendTool,
   BorderRadiusB,
   BorderRadiusL,
@@ -236,6 +245,7 @@ export const Icons = {
   Detached,
   DropEmpty,
   DropFilled,
+  DropShadow,
   EllipseTool,
   EraseTool,
   EWResize,
@@ -260,6 +270,7 @@ export const Icons = {
   Frequency,
   GapColumns,
   GapRows,
+  Glass,
   Gradient,
   GridColumnSpan,
   GridRowSpan,
@@ -271,10 +282,12 @@ export const Icons = {
   Image,
   IndividualInsets,
   Info,
+  InnerShadow,
   InputsConnector,
   Keyboard,
   Landscape,
   LassoTool,
+  LayerBlur,
   LayoutGrid,
   LayoutHorizontal,
   LayoutHorizontalWrap,
@@ -293,6 +306,7 @@ export const Icons = {
   MoveHand,
   MoveTool,
   MoveVectorTool,
+  Noise,
   NotAllowed,
   Opacity,
   PaddingB,
@@ -326,6 +340,7 @@ export const Icons = {
   Search,
   SectionTool,
   Settings,
+  Shader,
   Shaders,
   ShapeBuilderTool,
   SizeJitter,
@@ -354,6 +369,7 @@ export const Icons = {
   Target,
   TextOnPathTool,
   TextTool,
+  Texture,
   ToggleRotate,
   Tools,
   Triangle,
