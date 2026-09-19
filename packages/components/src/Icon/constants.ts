@@ -11,6 +11,7 @@ import AlignHorizontalRight from './svg/align-horizontal-right.svg?react';
 import AlignVerticalBottom from './svg/align-vertical-bottom.svg?react';
 import AlignVerticalCenter from './svg/align-vertical-center.svg?react';
 import AlignVerticalTop from './svg/align-vertical-top.svg?react';
+import AngularJitter from './svg/angular-jitter.svg?react';
 import ArrowDown from './svg/arrow-down.svg?react';
 import ArrowRight from './svg/arrow-right.svg?react';
 import ArrowTool from './svg/arrow-tool.svg?react';
@@ -142,6 +143,7 @@ import SectionTool from './svg/section-tool.svg?react';
 import Settings from './svg/settings.svg?react';
 import Shaders from './svg/shaders.svg?react';
 import ShapeBuilderTool from './svg/shape-builder-tool.svg?react';
+import SizeJitter from './svg/size-jitter.svg?react';
 import SliceTool from './svg/slice-tool.svg?react';
 import Smoothen from './svg/smoothen.svg?react';
 import Solid from './svg/solid.svg?react';
@@ -194,6 +196,7 @@ export const Icons = {
   AlignVerticalBottom,
   AlignVerticalCenter,
   AlignVerticalTop,
+  AngularJitter,
   ArrowDown,
   ArrowRight,
   ArrowTool,
@@ -325,6 +328,7 @@ export const Icons = {
   Settings,
   Shaders,
   ShapeBuilderTool,
+  SizeJitter,
   SliceTool,
   Smoothen,
   Solid,
