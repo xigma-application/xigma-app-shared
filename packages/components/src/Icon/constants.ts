@@ -155,6 +155,7 @@ import SliceTool from './svg/slice-tool.svg?react';
 import Smoothen from './svg/smoothen.svg?react';
 import Solid from './svg/solid.svg?react';
 import Source from './svg/source.svg?react';
+import Spread from './svg/spread.svg?react';
 import Square from './svg/square.svg?react';
 import StarTool from './svg/star-tool.svg?react';
 import StepBackwardOutlined from './svg/step-backward-outlined.svg?react';
@@ -348,6 +349,7 @@ export const Icons = {
   Smoothen,
   Solid,
   Source,
+  Spread,
   Square,
   StarTool,
   StepBackwardOutlined,
