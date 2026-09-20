@@ -101,6 +101,7 @@ import LayoutHorizontal from './svg/layout-horizontal.svg?react';
 import LayoutHorizontalWrap from './svg/layout-horizontal-wrap.svg?react';
 import LayoutVertical from './svg/layout-vertical.svg?react';
 import LeadArrow from './svg/lead-arrow.svg?react';
+import Light from './svg/light.svg?react';
 import LineTool from './svg/line-tool.svg?react';
 import Lock from './svg/lock.svg?react';
 import Mask from './svg/mask.svg?react';
@@ -296,6 +297,7 @@ export const Icons = {
   LayoutHorizontalWrap,
   LayoutVertical,
   LeadArrow,
+  Light,
   LineTool,
   Lock,
   Mask,
