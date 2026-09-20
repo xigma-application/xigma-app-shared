@@ -1,0 +1,24 @@
+<svg width="56" height="38" viewBox="0 0 56 38" fill="none" data-testid="light-intensity-indicator">
+    <path d="M28.8503 52.1085L0.608784 23.8664L15.8506 8.6246C19.9893 4.48594 22.4241 0.878192 28.7956 0.876273C35.0738 0.874381 37.6099 4.34926 41.706 8.44557L57.1094 23.8494L28.8503 52.1085Z" fill="url(#:r8ks:)"></path>
+    <path d="M28.8503 52.1085L0.608784 23.8664L15.8506 8.6246C19.9893 4.48594 22.4241 0.878192 28.7956 0.876273C35.0738 0.874381 37.6099 4.34926 41.706 8.44557L57.1094 23.8494L28.8503 52.1085Z" fill="url(#:r8kt:)"></path>
+    <path d="M28.8503 52.1085L0.608784 23.8664L15.8506 8.6246C19.9893 4.48594 22.4241 0.878192 28.7956 0.876273C35.0738 0.874381 37.6099 4.34926 41.706 8.44557L57.1094 23.8494L28.8503 52.1085Z" fill="url(#:r8ku:)"></path>
+    <path d="M28.7957 1.37568C34.823 1.37386 37.2028 4.64916 41.3524 8.79892L56.4026 23.8491L28.8503 51.4014L1.3159 23.8671L16.2045 8.97846C20.4085 4.77444 22.6793 1.37753 28.7957 1.37568Z" stroke="url(#:r8kv:)" stroke-opacity="0.07097765602219695"></path>
+    <defs>
+        <radialGradient id=":r8ks:" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(28.7926 7.13426) rotate(90.0173) scale(28.3295 31.3649)">
+            <stop stop-color="white" stop-opacity="0.18245655337649405"></stop>
+            <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+        </radialGradient>
+        <radialGradient id=":r8kt:" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(28.7926 7.13427) rotate(90.0173) scale(30.9706 34.289)">
+            <stop stop-color="white" stop-opacity="0.1419553120443939"></stop>
+            <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+        </radialGradient>
+        <linearGradient id=":r8ku:" x1="28.7924" y1="7.79289" x2="28.7996" y2="31.6432" gradientUnits="userSpaceOnUse">
+            <stop stop-color="white" stop-opacity="0.10646648403329541"></stop>
+            <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id=":r8kv:" x1="28.7932" y1="5.24066" x2="28.7955" y2="12.9741" gradientUnits="userSpaceOnUse">
+            <stop stop-color="white" stop-opacity="0.17744414005549236"></stop>
+            <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+        </linearGradient>
+    </defs>
+</svg>
