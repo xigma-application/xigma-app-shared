@@ -1,0 +1,5 @@
+export const GPU_TIMER_FRAME_SECTION = 'frame';
+export const GPU_TIMER_DEFAULT_TOGGLE_KEY = 'a';
+export const GPU_TIMER_DEFAULT_SAVE_KEY = 's';
+export const GPU_TIMER_MAX_SAMPLES = 20000;
+export const GPU_TIMER_NANOSECONDS_PER_MILLISECOND = 1e6;

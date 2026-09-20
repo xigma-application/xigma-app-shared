@@ -22,6 +22,7 @@ export default defineConfig({
         '**/constants.ts',
         '**/colors.ts',
         '**/*.d.ts',
+        '**/gpuTimer/**',
       ],
       provider: 'v8',
       thresholds: {
@@ -51,7 +52,7 @@ export default defineConfig({
         },
         test: {
           environment: 'jsdom',
-          exclude: ['**/node_modules/**', '**/dist/**'],
+          exclude: ['**/node_modules/**', '**/dist/**', '**/gpuTimer/**'],
           globals: true,
           name: 'unit',
           server: {
