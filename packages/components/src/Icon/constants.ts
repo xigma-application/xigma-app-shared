@@ -49,6 +49,7 @@ import Corners from './svg/corners.svg?react';
 import Crop from './svg/crop.svg?react';
 import CustomSize from './svg/custom-size.svg?react';
 import CutTool from './svg/cut-tool.svg?react';
+import Density from './svg/density.svg?react';
 import Detached from './svg/detached.svg?react';
 import DropEmpty from './svg/drop-empty.svg?react';
 import DropFilled from './svg/drop-filled.svg?react';
@@ -243,6 +244,7 @@ export const Icons = {
   Crop,
   CustomSize,
   CutTool,
+  Density,
   Detached,
   DropEmpty,
   DropFilled,
