@@ -97,6 +97,9 @@ import Landscape from './svg/landscape.svg?react';
 import LassoTool from './svg/lasso-tool.svg?react';
 import LayerBlur from './svg/layer-blur.svg?react';
 import LayoutGrid from './svg/layout-grid.svg?react';
+import LayoutGuideColumns from './svg/layout-guide-columns.svg?react';
+import LayoutGuideGrid from './svg/layout-guide-grid.svg?react';
+import LayoutGuideRows from './svg/layout-guide-rows.svg?react';
 import LayoutHorizontal from './svg/layout-horizontal.svg?react';
 import LayoutHorizontalWrap from './svg/layout-horizontal-wrap.svg?react';
 import LayoutVertical from './svg/layout-vertical.svg?react';
@@ -293,6 +296,9 @@ export const Icons = {
   LassoTool,
   LayerBlur,
   LayoutGrid,
+  LayoutGuideColumns,
+  LayoutGuideGrid,
+  LayoutGuideRows,
   LayoutHorizontal,
   LayoutHorizontalWrap,
   LayoutVertical,
