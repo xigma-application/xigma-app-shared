@@ -155,6 +155,7 @@ import Settings from './svg/settings.svg?react';
 import Shader from './svg/shader.svg?react';
 import Shaders from './svg/shaders.svg?react';
 import ShapeBuilderTool from './svg/shape-builder-tool.svg?react';
+import Shield from './svg/shield.svg?react';
 import SizeJitter from './svg/size-jitter.svg?react';
 import SliceTool from './svg/slice-tool.svg?react';
 import Smoothen from './svg/smoothen.svg?react';
@@ -354,6 +355,7 @@ export const Icons = {
   Shader,
   Shaders,
   ShapeBuilderTool,
+  Shield,
   SizeJitter,
   SliceTool,
   Smoothen,
