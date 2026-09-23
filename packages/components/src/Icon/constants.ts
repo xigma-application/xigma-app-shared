@@ -108,6 +108,7 @@ import LineTool from './svg/line-tool.svg?react';
 import Lock from './svg/lock.svg?react';
 import Mask from './svg/mask.svg?react';
 import MaskGroup from './svg/mask-group.svg?react';
+import MatchingLayers from './svg/matching-layers.svg?react';
 import MaxHeight from './svg/max-height.svg?react';
 import MaxWidth from './svg/max-width.svg?react';
 import MinHeight from './svg/min-height.svg?react';
@@ -309,6 +310,7 @@ export const Icons = {
   Lock,
   Mask,
   MaskGroup,
+  MatchingLayers,
   MaxHeight,
   MaxWidth,
   MinHeight,
