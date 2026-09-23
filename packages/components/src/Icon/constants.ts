@@ -120,6 +120,7 @@ import MoveVectorTool from './svg/move-vector-tool.svg?react';
 import Noise from './svg/noise.svg?react';
 import NotAllowed from './svg/not-allowed.svg?react';
 import Opacity from './svg/opacity.svg?react';
+import Overlay from './svg/overlay.svg?react';
 import PaddingB from './svg/padding-b.svg?react';
 import PaddingL from './svg/padding-l.svg?react';
 import PaddingLR from './svg/padding-lr.svg?react';
@@ -320,6 +321,7 @@ export const Icons = {
   Noise,
   NotAllowed,
   Opacity,
+  Overlay,
   PaddingB,
   PaddingL,
   PaddingLR,
