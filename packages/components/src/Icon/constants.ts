@@ -51,6 +51,8 @@ import CustomSize from './svg/custom-size.svg?react';
 import CutTool from './svg/cut-tool.svg?react';
 import Density from './svg/density.svg?react';
 import Detached from './svg/detached.svg?react';
+import DistributeHorizontalSpacing from './svg/distribute-horizontal-spacing.svg?react';
+import DistributeVerticalSpacing from './svg/distribute-vertical-spacing.svg?react';
 import DropEmpty from './svg/drop-empty.svg?react';
 import DropFilled from './svg/drop-filled.svg?react';
 import DropShadow from './svg/drop-shadow.svg?react';
@@ -186,6 +188,7 @@ import Target from './svg/target.svg?react';
 import TextOnPathTool from './svg/text-on-path-tool.svg?react';
 import TextTool from './svg/text-tool.svg?react';
 import Texture from './svg/texture.svg?react';
+import TidyUp from './svg/tidy-up.svg?react';
 import ToggleRotate from './svg/toggle-rotate.svg?react';
 import Tools from './svg/tools.svg?react';
 import Triangle from './svg/triangle.svg?react';
@@ -253,6 +256,8 @@ export const Icons = {
   CutTool,
   Density,
   Detached,
+  DistributeHorizontalSpacing,
+  DistributeVerticalSpacing,
   DropEmpty,
   DropFilled,
   DropShadow,
@@ -388,6 +393,7 @@ export const Icons = {
   TextOnPathTool,
   TextTool,
   Texture,
+  TidyUp,
   ToggleRotate,
   Tools,
   Triangle,
