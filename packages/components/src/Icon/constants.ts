@@ -23,6 +23,10 @@ import AutoLayout from './svg/auto-layout.svg?react';
 import AutoWidth from './svg/auto-width.svg?react';
 import BackgroundBlur from './svg/background-blur.svg?react';
 import BendTool from './svg/bend-tool.svg?react';
+import BooleanExclude from './svg/boolean-exclude.svg?react';
+import BooleanIntersect from './svg/boolean-intersect.svg?react';
+import BooleanSubtract from './svg/boolean-subtract.svg?react';
+import BooleanUnion from './svg/boolean-union.svg?react';
 import BorderRadiusB from './svg/border-radius-b.svg?react';
 import BorderRadiusL from './svg/border-radius-l.svg?react';
 import BorderRadiusR from './svg/border-radius-r.svg?react';
@@ -56,6 +60,7 @@ import DistributeVerticalSpacing from './svg/distribute-vertical-spacing.svg?rea
 import DropEmpty from './svg/drop-empty.svg?react';
 import DropFilled from './svg/drop-filled.svg?react';
 import DropShadow from './svg/drop-shadow.svg?react';
+import EditObject from './svg/edit-object.svg?react';
 import EllipseTool from './svg/ellipse-tool.svg?react';
 import EraseTool from './svg/erase-tool.svg?react';
 import EWResize from './svg/ew-resize.svg?react';
@@ -68,6 +73,7 @@ import FillVertical from './svg/fill-vertical.svg?react';
 import FitLayout from './svg/fit-layout.svg?react';
 import FixedHeight from './svg/fixed-height.svg?react';
 import FixedWidth from './svg/fixed-width.svg?react';
+import Flatten from './svg/flatten.svg?react';
 import FlipHorizontal from './svg/flip-horizontal.svg?react';
 import FlipVertical from './svg/flip-vertical.svg?react';
 import FlowDefault from './svg/flow-default.svg?react';
@@ -230,6 +236,10 @@ export const Icons = {
   AutoWidth,
   BackgroundBlur,
   BendTool,
+  BooleanExclude,
+  BooleanIntersect,
+  BooleanSubtract,
+  BooleanUnion,
   BorderRadiusB,
   BorderRadiusL,
   BorderRadiusR,
@@ -263,6 +273,7 @@ export const Icons = {
   DropEmpty,
   DropFilled,
   DropShadow,
+  EditObject,
   EllipseTool,
   EraseTool,
   EWResize,
@@ -275,6 +286,7 @@ export const Icons = {
   FitLayout,
   FixedHeight,
   FixedWidth,
+  Flatten,
   FlipHorizontal,
   FlipVertical,
   FlowDefault,
