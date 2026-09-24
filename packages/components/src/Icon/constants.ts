@@ -170,6 +170,8 @@ import SliceTool from './svg/slice-tool.svg?react';
 import Smoothen from './svg/smoothen.svg?react';
 import Solid from './svg/solid.svg?react';
 import Source from './svg/source.svg?react';
+import SpacingHorizontal from './svg/spacing-horizontal.svg?react';
+import SpacingVertical from './svg/spacing-vertical.svg?react';
 import Spinner from './svg/spinner.svg?react';
 import Spread from './svg/spread.svg?react';
 import Square from './svg/square.svg?react';
@@ -383,6 +385,8 @@ export const Icons = {
   Smoothen,
   Solid,
   Source,
+  SpacingHorizontal,
+  SpacingVertical,
   Spinner,
   Spread,
   Square,
