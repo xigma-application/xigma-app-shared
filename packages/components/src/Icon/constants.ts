@@ -47,6 +47,8 @@ import CollapsePanel from './svg/collapse-panel.svg?react';
 import Columns from './svg/columns.svg?react';
 import CommentTool from './svg/comment-tool.svg?react';
 import Component from './svg/component.svg?react';
+import ComponentMultiple from './svg/component-multiple.svg?react';
+import ComponentSet from './svg/component-set.svg?react';
 import Contrast from './svg/contrast.svg?react';
 import ContrastLocked from './svg/contrast-locked.svg?react';
 import Corners from './svg/corners.svg?react';
@@ -262,6 +264,8 @@ export const Icons = {
   Columns,
   CommentTool,
   Component,
+  ComponentMultiple,
+  ComponentSet,
   Contrast,
   ContrastLocked,
   Corners,
