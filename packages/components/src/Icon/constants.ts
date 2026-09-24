@@ -188,7 +188,9 @@ import Target from './svg/target.svg?react';
 import TextOnPathTool from './svg/text-on-path-tool.svg?react';
 import TextTool from './svg/text-tool.svg?react';
 import Texture from './svg/texture.svg?react';
-import TidyUp from './svg/tidy-up.svg?react';
+import TidyUpGrid from './svg/tidy-up-grid.svg?react';
+import TidyUpHorizontal from './svg/tidy-up-horizontal.svg?react';
+import TidyUpVertical from './svg/tidy-up-vertical.svg?react';
 import ToggleRotate from './svg/toggle-rotate.svg?react';
 import Tools from './svg/tools.svg?react';
 import Triangle from './svg/triangle.svg?react';
@@ -393,7 +395,9 @@ export const Icons = {
   TextOnPathTool,
   TextTool,
   Texture,
-  TidyUp,
+  TidyUpGrid,
+  TidyUpHorizontal,
+  TidyUpVertical,
   ToggleRotate,
   Tools,
   Triangle,
