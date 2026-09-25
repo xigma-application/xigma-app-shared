@@ -10,8 +10,8 @@ export type TStoryBlockWarningProps = {
 
 export const StoryBlockWarning: FC<TStoryBlockWarningProps> = ({ children = null }) => {
   return (
-    <blockquote className={cx(styles['StoryBlockWarning'])}>
-      <p className={cx(styles['StoryBlockWarning__context'])}>
+    <blockquote className={cx(styles.StoryBlockWarning)}>
+      <p className={cx(styles.StoryBlockWarning__context)}>
         <span className={cx(styles['StoryBlockWarning__icon-warning'])}>⚠️</span> {children}
       </p>
     </blockquote>

@@ -34,11 +34,11 @@ export const StoryBlockCode: FC<TStoryBlockCodeProps> = ({ blocksCodeData, class
     .flat();
 
   return (
-    <div className={cx(className, styles['StoryBlockCode'])}>
+    <div className={cx(className, styles.StoryBlockCode)}>
       {/* IMPORTS */}
       {imports.map((importObj, key) => (
         <p
-          className={cx(styles['StoryBlockCode__imports'])}
+          className={cx(styles.StoryBlockCode__imports)}
           dangerouslySetInnerHTML={{
             __html: parseImportToHTMLContext(importObj, styles),
           }}
@@ -47,12 +47,12 @@ export const StoryBlockCode: FC<TStoryBlockCodeProps> = ({ blocksCodeData, class
       ))}
 
       {/* SEPARATOR */}
-      {propsLength > 0 && <div className={cx(styles['StoryBlockCode__separator'])} />}
+      {propsLength > 0 && <div className={cx(styles.StoryBlockCode__separator)} />}
 
       {/* VARIABLES */}
       {variables.map((variable, key) => (
         <div
-          className={cx(styles['StoryBlockCode__variables'])}
+          className={cx(styles.StoryBlockCode__variables)}
           dangerouslySetInnerHTML={{
             __html: parseVariableToHTMLContext(styles, variable),
           }}
@@ -66,7 +66,7 @@ export const StoryBlockCode: FC<TStoryBlockCodeProps> = ({ blocksCodeData, class
 
         return props.map((props, key) => (
           <div
-            className={cx(styles['StoryBlockCode__components'])}
+            className={cx(styles.StoryBlockCode__components)}
             dangerouslySetInnerHTML={{
               __html: parseComponentToHTMLContext(props, componentName, styles),
             }}

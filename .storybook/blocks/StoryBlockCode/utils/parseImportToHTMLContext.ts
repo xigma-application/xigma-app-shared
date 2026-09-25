@@ -14,7 +14,7 @@ const getItemWithHighlightWordAs = (itemsToImports: string, styles: Record<strin
 
 export const parseImportToHTMLContext = ({ items: itemsToImports, path }: TImport, styles: Record<string, string>): string =>
   [
-    getHTMLElement(cx(styles['StoryBlockCode__import']), 'import'),
+    getHTMLElement(cx(styles.StoryBlockCode__import), 'import'),
     getHTMLElement(cx(styles['StoryBlockCode__import-items']), getItemWithHighlightWordAs(itemsToImports, styles)),
     getHTMLElement(cx(styles['StoryBlockCode__import-from']), 'from'),
     getHTMLElement(cx(styles['StoryBlockCode__import-path']), `'${path}'`),

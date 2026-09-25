@@ -19,7 +19,7 @@ const parseAttributesToHTML = (attributes: Array<TComponentAttributes>, styles: 
     )
     .join('');
 
-  return getHTMLElement(cx(styles['StoryBlockCode__attribute']), context);
+  return getHTMLElement(cx(styles.StoryBlockCode__attribute), context);
 };
 
 export const parseComponentToHTMLContext = (
@@ -39,12 +39,12 @@ export const parseComponentToHTMLContext = (
           if (props) {
             return props
               .map((props) =>
-                getHTMLElement(cx(styles['StoryBlockCode__children']), parseComponentToHTMLContext(props, componentName, styles), 'div'),
+                getHTMLElement(cx(styles.StoryBlockCode__children), parseComponentToHTMLContext(props, componentName, styles), 'div'),
               )
               .join('');
           }
 
-          return getHTMLElement(cx(styles['StoryBlockCode__children']), parseComponentToHTMLContext({}, componentName, styles), 'div');
+          return getHTMLElement(cx(styles.StoryBlockCode__children), parseComponentToHTMLContext({}, componentName, styles), 'div');
         })
         .join('')}`;
     }

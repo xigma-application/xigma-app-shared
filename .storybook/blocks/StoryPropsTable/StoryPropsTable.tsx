@@ -13,12 +13,12 @@ export type TPropsStoryPropsTable = {
 
 const StoryPropsTable: FC<TPropsStoryPropsTable> = ({ tableBodyData }) => {
   return (
-    <section className={cx(styles['StoryPropsTable'])}>
+    <section className={cx(styles.StoryPropsTable)}>
       {/* TITLE */}
-      <h2 className={cx(styles['StoryPropsTable__title'])}>Props</h2>
+      <h2 className={cx(styles.StoryPropsTable__title)}>Props</h2>
 
       {/* TABLE */}
-      <table className={cx(styles['StoryPropsTable__table'])}>
+      <table className={cx(styles.StoryPropsTable__table)}>
         {/* HEADER */}
         <thead>
           <tr className={cx(styles['StoryPropsTable__row-header'])}>

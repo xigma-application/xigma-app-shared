@@ -22,13 +22,13 @@ export const StoryApi: FC<TStoryApiProps> = ({ children = null, description = []
   const { tableBodyData } = restProps;
 
   return (
-    <main className={cx(styles['StoryApi'])}>
+    <main className={cx(styles.StoryApi)}>
       {/* TITLE */}
-      <h1 className={cx(styles['StoryApi__title'])}>{title}</h1>
+      <h1 className={cx(styles.StoryApi__title)}>{title}</h1>
 
       {/* DESCRIPTION */}
       {description.map((description, key) => (
-        <p className={cx(styles['StoryApi__description'])} dangerouslySetInnerHTML={{ __html: description }} key={key} />
+        <p className={cx(styles.StoryApi__description)} dangerouslySetInnerHTML={{ __html: description }} key={key} />
       ))}
 
       {/* COMPONENT */}

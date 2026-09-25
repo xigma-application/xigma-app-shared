@@ -40,23 +40,23 @@ export const StoryComponent: FC<TStoryComponentProps> = ({
   ...restProps
 }) => (
   <section
-    className={cx(className, styles['StoryComponent'], {
+    className={cx(className, styles.StoryComponent, {
       [styles['StoryComponent--max-width']]: applyMaxWidth,
     })}
   >
     {/*  TITLE */}
-    <h2 className={cx(styles['StoryComponent__title'])}>{title}</h2>
+    <h2 className={cx(styles.StoryComponent__title)}>{title}</h2>
 
     {/* DESCRIPTION */}
     {description.map((description, key) => (
-      <p className={cx(styles['StoryComponent__description'])} dangerouslySetInnerHTML={{ __html: description }} key={key} />
+      <p className={cx(styles.StoryComponent__description)} dangerouslySetInnerHTML={{ __html: description }} key={key} />
     ))}
 
     {/* COMPONENT SECTION */}
     {children && (
       <section
         className={cx(
-          styles['StoryComponent__content'],
+          styles.StoryComponent__content,
           styles[CONTENT_MODIFICATORS[contentAlignItems]],
           styles[CONTENT_MODIFICATORS[contentDisplay]],
           styles[CONTENT_MODIFICATORS[kebabToCamelCase(contentGridFlow)]],
