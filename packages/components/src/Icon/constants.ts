@@ -12,6 +12,7 @@ import AlignVerticalBottom from './svg/align-vertical-bottom.svg?react';
 import AlignVerticalCenter from './svg/align-vertical-center.svg?react';
 import AlignVerticalTop from './svg/align-vertical-top.svg?react';
 import AngularJitter from './svg/angular-jitter.svg?react';
+import Arc from './svg/arc.svg?react';
 import ArrowDown from './svg/arrow-down.svg?react';
 import ArrowRight from './svg/arrow-right.svg?react';
 import ArrowTool from './svg/arrow-tool.svg?react';
@@ -235,6 +236,7 @@ export const Icons = {
   AlignVerticalCenter,
   AlignVerticalTop,
   AngularJitter,
+  Arc,
   ArrowDown,
   ArrowRight,
   ArrowTool,
