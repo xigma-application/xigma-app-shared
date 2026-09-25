@@ -181,9 +181,14 @@ import StarTool from './svg/star-tool.svg?react';
 import StepBackwardOutlined from './svg/step-backward-outlined.svg?react';
 import Stroke from './svg/stroke.svg?react';
 import StrokeBottom from './svg/stroke-bottom.svg?react';
+import StrokeCapCircleArrow from './svg/stroke-cap-circle-arrow.svg?react';
+import StrokeCapDiamondArrow from './svg/stroke-cap-diamond-arrow.svg?react';
+import StrokeCapLineArrow from './svg/stroke-cap-line-arrow.svg?react';
 import StrokeCapNone from './svg/stroke-cap-none.svg?react';
+import StrokeCapReversedTriangle from './svg/stroke-cap-reversed-triangle.svg?react';
 import StrokeCapRound from './svg/stroke-cap-round.svg?react';
 import StrokeCapSquare from './svg/stroke-cap-square.svg?react';
+import StrokeCapTriangleArrow from './svg/stroke-cap-triangle-arrow.svg?react';
 import StrokeDashed from './svg/stroke-dashed.svg?react';
 import StrokeJoinBevel from './svg/stroke-join-bevel.svg?react';
 import StrokeJoinMiter from './svg/stroke-join-miter.svg?react';
@@ -398,9 +403,14 @@ export const Icons = {
   StepBackwardOutlined,
   Stroke,
   StrokeBottom,
+  StrokeCapCircleArrow,
+  StrokeCapDiamondArrow,
+  StrokeCapLineArrow,
   StrokeCapNone,
+  StrokeCapReversedTriangle,
   StrokeCapRound,
   StrokeCapSquare,
+  StrokeCapTriangleArrow,
   StrokeDashed,
   StrokeJoinBevel,
   StrokeJoinMiter,
