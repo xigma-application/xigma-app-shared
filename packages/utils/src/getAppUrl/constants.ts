@@ -6,10 +6,12 @@ import { XigmaApp } from './types';
 export const DEV_PORTS: Record<XigmaApp, number> = {
   'xigma-app-design': 7710,
   'xigma-app-website': 7700,
+  'xigma-fonts-library': 7720,
 };
 
 // TODO: replace with the real production domains once they're decided.
 export const PROD_URLS: Record<XigmaApp, string> = {
   'xigma-app-design': 'https://design.xigma.app',
   'xigma-app-website': 'https://xigma.app',
+  'xigma-fonts-library': 'https://fonts.xigma.app',
 };
