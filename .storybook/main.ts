@@ -12,17 +12,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const stripCssModulesGlobal: PostcssPlugin = {
-  postcssPlugin: 'strip-css-modules-global',
   Rule(rule) {
     rule.selector = rule.selector.replace(/:global\(([^)]+)\)/g, '$1');
   },
+  postcssPlugin: 'strip-css-modules-global',
 };
 
 const config: StorybookConfig = {
-  stories: ['../packages/*/src/**/*.mdx', '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-  // Monaco Editor's own assets (for storybook-addon-code-editor's live playground) — served
-  // statically, not bundled through Vite
-  staticDirs: [...getCodeEditorStaticDirs(__filename)],
   addons: [
     '@storybook/addon-docs',
     '@storybook/addon-themes',
@@ -37,6 +33,10 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  // Monaco Editor's own assets (for storybook-addon-code-editor's live playground) — served
+  // statically, not bundled through Vite
+  staticDirs: [...getCodeEditorStaticDirs(__filename)],
+  stories: ['../packages/*/src/**/*.mdx', '../packages/*/src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
@@ -45,6 +45,11 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config) =>
     mergeConfig(config, {
+      css: {
+        postcss: {
+          plugins: [stripCssModulesGlobal],
+        },
+      },
       plugins: [
         svgr({
           svgrOptions: { ref: true, titleProp: false },
@@ -53,11 +58,6 @@ const config: StorybookConfig = {
       resolve: {
         alias: {
           'storybook-blocks': path.resolve(__dirname, 'blocks'),
-        },
-      },
-      css: {
-        postcss: {
-          plugins: [stripCssModulesGlobal],
         },
       },
     }),

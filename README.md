@@ -33,6 +33,8 @@ których potrzebuje.
 ```bash
 npm install
 npm run build      # buduje wszystkie pakiety (workspaces --if-present)
+npm run lint       # Oxlint (lint:fix — autofix)
+npm run format:write  # Oxfmt (format:check — tylko sprawdzenie)
 ```
 
 - Nowy komponent React: `packages/components/src/<Nazwa>/`, wyeksportowany w

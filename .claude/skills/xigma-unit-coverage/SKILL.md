@@ -42,8 +42,7 @@ everything else, including every hook/util/component you touch, is held to the s
    (catches type errors in `.stories.tsx`, which coverage doesn't touch since they're excluded)
    and, if any Storybook file changed, `npm run build-storybook`.
 
-This repo has no `prettier`/`eslint` script yet (see root `package.json`), so there is no
-formatting step to run after — unlike xigma-app's version of this skill.
+Always finish by running `npm run lint` (Oxlint) and `npm run format:write` (Oxfmt).
 
 ## Worked example: a default/no-op path never exercised
 

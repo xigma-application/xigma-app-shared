@@ -11,7 +11,7 @@ export const collectGpuTimerResults = (gl: WebGL2RenderingContext, state: TGpuTi
     state.pending = state.pending.filter(({ frame, name, query }) => {
       if (gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE)) {
         if (!disjoint && state.samples.length < GPU_TIMER_MAX_SAMPLES) {
-          state.samples.push({ frame, name, ms: gl.getQueryParameter(query, gl.QUERY_RESULT) / GPU_TIMER_NANOSECONDS_PER_MILLISECOND });
+          state.samples.push({ frame, ms: gl.getQueryParameter(query, gl.QUERY_RESULT) / GPU_TIMER_NANOSECONDS_PER_MILLISECOND, name });
         }
 
         gl.deleteQuery(query);

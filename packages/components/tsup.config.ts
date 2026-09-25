@@ -18,8 +18,8 @@ const sassPlugin: Plugin = {
     build.onLoad({ filter: /\.scss$/ }, (args) => {
       const source = toPkgScheme(readFileSync(args.path, 'utf8'));
       const result = sass.compileString(source, {
-        url: pathToFileURL(args.path),
         importers: [new sass.NodePackageImporter()],
+        url: pathToFileURL(args.path),
       });
 
       return { contents: stripCssModulesGlobal(result.css), loader: 'css' };
@@ -37,19 +37,21 @@ const svgrPlugin: Plugin = {
     build.onResolve({ filter: /\.svg(\?react)?$/ }, async (args) => {
       // build.resolve() re-runs this same onResolve (esbuild doesn't skip the calling
       // plugin), and the resolved path still ends in .svg — so guard against the recursion.
-      if (args.pluginData?.svgrResolved) return;
+      if (args.pluginData?.svgrResolved) {
+        return;
+      }
 
       const resolved = await build.resolve(args.path.replace(/\?react$/, ''), {
-        resolveDir: args.resolveDir,
         kind: args.kind,
         pluginData: { svgrResolved: true },
+        resolveDir: args.resolveDir,
       });
 
       if (resolved.errors.length > 0) {
         return { errors: resolved.errors };
       }
 
-      return { path: resolved.path, namespace: 'svgr' };
+      return { namespace: 'svgr', path: resolved.path };
     });
 
     build.onLoad({ filter: /.*/, namespace: 'svgr' }, async (args) => {
@@ -60,7 +62,7 @@ const svgrPlugin: Plugin = {
         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
         .join('');
 
-      const jsxCode = await transform(svgCode, { ref: true, titleProp: false, svgo: false, plugins: [jsx] }, { componentName });
+      const jsxCode = await transform(svgCode, { plugins: [jsx], ref: true, svgo: false, titleProp: false }, { componentName });
 
       return {
         contents: jsxCode,
@@ -72,12 +74,12 @@ const svgrPlugin: Plugin = {
 };
 
 export default defineConfig({
-  entry: ['src/index.ts'],
-  format: ['esm', 'cjs'],
-  dts: true,
-  splitting: false,
-  sourcemap: true,
   clean: true,
-  external: ['react', 'react-dom', '@radix-ui/react-tooltip', '@radix-ui/react-dropdown-menu'],
+  dts: true,
+  entry: ['src/index.ts'],
   esbuildPlugins: [sassPlugin, svgrPlugin],
+  external: ['react', 'react-dom', '@radix-ui/react-tooltip', '@radix-ui/react-dropdown-menu'],
+  format: ['esm', 'cjs'],
+  sourcemap: true,
+  splitting: false,
 });

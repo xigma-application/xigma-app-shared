@@ -8,19 +8,6 @@ import { TooltipProvider } from '../packages/core/src/TooltipProvider/TooltipPro
 import './styles/index.scss';
 
 const preview: Preview = {
-  tags: ['autodocs'],
-  parameters: {
-    a11y: {
-      test: 'error',
-    },
-    docs: { container: ReactiveDocsContainer },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-  },
   decorators: [
     (Story) => (
       <TooltipProvider>
@@ -28,14 +15,27 @@ const preview: Preview = {
       </TooltipProvider>
     ),
     withThemeByDataAttribute({
+      attributeName: 'data-theme',
+      defaultTheme: 'dark',
       themes: {
         dark: 'dark',
         light: 'light',
       },
-      defaultTheme: 'dark',
-      attributeName: 'data-theme',
     }),
   ],
+  parameters: {
+    a11y: {
+      test: 'error',
+    },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    docs: { container: ReactiveDocsContainer },
+  },
+  tags: ['autodocs'],
 };
 
 export default preview;

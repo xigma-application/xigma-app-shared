@@ -1,3 +1,4 @@
+// oxlint-disable-next-line typescript/triple-slash-reference -- vitest documents this directive for typing the test key in a Vite config
 /// <reference types="vitest/config" />
 
 import path from 'node:path';
@@ -12,7 +13,6 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   test: {
     coverage: {
-      include: ['packages/*/src/**/*.{ts,tsx}'],
       exclude: [
         '**/*.spec.{ts,tsx}',
         '**/*.stories.tsx',
@@ -24,6 +24,7 @@ export default defineConfig({
         '**/*.d.ts',
         '**/gpuTimer/**',
       ],
+      include: ['packages/*/src/**/*.{ts,tsx}'],
       provider: 'v8',
       thresholds: {
         branches: 100,
@@ -32,8 +33,6 @@ export default defineConfig({
         statements: 100,
       },
     },
-    resolveSnapshotPath: (testPath, snapExtension) =>
-      path.join(path.dirname(testPath), 'snapshots', `${path.basename(testPath)}${snapExtension}`),
     projects: [
       {
         extends: true,
@@ -89,5 +88,7 @@ export default defineConfig({
         },
       },
     ],
+    resolveSnapshotPath: (testPath, snapExtension) =>
+      path.join(path.dirname(testPath), 'snapshots', `${path.basename(testPath)}${snapExtension}`),
   },
 });
