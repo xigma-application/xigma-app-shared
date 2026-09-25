@@ -54,6 +54,7 @@ import Contrast from './svg/contrast.svg?react';
 import ContrastLocked from './svg/contrast-locked.svg?react';
 import Corners from './svg/corners.svg?react';
 import Count from './svg/count.svg?react';
+import CountStar from './svg/count-star.svg?react';
 import Crop from './svg/crop.svg?react';
 import CustomSize from './svg/custom-size.svg?react';
 import CutTool from './svg/cut-tool.svg?react';
@@ -155,6 +156,7 @@ import PositionSwitcher from './svg/position-switcher.svg?react';
 import PreviewPlay from './svg/preview-play.svg?react';
 import Properties from './svg/properties.svg?react';
 import Protractor from './svg/protractor.svg?react';
+import Ratio from './svg/ratio.svg?react';
 import RectangleTool from './svg/rectangle-tool.svg?react';
 import RectangularPattern from './svg/rectangular-pattern.svg?react';
 import RemoveFit from './svg/remove-fit.svg?react';
@@ -279,6 +281,7 @@ export const Icons = {
   ContrastLocked,
   Corners,
   Count,
+  CountStar,
   Crop,
   CustomSize,
   CutTool,
@@ -380,6 +383,7 @@ export const Icons = {
   PreviewPlay,
   Properties,
   Protractor,
+  Ratio,
   RectangleTool,
   RectangularPattern,
   RemoveFit,
