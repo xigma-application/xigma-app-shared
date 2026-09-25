@@ -53,6 +53,7 @@ import ComponentSet from './svg/component-set.svg?react';
 import Contrast from './svg/contrast.svg?react';
 import ContrastLocked from './svg/contrast-locked.svg?react';
 import Corners from './svg/corners.svg?react';
+import Count from './svg/count.svg?react';
 import Crop from './svg/crop.svg?react';
 import CustomSize from './svg/custom-size.svg?react';
 import CutTool from './svg/cut-tool.svg?react';
@@ -277,6 +278,7 @@ export const Icons = {
   Contrast,
   ContrastLocked,
   Corners,
+  Count,
   Crop,
   CustomSize,
   CutTool,
