@@ -127,6 +127,9 @@ import MaxWidth from './svg/max-width.svg?react';
 import MinHeight from './svg/min-height.svg?react';
 import MinWidth from './svg/min-width.svg?react';
 import Minus from './svg/minus.svg?react';
+import MirrorAngle from './svg/mirror-angle.svg?react';
+import MirrorAngleLength from './svg/mirror-angle-length.svg?react';
+import MirrorNone from './svg/mirror-none.svg?react';
 import MoreOptions from './svg/more-options.svg?react';
 import MoveHand from './svg/move-hand.svg?react';
 import MoveTool from './svg/move-tool.svg?react';
@@ -354,6 +357,9 @@ export const Icons = {
   MinHeight,
   MinWidth,
   Minus,
+  MirrorAngle,
+  MirrorAngleLength,
+  MirrorNone,
   MoreOptions,
   MoveHand,
   MoveTool,
